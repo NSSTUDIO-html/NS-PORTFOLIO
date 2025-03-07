@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Hello, World!</title>
+</head>
+<body>
+  <style>
+  body{
+    background: black;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      height: 100vh;
+  }
+  h1{
+    font-size:100px;
+    text-shadow:2px 2px 10px white;
+    color:black;
+  -webkit-text-stroke-width: 2px; /* Set stroke width */
+  -webkit-text-stroke-color: white; /* Set stroke color */
+    animation:text 5s linear infinite;
+  }
+  @keyframes text{
+    0%{
+      text-shadow:2px 2px 10px red;
+      -webkit-text-stroke-color: red;
+    }
+    25%{
+      text-shadow:2px 2px 10px orange;
+      -webkit-text-stroke-color: orange;
+    }
+    50%{
+      text-shadow:2px 2px 10px yellow;
+      -webkit-text-stroke-color: yellow;
+    }
+    75%{
+      text-shadow:2px 2px 10px blue;
+      -webkit-text-stroke-color: blue;
+    }
+    100%{
+      text-shadow:2px 2px 10px green;
+      -webkit-text-stroke-color: green;
+    }
+  }
+  </style>
+  <h1>
+    2024
+  </h1>
+</body>
+</html>

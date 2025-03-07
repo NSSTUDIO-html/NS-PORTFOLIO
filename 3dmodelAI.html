@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PNG to 3D Model Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #imageInput {
+      margin-bottom: 10px;
+    }
+    #canvas3d {
+      width: 500px;
+      height: 500px;
+      border: 1px solid #ccc;
+      margin: 20px auto;
+      background-color: #000;
+    }
+    #depthCanvas {
+        display: none;
+    }
+    .file-upload-container {
+      background-color: #e0e0e0;
+      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    .file-upload-container input[type="file"] {
+      display: none;
+    }
+    .file-upload-container label {
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    #uploadedImage {
+      max-width: 400px;
+      max-height: 400px;
+      margin: 20px auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>PNG to 3D Model Generator</h1>
+  <div class="file-upload-container">
+    <label for="imageInput">Choose file</label>
+    <input type="file" id="imageInput" accept="image/png">
+  </div>
+  <img id="uploadedImage" style="display: none;">
+  <canvas id="canvas3d"></canvas>
+  <canvas id="depthCanvas"></canvas>
+
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, 500 / 500, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas3d') });
+    camera.position.z = 5;
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    const imageInput = document.getElementById('imageInput');
+    const uploadedImage = document.getElementById('uploadedImage');
+
+    imageInput.addEventListener('change', handleImageUpload);
+
+    async function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      uploadedImage.src = URL.createObjectURL(file);
+      uploadedImage.style.display = 'block';
+
+      const img = new Image();
+      img.onload = async () => {
+        const inputCanvas = document.createElement('canvas');
+        inputCanvas.width = img.width;
+        inputCanvas.height = img.height;
+        const inputCtx = inputCanvas.getContext('2d');
+        inputCtx.drawImage(img, 0, 0);
+
+        // Placeholder: Replace with your actual TensorFlow.js model and depth estimation logic
+        const depthMapCanvas = await generateDepthMap(inputCanvas);
+
+        if (depthMapCanvas) {
+          create3DModelFromDepthMap(depthMapCanvas);
+        }
+
+      };
+      img.src = URL.createObjectURL(file);
+    }
+
+    async function generateDepthMap(inputCanvas) {
+      // Placeholder: Replace with your TensorFlow.js depth estimation model
+      // For now, create a dummy depth map (grayscale)
+      const depthCanvas = document.getElementById('depthCanvas');
+      depthCanvas.width = inputCanvas.width;
+      depthCanvas.height = inputCanvas.height;
+      const depthCtx = depthCanvas.getContext('2d');
+      depthCtx.drawImage(inputCanvas,0,0);
+      const imageData = depthCtx.getImageData(0,0,depthCanvas.width, depthCanvas.height);
+      const data = imageData.data;
+      for (let i = 0; i < data.length; i += 4) {
+          const gray = (data[i] + data[i+1] + data[i+2])/3;
+          data[i] = gray;
+          data[i+1] = gray;
+          data[i+2] = gray;
+      }
+      depthCtx.putImageData(imageData, 0, 0);
+
+      return depthCanvas;
+    }
+
+    async function create3DModelFromDepthMap(depthMapCanvas) {
+      scene.children.filter(obj => obj.type === "Mesh").forEach(obj => scene.remove(obj));
+      const geometry = new THREE.PlaneGeometry(10, 10, depthMapCanvas.width - 1, depthMapCanvas.height - 1);
+      const depthData = depthMapCanvas.getContext('2d').getImageData(0, 0, depthMapCanvas.width, depthMapCanvas.height).data;
+
+      const vertices = geometry.attributes.position.array;
+      for (let i = 0; i < vertices.length; i += 3) {
+        const x = vertices[i];
+        const y = vertices[i + 1];
+        const pixelIndex = (Math.round((1 - (y / 10) * depthMapCanvas.height)) * depthMapCanvas.width + Math.round((x / 10) * depthMapCanvas.width)) * 4;
+        const depth = depthData[pixelIndex] / 255.0;
+        vertices[i + 2] = depth * 3;
+      }
+      geometry.attributes.position.needsUpdate = true;
+      const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+      const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(0,0,0);
+        mesh.scale.set(0.71,0.71,0.71);
+      scene.add(mesh);
+    }
+
+  </script>
+</body>
+</html>

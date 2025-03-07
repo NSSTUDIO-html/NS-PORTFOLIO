@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="Utf-8" />
+<meta http-equiv="Content-Type"name="viewport" content="width=device-width,intial-scale=1.0" />
+  <title>Casio-Style Calculator</title>
+  <style>
+    
+    .calculator {
+    width: 300px;
+    margin: 0 auto;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: gray;
+    background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7akevlXsQ3W2Gz9iPz1IPVG9nbgQ8u-aDUE-S0Gy17CJVdmi0BU9FSeU&s=10');
+    background-size: contain;
+    }
+    input[type="text"] {
+    text-shadow: 0 0 20px white;
+    width: 240px;
+    padding: 20px;
+    font-size: 30px;
+    margin-bottom: 10px;
+    border: 3px solid white;
+    border-radius: 5px;
+    background: black url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3uZvXCqRRfBYJio0zRyFSrHAIpNKs8U9aKQ&usqp=CAU');
+    background-size: cover;
+    color: white;
+    }
+    button {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    margin: 7px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: black;
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKQhC7r70HTkiXQXMVbt86uk75Fwh6CqWNEA&usqp=CAU');
+    background-size: contain;
+    color: black;
+    cursor: pointer;
+    }
+    button:hover{
+    background: light gray;
+    border: yellow;
+    }
+    h1{
+    font-family: times;
+    color: silver;
+    }
+    #dis{
+    display: flex;
+    color: white;
+    }
+    .eq{
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS35ZCBbSZVA2vRIbBNjWFgyP700Il9Vjjre4qpwUWkENK_l7eQMqzqsQ3I&s=10');
+    background-size: cover;
+    color: white;
+    }
+    .C{
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKkwrAu1-_TDuaUTaphVdR_95-V4U7v5hHkA&usqp=CAU');
+    background-size: cover;
+    color: white;
+    }
+    #dis h2{
+    margin-left: 90px;
+    position: relative;
+    font-family: courier;
+    color: silver;
+    }
+    .pl{
+    background: url('data:image/jpeg;base64,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');
+    background-size: cover;
+    color: white;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="calculator" align="center">
+  <div id="dis"><h1><b>CASIO</b></h1>
+  <h2 align="right"><b>fx-40MS</b></h2></div>
+    <input disabled type="text"id="display"readonly>
+    <button class="C"onclick="clearDisplay()">C</button>
+    <button onclick="appendToDisplay('7')">7</button>
+    <button onclick="appendToDisplay('8')">8</button>
+    <button onclick="appendToDisplay('9')">9</button>
+    <button class="pl"onclick="appendToDisplay('+')">+</button>
+    <button onclick="appendToDisplay('4')">4</button>
+    <button onclick="appendToDisplay('5')">5</button>
+    <button onclick="appendToDisplay('6')">6</button>
+    <button class="pl"onclick="appendToDisplay('-')">-</button>
+    <button onclick="appendToDisplay('1')">1</button>
+    <button onclick="appendToDisplay('2')">2</button>
+    <button onclick="appendToDisplay('3')">3</button>
+    <button class="pl"onclick="appendToDisplay('*')">x</button>
+    <button class=""onclick="appendToDisplay('**')">^</button>
+    <button onclick="appendToDisplay('0')">0</button>
+    <button class="eq"onclick="calculateResult()">=</button>
+    <button class="pl"onclick="appendToDisplay('/')">/</button>
+  <button onclick="Sine()">sin</button>
+  <button onclick="Cosine()">cos</button>
+  <button onclick="Tan()">tan</button>
+  <button class="pl"onclick="appendToDisplay('%')">%</button>
+  <button onclick="asin()"style="font-size:15px;">sin<sup style="font-size:5px;">-1</sup></button>
+  <button onclick="acos()"style="font-size:15px;">cos<sup style="font-size:5px;">-1</sup></button>
+  <button onclick="atan();playButton()"style="font-size:15px;">tan<sup style="font-size:5px;">-1</sup></button>
+  <button onclick="showPi();playButton()">π</button>
+  <button onclick="showLog();playButton()">log</button>
+  <button onclick="log()">ln</button>
+  </div>
+<audio id="buttonClickSound" src="/storage/emulated/0/Download/zapsplat_office_calculator_button_press_single_001_11983.mp3"></audio>
+
+  <script>
+  function playButton() {
+    var audio = document.getElementById('buttonClickSound');
+    audio.play();
+  }
+  function log() {
+  var displayValue = document.getElementById("display").value;
+  var number = parseFloat(displayValue);
+  
+  if (number > 0) {
+  var result = Math.log(number);
+  document.getElementById("display").value = result;
+  } else {
+  document.getElementById("display").value = 'Invalid input';
+  }
+  }
+  
+  function showLog() {
+  var displayValue = document.getElementById("display").value;
+  var number = parseFloat(displayValue);
+  
+  if (number > 0) {
+  var result = Math.log10(number);
+  document.getElementById("display").value = result;
+  } else {
+  document.getElementById("display").value = 'Invalid input';
+  }
+  }
+  
+  function showPi() {
+  var pi = Math.PI;
+  document.getElementById("display").value = pi.value="π";
+  }
+    function appendToDisplay(value) {
+      document.getElementById("display").value += value;
+    }
+
+    function clearDisplay() {
+      document.getElementById("display").value = '';
+    }
+
+    function calculateResult() {
+       try {
+        document.getElementById("display").value = eval(document.getElementById("display").value);
+      }catch (error) {
+        document.getElementById("display").value = 'Error';
+      }
+    }
+    function Sine() {
+    var displayValue = document.getElementById("display").value;
+    
+    var angleInDegrees = parseFloat(displayValue);
+    var angleInRadians = (angleInDegrees * Math.PI) / 180;
+    
+    var sineValue = Math.sin(angleInRadians);
+    document.getElementById("display").value = sineValue;
+    }
+    function Cosine() {
+    var displayValue = document.getElementById("display").value;
+    
+    var angleInDegrees = parseFloat(displayValue);
+    var angleInRadians = (angleInDegrees * Math.PI) / 180;
+    
+    var cosineValue = Math.cos(angleInRadians);
+    document.getElementById("display").value = cosineValue;
+    }
+    function Tan() {
+    var displayValue = document.getElementById("display").value;
+    
+    var angleInDegrees = parseFloat(displayValue);
+    var angleInRadians = (angleInDegrees * Math.PI) / 180;
+    
+    var tanValue = Math.tan(angleInRadians);
+    document.getElementById("display").value = tanValue;
+    }
+    function asin() {
+    var displayValue = document.getElementById("display").value;
+    
+    var angleInDegrees = parseFloat(displayValue);
+    var angleInRadians = (angleInDegrees * Math.PI) / 180;
+    
+    var asinValue = Math.asin(angleInRadians);
+    document.getElementById("display").value = asinValue;
+    }
+    function acos() {
+    var displayValue = document.getElementById("display").value;
+    
+    var angleInDegrees = parseFloat(displayValue);
+    var angleInRadians = (angleInDegrees * Math.PI) / 180;
+    
+    var acosValue = Math.acos(angleInRadians);
+    document.getElementById("display").value = acosValue;
+    }
+    function atan() {
+    var displayValue = document.getElementById("display").value;
+    
+    var angleInDegrees = parseFloat(displayValue);
+    var angleInRadians = (angleInDegrees * Math.PI) / 180;
+    
+    var atanValue = Math.atan(angleInRadians);
+    document.getElementById("display").value = atanValue;
+    }
+  </script>
+</body>
+</html>
