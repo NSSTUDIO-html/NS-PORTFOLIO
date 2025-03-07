@@ -6,7 +6,7 @@
     <title>NAGA SASANK - Portfolio</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: Times;
             margin: 0;
             padding: 0;
             line-height: 1.6;
@@ -15,12 +15,37 @@
         }
 
         header {
-            background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
 
             color: white;
             text-align: center;
             padding: 2em 0;
-        }
+            animation: border-color-change 3s infinite linear;
+}
+
+@keyframes border-color-change {
+  0% {
+    background: linear-gradient(120deg, yellow 0%, orange 100%);
+
+  }
+  25% {
+    background: linear-gradient(120deg, orange 0%, red 100%);
+
+  }
+  50% {
+    background: linear-gradient(120deg, red 0%, blue 100%);
+
+  }
+  75% {
+    background: linear-gradient(120deg, blue 0%, green 100%);
+
+  }
+  100% {
+    background: linear-gradient(120deg, green 0%, white 100%);
+
+  }
+}
+        
 
         nav {
             background-image: linear-gradient(180deg, white 0%, gray 100%);
