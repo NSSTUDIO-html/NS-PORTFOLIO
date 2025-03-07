@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Image Editor</title>
+</head>
+<body>
+    <canvas id="imageCanvas" width="800" height="600" style="border:1px solid #000;"></canvas>
+    <br>
+    <button onclick="selectPencil()">Pencil</button>
+    <button onclick="selectEraser()">Eraser</button>
+    <input type="color" id="colorPicker" value="#000000">
+    <br>
+    <button onclick="clearCanvas()">Clear Canvas</button>
+    <br>
+    <input type="file" id="imageInput" accept="image/*">
+    <br>
+    <button onclick="saveImage()">Save Image</button>
+
+    <script>
+        const canvas = document.getElementById('imageCanvas');
+        const ctx = canvas.getContext('2d');
+        const colorPicker = document.getElementById('colorPicker');
+        let drawing = false;
+        let tool = 'pencil';
+
+        canvas.addEventListener('mousedown', () => {
+            drawing = true;
+            ctx.beginPath();
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            drawing = false;
+            ctx.closePath();
+        });
+
+        canvas.addEventListener('mousemove', draw);
+
+        function draw(e) {
+            if (!drawing) return;
+
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = colorPicker.value;
+
+            if (tool === 'pencil') {
+                ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+                ctx.stroke();
+            } else if (tool === 'eraser') {
+                ctx.clearRect(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top, 20, 20);
+            }
+        }
+
+        function selectPencil() {
+            tool = 'pencil';
+        }
+
+        function selectEraser() {
+            tool = 'eraser';
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function saveImage() {
+            const image = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = image;
+            link.download = 'edited_image.png';
+            link.click();
+        }
+
+        const imageInput = document.getElementById('imageInput');
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const image = new Image();
+            image.src = URL.createObjectURL(file);
+            image.onload = () => {
+                ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            };
+        });
+    </script>
+</body>
+</html>

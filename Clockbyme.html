@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CLOCK BY ME</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background:;
+      
+    }
+
+    .clock {
+      width: 200px;
+      height: 200px;
+      border: 20px ridge silver;
+      border-radius: 50%;
+      position: absolute;
+     background: dark white;
+     box-shadow:2px 2px 40px;
+    }
+
+    .hour-hand,
+    .minute-hand,
+    .second-hand {
+      position: absolute;
+      background: black;
+      box-shadow:2px 2px 2px gray;
+    }
+
+    .hour-hand {
+      width: 5px;
+      height: 50px;
+      top: 50px;
+      left: 98px;
+      border-radius:3px;
+      transform-origin: center bottom;
+    }
+
+    .minute-hand {
+      width: 3px;
+      height: 70px;
+      top: 30px;
+      left: 99px;
+      border-radius:3px;
+      transform-origin: center bottom;
+    }
+
+    .second-hand {
+      width: 1px;
+      height: 80px;
+      top: 20px;
+      left: 100px;
+      transform-origin: center bottom;
+      background: red;
+    }
+
+    .center-circle {
+      width: 12px;
+      height: 12px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      top: 92px;
+      left: 92px;
+      border:3px outset red;
+      box-shadow:2px 2px 2px;
+      }
+      
+    
+.numbers span{
+position:absolute;
+font-family:times;
+font-style: bold;
+color:black;
+text-shadow:2px 2px 2px black;
+}
+.m{color:silver;}
+.h{color:gold;}
+.digital{
+position:relative;
+top:180px;
+display:flex;
+font-size:50px;
+background:dark white;
+border:20px ridge black;
+border-radius:30px;
+box-shadow:2px 2px 30px;
+font-family:times;
+text-shadow:2px 2px 20px;
+}
+    
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div class="hour-hand" id="hourHand"></div>
+    <div class="minute-hand" id="minuteHand"></div>
+    <div class="second-hand" id="secondHand"></div>
+    <div class="center-circle"></div>
+    <div class="numbers">
+      <span style="top:10px;left:90px;">12</span>
+      <span style="top:20px;left:135px;">1</span>
+      <span style="top:50px;left:165px;">2</span>
+      <span style="top:90px;left:180px;">3</span>
+      <span style="top:130px;left:165px;">4</span>
+      <span style="top:160px;left:135px;">5</span>
+      <span style="bottom:10px;right:90px;">6</span>
+      <span style="top:160px;right:135px;">7</span>
+      <span style="top:130px;right:165px;">8</span>
+      <span style="top:90px;right:180px;">9</span>
+      <span style="top:50px;right:165px;">10</span>
+      <span style="top:20px;right:135px;">11</span>
+    </div>
+  </div>
+  <div class="digital">
+  <div class="h"id="hour">0</div>: <span class="m"id="minutes">00</span>
+</div>
+  <script>
+    function updateClock() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    
+    // Display current time in the specified elements
+    const hour = document.getElementById('hour');
+    hour.textContent = hours; // Update the displayed hour
+    const minute = document.getElementById('minutes');
+    minute.textContent = minutes;
+    const hourHand = document.getElementById('hourHand');
+    const minuteHand = document.getElementById('minuteHand');
+    const secondHand = document.getElementById('secondHand');
+    
+    const secondDeg = (seconds / 60) * 360;
+    const minuteDeg = (minutes / 60) * 360 + (seconds / 60) * 6;
+    const hourDeg = (hours / 12) * 360 + (minutes / 60) * 30;
+    
+    hourHand.style.transform = `rotate(${hourDeg}deg)`;
+    minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+    secondHand.style.transform = `rotate(${secondDeg}deg)`;
+    }
+    
+    setInterval(updateClock, 1000);
+
+  </script>
+</body>
+</html>

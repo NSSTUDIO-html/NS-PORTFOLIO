@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A convertor INR TO USD</title>
+  <style>
+  label{
+      font-style:italic;
+      font-family:times;
+  }
+  input,h1{
+      font-style:bold;
+      font-family:cursive;
+      border:2px ridge black;
+     width:180px;
+  }
+  </style>
+</head>
+<body>
+<h1>A currency converter</h1>
+  <p>
+  <label>Enter in rupees:</label>
+  <input type="number" id="a" placeholder="Enter value in Indian Rupees"></p>
+  <p>
+  <label>Enter in dollars:</label>
+  <input type="number" id="b" placeholder="Result in Dollars">
+  </p>
+
+  <script>
+    var a = document.getElementById("a");
+    var b = document.getElementById("b");
+
+    a.addEventListener("input", function() {
+      // Assuming an exchange rate of 1 INR = 0.014 USD
+      var exchangeRate = 0.014;
+      b.value = a.value * exchangeRate;
+      
+    });
+  b.addEventListener("input",function(){
+      var Rate = 80;
+      a.value = b.value * Rate;});
+  </script>
+</body>
+</html>

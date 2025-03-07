@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cylinders in a Circle</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+   <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Cylinder Setup
+        const numCylinders = 12;
+        const cylinderRadius = 0.5;
+        const circleRadius = 5;
+
+        const cylinderGeometry = new THREE.CylinderGeometry(cylinderRadius, cylinderRadius, 2, 32);
+        const cylinderMaterial = new THREE.MeshPhongMaterial({ color: 0xffa500 }); // Use MeshStandardMaterial
+
+        for (let i = 0; i < numCylinders; i++) {
+            const angle = (i / numCylinders) * Math.PI * 2;
+            const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+
+            const x = Math.sin(angle) * circleRadius;
+            const z = Math.cos(angle) * circleRadius;
+            cylinder.position.set(x, 0, z);
+            cylinder.lookAt(0, 0, 0);
+            scene.add(cylinder);
+        }
+
+        // Lighting
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Adjusted intensity
+        directionalLight.position.set(1, 2, 10);
+        directionalLight.castShadow = true; // Enable shadows (if needed)
+        scene.add(directionalLight);
+
+        const ambientLight = new THREE.AmbientLight(0x404040, 1); // Adjusted intensity
+        scene.add(ambientLight);
+
+
+        camera.position.set(0, 0, 25);
+        camera.lookAt(0, 0, 0);
+
+        // Touch/Mouse Controls
+        let startX = 0, startY = 0;
+        let isDragging = false; // Flag to track dragging state
+
+        document.addEventListener("mousedown", (e) => {
+            startX = e.clientX;
+            startY = e.clientY;
+            isDragging = true; // Set dragging to true
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (isDragging) { // Only rotate if dragging
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+
+                camera.position.x = circleRadius * Math.sin(camera.rotation.y + deltaX * 0.01);
+                camera.position.z = circleRadius * Math.cos(camera.rotation.y + deltaX * 0.01);
+                camera.position.y += deltaY * 0.01; // Vertical rotation
+
+                camera.lookAt(0, 0, 0); // Keep looking at the center
+
+                startX = e.clientX; // Update starting position
+                startY = e.clientY;
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false; // Reset dragging
+        });
+
+        document.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true; // Set dragging to true
+        });
+
+        document.addEventListener("touchmove", (e) => {
+             if (isDragging) { // Only rotate if dragging
+                const deltaX = e.touches[0].clientX - startX;
+                const deltaY = e.touches[0].clientY - startY;
+
+                camera.position.x = circleRadius * Math.sin(camera.rotation.y + deltaX * 0.01);
+                camera.position.z = circleRadius * Math.cos(camera.rotation.y + deltaX * 0.01);
+                camera.position.y += deltaY * 0.01; // Vertical rotation
+
+                camera.lookAt(0, 0, 0); // Keep looking at the center
+
+                startX = e.touches[0].clientX; // Update starting position
+                startY = e.touches[0].clientY;
+            }
+        });
+
+        document.addEventListener("touchend", () => {
+            isDragging = false; // Reset dragging
+        });
+
+
+        // Animation loop (No automatic rotation)
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener("resize", () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
+
