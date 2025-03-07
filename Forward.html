@@ -1,0 +1,185 @@
+<head><title>maths6a5thsem</title></head>
+<style>
+body{
+color:white;
+background-color:black;
+background-size:cover;
+background-image:url('')
+}
+input{
+width:100px;
+height:50px;
+font-size:30px;
+color:white;
+caret-color:red;
+background-color:black;
+}
+tr{
+text-align: center;
+vertical-align: middle;
+}
+summary{
+font-size:60px;
+font-family:times;
+}
+table{
+max-width:100%;
+height:600px;
+width:800px;
+font-size:20px;
+border-size:70px;
+border-collapse:collapse;
+empty-cells:hide;
+}
+.reset{
+background-size:cover;
+background-image:url('https://media.istockphoto.com/id/1058076664/photo/3d-render-colorful-neon-light-spectrum-loop-ultraviolet-quantum-energy-pink-blue-violet.webp?b=1&s=170667a&w=0&k=20&c=W4aN0w9mZ2e5zXctLUjdILSWt9QZIuQtjPsZ4enLjyg=')
+}
+.diff{
+background-size:cover;
+background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo0ZZ-E7iw1FQbjG32m9A8fh4NzDhldLxwKw&usqp=CAU');
+}
+button{
+color:white;
+background-size:cover;
+}
+</style>
+<body>
+<details>
+<summary>Forward Difference</summary>
+<h1 style="font-family:cursive;font-size:70px;">• You can enter y values on the table to find difference.</h1>
+<marquee scrollamount="40"style="font-size:70px;font-family:cursive;"><b style="color:green;">Update:</b>You can use decimal values on table</marquee>
+<table align="center"border="5" bgcolor="" borderColor="blue">
+<caption>Forward Difference Table</caption>
+<tr bgcolor="gray">
+<th>x</th>
+<th>y</th>
+<th>∆y</th>
+<th>∆<sup>2</sup>y</th>
+<th>∆<sup>3</sup>y</th>
+<th>∆<sup>4</sup>y</th>
+<th>∆<sup>5</sup>y</th>
+</tr>
+<tr>
+<td>x<sub>0</sub></td>
+<td>y<sub>0</sub><input id="A" type="number"step=".01"></td>
+<td>∆y<sub>0</sub><input id="G"type="number"step=".01"disabled></td>
+<td>∆<sup>2</sup>y<sub>0</sub><input id="L"type="number"step=".01"disabled></td>
+<td>∆<sup>3</sup>y<sub>0</sub><input id="P"type="number"step=".01"disabled></td>
+<td>∆<sup>4</sup>y<sub>0</sub><input id="S"type="number"step=".01"disabled></td>
+<td>∆<sup>5</sup>y<sub>0</sub><input id="U"type="number"step=".01"disabled></td>
+</tr>
+<tr>
+<td>x<sub>1</sub></td>
+<td>y<sub>1</sub><input id="B"type="number"step=".01"></td>
+<td>∆y<sub>1</sub><input id="H"type="text"step=".00"disabled></td>
+<td>∆<sup>2</sup>y<sub>1</sub><input id="M"type="text"step=".01"disabled>
+<td>∆<sup>3</sup>y<sub>1</sub><input id="Q"type="text"step=".01"disabled>
+<td>∆<sup>4</sup>y<sub>1</sub><input id="T"type="text"step=".01"disabled>
+</tr>
+<tr>
+<td>x<sub>2</sub></td>
+<td>y<sub>2</sub><input id="C"type="number"step=".01"></td>
+<td>∆y<sub>2</sub><input id="I"type="text"step=".01"disabled></td>
+<td>∆<sup>2</sup>y<sub>2</sub><input id="N"type="text"step=".01"disabled>
+<td>∆<sup>3</sup>y<sub>2</sub><input id="R"type="text"step=".01"disabled>
+</tr>
+<tr>
+<td>x<sub>3</sub></td>
+<td>y<sub>3</sub><input id="D"type="number"step=".01"></td>
+<td>∆y<sub>3</sub><input id="J"type="text"step=".01"disabled></td>
+<td>∆<sup>2</sup>y<sub>3</sub><input id="O"type="text"step=".01"disabled>
+</tr>
+<tr>
+<td>x<sub>4</sub></td>
+<td>y<sub>4</sub><input id="E"type="number"step=".01"></td>
+<td>∆y<sub>4</sub><input id="K"type="text"step=".01"disabled></td>
+</tr>
+<tr>
+<td>x<sub>5</sub></td>
+<td>y<sub>5</sub><input id="F"type="number"step=".01"></td>
+</tr></td></td></td></td></td></td></table>
+<br>
+<button onclick="reset()"style="font-size:50px;padding:30px 50px 30px 50px;"class="reset">Reset</button>
+<button onclick="diff()"style="font-size:50px;padding:30px 50px 30px 50px;"class="diff">Difference</button>
+</details>
+<script>
+function reset()
+{
+document.getElementById("A").value="";
+document.getElementById("B").value="";
+document.getElementById("C").value="";
+document.getElementById("D").value="";
+document.getElementById("E").value="";
+document.getElementById("F").value="";
+document.getElementById("G").value="0";
+document.getElementById("H").value="0";
+document.getElementById("I").value="0";
+document.getElementById("J").value="0";
+document.getElementById("K").value="0";
+document.getElementById("L").value="0";
+document.getElementById("M").value="0";
+document.getElementById("N").value="0";
+document.getElementById("O").value="0";
+document.getElementById("P").value="0";
+document.getElementById("Q").value="0";
+document.getElementById("R").value="0";
+document.getElementById("S").value="0";
+document.getElementById("T").value="0";
+document.getElementById("U").value="0";
+}
+function diff()
+{
+var a=Number(document.getElementById("A").value);
+var b=Number(document.getElementById("B").value);
+var c=Number(document.getElementById("C").value);
+var d=Number(document.getElementById("D").value);
+var e=Number(document.getElementById("E").value);
+var f=Number(document.getElementById("F").value);
+var g=Number(document.getElementById("G").value);
+var h=Number(document.getElementById("H").value);
+var i=Number(document.getElementById("I").value);
+var j=Number(document.getElementById("J").value);
+var k=Number(document.getElementById("K").value);
+var l=Number(document.getElementById("L").value);
+var m=Number(document.getElementById("M").value);
+var n=Number(document.getElementById("N").value);
+var o=Number(document.getElementById("O").value);
+var p=Number(document.getElementById("P").value);
+var q=Number(document.getElementById("Q").value);
+var r=Number(document.getElementById("R").value);
+var s=Number(document.getElementById("S").value);
+var t=Number(document.getElementById("T").value);
+var u=Number(document.getElementById("U").value);
+var g=(b-a).toFixed(2);
+var h=(c-b).toFixed(2);
+var i=(d-c).toFixed(2);
+var j=(e-d).toFixed(2);
+var k=(f-e).toFixed(2);
+var l=(h-g).toFixed(2);
+var m=(i-h).toFixed(2);
+var n=(j-i).toFixed(2);
+var o=(k-j).toFixed(2);
+var p=(m-l).toFixed(2);
+var q=(n-m).toFixed(2);
+var r=(o-n).toFixed(2);
+var s=(q-p).toFixed(2);
+var t=(r-q).toFixed(2);
+var u=(t-s).toFixed(2);
+document.getElementById("G").value=String(g);
+document.getElementById("H").value=String(h);
+document.getElementById("I").value=String(i);
+document.getElementById("J").value=String(j);
+document.getElementById("K").value=String(k);
+document.getElementById("L").value=String(l);
+document.getElementById("M").value=String(m);
+document.getElementById("N").value=String(n);
+document.getElementById("O").value=String(o);
+document.getElementById("P").value=String(p);
+document.getElementById("Q").value=String(q);
+document.getElementById("R").value=String(r);
+document.getElementById("S").value=String(s);
+document.getElementById("T").value=String(t);
+document.getElementById("U").value=String(u);
+}
+</script>

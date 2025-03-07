@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text-to-Speech Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style type="text/css">
+  button{
+  padding:10px;
+  border:20px ridge black;
+  background:silver;
+  color:black;
+  font-family:times;
+  transition: background 1s,border 0.1s;
+  }
+  button:active{
+  transform: scale(0.88);
+  background: white;
+  border: 20px ridge silver;
+  }
+  input{
+  border: 10px ridge black;
+  font-size: 20px;
+  font-family: times;
+  }
+  </style>
+  </head>
+  <body>
+  <div align="center">
+    <h1 style="font-family:times;text-shadow:2px 2px 5px;">Text to Speech</h1>
+    <input type="text" id="text-to-speak" placeholder="Enter text to speak"><br><br>
+    <button id="speak-button"><b>Speak</b></button>
+</div>
+    <script>
+      // Check if the browser supports the Web Speech API
+      if ('speechSynthesis' in window) {
+        const synth = window.speechSynthesis;
+        const speakButton = document.getElementById('speak-button');
+        const textToSpeakInput = document.getElementById('text-to-speak');
+
+        speakButton.addEventListener('click', function () {
+          const text = textToSpeakInput.value;
+          if (text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            synth.speak(utterance);
+          }
+        });
+      } else {
+        alet('Text-to-speech is not supported in your browser.');
+      }
+      // Check if speech synthesis is supported in the browser
+      if ('speechSynthesis' in window) {
+      var synthesis = window.speechSynthesis;
+      var voices = synthesis.getVoices();
+      
+      // Function to list available voices
+      function listVoices() {
+      voices.forEach(function(voice, index) {
+      console.log(index + 1 + '. ' + voice.name);
+      });
+      }
+      
+      // Function to change the voice and speak
+      function speakWithVoice(text, voiceIndex) {
+      if (voiceIndex >= 0 && voiceIndex < voices.length) {
+      var utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = voices[voiceIndex];
+      synthesis.speak(utterance);
+      } else {
+      console.log('Invalid voice index.');
+      }
+      }
+      
+      // List available voices
+      listVoices();
+      
+      // Example: Change voice to the second voice in the list (index 1)
+      speakWithVoice("Hello, this is a different voice.", 1);
+      } else {
+      console.log('Speech synthesis is not supported in this browser.');
+      }
+      </script>
+  </body>
+</html>

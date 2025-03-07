@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Photo Editor</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            
+        }
+
+        #editor {
+            margin-top: 20px;
+            
+        }
+
+        input {
+            width: 200px;
+            display: flex;
+            
+        }
+
+        .rotate-options {
+            margin-top: 10px;
+        }
+
+        #preview {
+            margin-top: 20px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Photo Editor</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <div id="editor">
+        <label for="brightnessSlider">Brightness: </label>
+        <input type="range" class="filter-slider" id="brightnessSlider" min="0" max="200" value="100">
+        <br>
+        <label for="contrastSlider">Contrast: </label>
+        <input type="range" class="filter-slider" id="contrastSlider" min="0" max="200" value="100">
+        <br>
+        <label for="saturationSlider">Saturation: </label>
+        <input type="range" class="filter-slider" id="saturationSlider" min="0" max="200" value="100">
+        <br>
+        <label for="grayscaleSlider">Grayscale: </label>
+        <input type="range" class="filter-slider" id="grayscaleSlider" min="0" max="100" value="0">
+        <br>
+        <label for="hueRotateSlider">Hue Rotate: </label>
+        <input type="range" class="filter-slider" id="hueRotateSlider" min="0" max="360" value="0">
+        <br>
+        <label for="blurSlider">Blur: </label>
+        <input type="range" class="filter-slider" id="blurSlider" min="0" max="10" value="0">
+        <br>
+        <label for="opacitySlider">Opacity: </label>
+        <input type="range" class="filter-slider" id="opacitySlider" min="0" max="100" value="100">
+        <div class="rotate-options">
+            <button id="rotateLeft">Rotate Left</button>
+            <button id="rotateRight">Rotate Right</button>
+        </div>
+    </div>
+    <img id="preview" alt="Preview Image">
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const brightnessSlider = document.getElementById('brightnessSlider');
+        const contrastSlider = document.getElementById('contrastSlider');
+        const saturationSlider = document.getElementById('saturationSlider');
+        const grayscaleSlider = document.getElementById('grayscaleSlider');
+        const hueRotateSlider = document.getElementById('hueRotateSlider');
+        const blurSlider = document.getElementById('blurSlider');
+        const opacitySlider = document.getElementById('opacitySlider');
+        const rotateLeftBtn = document.getElementById('rotateLeft');
+        const rotateRightBtn = document.getElementById('rotateRight');
+        const previewImage = document.getElementById('preview');
+
+        imageInput.addEventListener('change', handleImageUpload);
+        brightnessSlider.addEventListener('input', updateFilters);
+        contrastSlider.addEventListener('input', updateFilters);
+        saturationSlider.addEventListener('input', updateFilters);
+        grayscaleSlider.addEventListener('input', updateFilters);
+        hueRotateSlider.addEventListener('input', updateFilters);
+        blurSlider.addEventListener('input', updateFilters);
+        opacitySlider.addEventListener('input', updateFilters);
+        rotateLeftBtn.addEventListener('click', rotateLeft);
+        rotateRightBtn.addEventListener('click', rotateRight);
+
+        function handleImageUpload() {
+            const file = imageInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateFilters() {
+            const brightnessValue = brightnessSlider.value;
+            const contrastValue = contrastSlider.value;
+            const saturationValue = saturationSlider.value;
+            const grayscaleValue = grayscaleSlider.value;
+            const hueRotateValue = hueRotateSlider.value;
+            const blurValue = blurSlider.value;
+            const opacityValue = opacitySlider.value;
+
+            previewImage.style.filter = `
+                brightness(${brightnessValue}%) 
+                contrast(${contrastValue}%) 
+                saturate(${saturationValue}%) 
+                grayscale(${grayscaleValue}%) 
+                hue-rotate(${hueRotateValue}deg) 
+                blur(${blurValue}px) 
+                opacity(${opacityValue}%)
+            `;
+        }
+
+        function rotateLeft() {
+            previewImage.style.transform = `rotate(${(parseFloat(getComputedStyle(previewImage).transform.split(',')[1]) || 0) - 90}deg)`;
+        }
+
+        function rotateRight() {
+            previewImage.style.transform = `rotate(${(parseFloat(getComputedStyle(previewImage).transform.split(',')[1]) || 0) + 90}deg)`;
+        }
+    </script>
+</body>
+</html>

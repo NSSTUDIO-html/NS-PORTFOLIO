@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>loading animation</title>
+  <style>
+    body {
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      height: 100vh;
+    }
+    #box {
+      height: 50px;
+      width: 80px;
+      border: 3px solid white;
+      position: relative;
+      border-radius: 10px;
+    }
+ #i{
+   height: 10px;
+      width: 5px;
+      border: 3px solid white;
+      position: relative;
+      
+ }
+    #box:after {
+      bottom:200px;
+      content: "";
+      display: block;
+      background: white;
+      border-radius: 7px;
+      animation: animate 5s linear infinite;
+      height: 100%;
+    }
+    @keyframes animate {
+      0%{ width: 0%; 
+        background:red;
+      }
+      25%{ width: 25%; 
+        background:orange;
+      }
+      50% { width: 50%;
+        background:yellow;
+      }
+      75%{ width: 75%;
+        background:lite green;
+      }
+      100%{ width:100%;
+        background:green;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <div id="i"></div>
+</body>
+</html>

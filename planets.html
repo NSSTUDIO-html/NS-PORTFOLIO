@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Earth and Moon</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content:center;
+      margin: 0;
+      height: 100vh;
+    }
+
+    .earth-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .earth {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBsoyXSZtw2L2qUT6t2RjIKAEVCv5J2CLI-A&usqp=CAU');
+      background-size: 100%;
+      background-position: center;
+      position: relative;
+      animation: earthRotate 10s linear infinite;
+    }
+
+    .moon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #BFBFBF;
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcqcxhRQEkAnN4o1kERH3HTqOHu-CLMZgG-g&usqp=CAU');
+      background-size: 120%;
+      background-position: center;
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      margin-top: -10px;
+      margin-left: -10px;
+      animation: moonOrbit 10s linear infinite;
+    }
+
+    @keyframes earthRotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes moonOrbit {
+      from {
+        transform: rotate(0deg) translateX(200px) rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg) translateX(200px) rotate(-360deg);
+       
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="earth-container">
+    <div class="earth"></div>
+    <div class="moon"></div>
+  </div>
+</body>
+</html>

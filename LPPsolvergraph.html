@@ -1,0 +1,254 @@
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,">
+<style type="text/css">
+body{
+font-family:times;
+}
+.head{
+color:white;
+}
+table{
+border:3px solid gr;
+background-color:;
+color:black;
+}
+input{
+width:50px;
+border:2px solid black;
+}
+button{
+border:2px solid black;
+border-radius:6px;
+color:white;
+background-color:black;
+padding:20px;
+}
+button:active{
+transform:scale(0.90);
+background-color:white;
+color:black;
+}
+</style></head>
+<body>
+<div style="background:black;"><h1 class="head"style="font-family:times;"align="center">OR-I</h1>
+<hr></div>
+<h2>Q. Solve the following LPP by using graphical method</h2>
+<p>Maximize Z = <input id="oop"type="number">x<sub>1</sub>+<input id="os"type="number">x<sub>2</sub><br>
+Subject to constraints : <br>
+<input id="A"type="number">x<sub>1</sub>+<input id="b"type="number">x<sub>2</sub>≤<input id="e"type="number"><br>
+<input id="c"type="number">x<sub>1</sub>+<input id="d"type="number">x<sub>2</sub>≤<input id="f"type="number"><br>
+and x1,x2≥0.<br>
+<div align="center"><button onclick="solver()"><b>SOLVE</b></button></div>
+</p>
+<h3>Answer :<br></h3>
+<b>Graphical Method :<br></b>
+Convert the inequality constraints as equalities<br>
+<input disabled id="G"type="number">x<sub>1</sub>+<input disabled id="H"type="number">x<sub>2</sub>=<input disabled id="K"type="number"> - (1)<br>
+<input disabled id="I"type="number">x<sub>1</sub>+<input disabled id="J"type="number">x<sub>2</sub>=<input disabled id="L"type="number"> - (2)<br>
+Put x<sub>1</sub>= 0 in (1) => x<sub>2</sub>=<input disabled id="m"type="number"><br>
+Let A = (0, <input disabled id="q">)<br>
+Again put x<sub>2</sub>=0 in (1)=>x<sub>1</sub>=<input disabled id="n"><br>
+Let B = (<input disabled id="r"> ,0)<br>
+Put x<sub>2</sub>= 0 in (2) => x<sub>1</sub>=<input disabled type="number"id="o"><br>
+Let C = (<input disabled id="s"> ,0)<br>
+Put x<sub>1</sub>= 0 in (2) => x<sub>2</sub>=<input disabled type="number"id="p"><br>
+Let D = (0, <input disabled id="t">)<br>
+Using the above four points, construct graph<br>
+<marquee>This is the graph it's real use autoscale option to see graph</marquee>
+<br>
+<div id="plot" style="width: 500px; height: 400px;"></div><br>
+    <button onclick="guide()">GUIDE</button><br>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+Let 'E' be the point of intersection of (1) and (2).<br>
+So, solve (1) and (2)<br>
+the values of units x<sub>1</sub>,x<sub>2</sub> is <br>
+Therefore E = (<input id="u" value="0" type="number">, <input id="v" value="0" type="number">)<button onclick="cont()">CONTINUE</button><br>
+In the above graph, the feasible region is given by OAEC.<br>
+The values of Z at these vertices are given by<br>
+<table border="2" style="width:500px;object-fit:contain;">
+<tr>
+<td>Vertex</td>
+<td>Value of Z=<input id="w"disabled>x<sub>1</sub>+<input id="x"disabled>x<sub>2</sub></td>
+</tr>
+<tr>
+<td>O(0,0)</td>
+<td>Z=0</td>
+</tr>
+<tr>
+<td>A(0,<input id="y"disabled>)</td>
+<td>Z=<input id="z"disabled>(0)+<input id="a1"disabled>(<input id="b1"disabled>)=<input id="c1"disabled></td>
+</tr>
+<tr>
+<td>E(<input id="d1"disabled>,<input id="e1"disabled>)</td>
+<td>Z=<input id="f1"disabled>(<input id="g1"disabled>)+<input id="h1"disabled>(<input id="i1"disabled>)=<input id="j1"disabled></td>
+</tr>
+<tr>
+<td>C(<input id="k1"disabled>,0)</td>
+<td>Z=<input id="l1"disabled>(<input id="m1"disabled>)+<input id="n1"disabled>(0)=<input id="o1"disabled></td>
+</tr></table>
+Therefore, The problem is of maximization type,the optimum solution
+of the given problem is:<br>
+<b>Maximize Z = <input type="number">,x<sub>1</sub>=<input type="number">and x<sub>2</sub>=<input type="number"></b>
+<div></div>
+<script>
+//assigning html id's as javascript variables by 'let' keyword
+let a1 = document.getElementById("A");
+        let b1 = document.getElementById("b");
+        let c1 = document.getElementById("c");
+        let d1 = document.getElementById("d");
+        let e1 = document.getElementById("e");
+        let f1 = document.getElementById("f");
+        let g1 = document.getElementById("G");
+        let h1 = document.getElementById("H");
+        let i1 = document.getElementById("I");
+        let j1 = document.getElementById("J");
+        let k1 = document.getElementById("K");
+        let l1 = document.getElementById("L");
+        let m1 = document.getElementById("m");
+        let n1 = document.getElementById("n");
+        let o1 = document.getElementById("o");
+        let p1 = document.getElementById("p");
+        let q1 = document.getElementById("q");
+        let r1 = document.getElementById("r");
+        let s1 = document.getElementById("s");
+        let t1 = document.getElementById("t");
+        let u1 = document.getElementById("u");
+        let v1 = document.getElementById("v");
+        let w1 = document.getElementById("w");
+        let x1 = document.getElementById("x");
+        let y1 = document.getElementById("y");
+        let z1 = document.getElementById("z");
+        let a2 = document.getElementById("a1");
+        let b2 = document.getElementById("b1");
+        let c2 = document.getElementById("c1");
+        let d2 = document.getElementById("d1");
+        let e2 = document.getElementById("e1");
+        let f2 = document.getElementById("f1");
+        let g2 = document.getElementById("g1");
+        let h2 = document.getElementById("h1");
+        let i2 = document.getElementById("i1");
+        let j2 = document.getElementById("j1");
+        let k2 = document.getElementById("k1");
+        let l2 = document.getElementById("l1");
+        let m2 = document.getElementById("m1");
+        let n2 = document.getElementById("n1");
+        let o2 = document.getElementById("o1");
+        let oop = document.getElementById("oop");
+        let os = document.getElementById("os");
+        
+        function guide() {
+        alert('use autoscale button to see graph on top button row on graph that is look like x shaped arrow key')
+        }
+      function solver() {
+            //constraints values (1)(2) by 'var' variables
+            var gun = a1.value; se = c1.value;
+            g1.value = gun; i1.value=se;
+            var sun = b1.value; de=d1.value;
+            h1.value = sun; j1.value=de;
+            var bun = e1.value; ge=f1.value;
+            k1.value = bun; l1.value=ge;
+            var nm1 = (bun/sun).toFixed(2);
+            m1.value=nm1;//A point y value
+            q1.value=nm1;
+            var mn1 = (bun/gun).toFixed(2);
+            n1.value=mn1;//B point x value
+            r1.value=mn1;
+            var im1 = (ge/se).toFixed(2);
+            o1.value=im1;//C point x value
+            s1.value=im1;
+            var oo1 = (ge/de).toFixed(2);
+            p1.value=oo1;//D point y value
+            t1.value=oo1;
+            
+            
+            
+            // Define the four points
+            const point1 = { x: 0, y: nm1 };
+            const point2 = { x: mn1, y: 0 };
+            const point3 = { x: im1, y: 0 };
+            const point4 = { x: 0, y: oo1 };
+            
+            // Calculate the slopes and intercepts of the two lines
+            const slope1 = (point2.y - point1.y) / (point2.x - point1.x);
+            const intercept1 = point1.y - slope1 * point1.x;
+            
+            const slope2 = (point4.y - point3.y) / (point4.x - point3.x);
+            const intercept2 = point3.y - slope2 * point3.x;
+            
+            // Calculate the intersection point
+            const intersectionX = (intercept2 - intercept1) / (slope1 - slope2);
+            const intersectionY = slope1 * intersectionX + intercept1;
+            
+            // Create a Plotly scatter plot
+            const trace1 = {
+            x: [point1.x, point2.x],
+            y: [point1.y, point2.y],
+            mode: 'lines',
+            name: 'Line 1 Point A,B'
+            };
+            
+            const trace2 = {
+            x: [point3.x, point4.x],
+            y: [point3.y, point4.y],
+            mode: 'lines',
+            name: 'Line 2 Point C,D'
+            };
+            
+            const traceIntersection = {
+            x: [intersectionX],
+            y: [intersectionY],
+            mode: 'markers',
+            name: 'Intersection Point E',
+            marker: { size: 10, color: 'red' }
+            };
+            
+            const data = [trace1, trace2, traceIntersection];
+            
+            const layout = {
+            xaxis: { range: [0, 6] },
+            yaxis: { range: [0, 6] },
+            title: 'LPP GRAPHICAL METHOD',
+            };
+            
+            Plotly.newPlot('plot', data, layout);
+            }
+            // Calculate the intersection point
+            const intersectionX = (intercept2 - intercept1) / (slope1 - slope2);
+            const intersectionY = slope1 * intersectionX + intercept1;
+            
+            // Update the 'E' point's 'u' and 'v' values
+            u1.value = intersectionX;
+            v1.value = intersectionY;
+            
+            // Create a Plotly scatter plot for the updated 'E' point
+            const traceIntersection = {
+            x: [intersectionX],
+            y: [intersectionY],
+            mode: 'markers',
+            name: 'Intersection Point E',
+            marker: { size: 10, color: 'red' }
+            };
+            
+            // Update the Plotly plot with the new data
+            const data = [trace1, trace2, traceIntersection];
+            
+            //assigning table values 
+            var h=oop.value;
+            w1.value=h;f2.value=h;
+            z1.value=h;l2.value=h;
+            var g=os.value;
+            x1.value=g;a2.value=g;h2.value=g;n2.value=g;
+            var uv=m1.value; var k=u1.value; var l=v1.value;
+            y1.value=uv; d2.value=k; e2.value=l;
+            kk=o1.value; b2.value=uv; g2.value=k;
+            k2.value=kk; i2.value=l; m2.value=kk;
+            var js=(g*uv).toFixed(2);//optimum solutions
+            c2.value=js;
+            ks=(h*k+g*l).toFixed(2);
+            j2.value=ks;
+            ls=(h*kk).toFixed(2);
+            o2.value=ls;
+            
+            </script>
+           </body>
