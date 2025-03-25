@@ -117,20 +117,20 @@ background: linear-gradient(120deg, white 0%, cyan 100%);
 
     <div class="slider-container2">
         <h2>MISCELLANEOUS DRAWINGS</h2>
-        <div class="slider2">
-            <div class="slide2"><img src="svp.jpg" alt="Slide 1"></div>
-            <div class="slide2"><img src="v.jpeg" alt="Slide 2"></div>
-            <div class="slide2"><img src="bn.jpg" alt="Slide 3"></div>
-            <div class="slide2"><img src="cricket.jpg" alt="Slide 4"></div>
-            <div class="slide2"><img src="newyork.jpg" alt="Slide 4"></div>
-            <div class="slide2"><img src="yevadu.jpg" alt="Slide 4"></div>
-            <div class="slide2"><img src="leo.jpg" alt="Slide 4"></div>
-            <div class="slide2"><img src="rolexr.jpg" alt="Slide 4"></div>
-            <div class="slide2"><img src="rashmika.jpg" alt="Slide 4"></div>
+        <div class="slider3">
+            <div class="slide3"><img src="svp.jpg" alt="Slide 1"></div>
+            <div class="slide3"><img src="v.jpg" alt="Slide 2"></div>
+            <div class="slide3"><img src="bn.jpg" alt="Slide 3"></div>
+            <div class="slide3"><img src="cricket.jpg" alt="Slide 4"></div>
+            <div class="slide3"><img src="newyork.jpg" alt="Slide 4"></div>
+            <div class="slide3"><img src="yevadu.jpg" alt="Slide 4"></div>
+            <div class="slide3"><img src="leo.jpg" alt="Slide 4"></div>
+            <div class="slide3"><img src="rolexr.jpg" alt="Slide 4"></div>
+            <div class="slide3"><img src="rashmika.jpg" alt="Slide 4"></div>
        
         </div>
-        <button class="nav-button2 prev2" onclick="prevSlide2()">&#10094;</button>
-        <button class="nav-button2 next2" onclick="nextSlide2()">&#10095;</button>
+        <button class="nav-button2 prev2" onclick="prevSlide3()">&#10094;</button>
+        <button class="nav-button2 next2" onclick="nextSlide3()">&#10095;</button>
     </div>
 
     <script>
@@ -204,6 +204,30 @@ background: linear-gradient(120deg, white 0%, cyan 100%);
 
         function prevSlide2() {
             showSlide2(slideIndex2 - 1);
+        }
+
+        const slider3 = document.querySelector('.slider3');
+        const slides3 = document.querySelectorAll('.slide3');
+        const slideCount3 = slides.length;
+        let slideIndex3 = 0;
+
+        function showSlide3(index3) {
+            if (index3 < 0) {
+                slideIndex3 = slideCount3- 1;
+            } else if (index3 >= slideCount3) {
+                slideIndex3 = 0;
+            } else {
+                slideIndex3 = index3;
+            }
+            slider3.style.transform = `translateX(-${slideIndex3 * 100}%)`;
+        }
+
+        function nextSlide3() {
+            showSlide2(slideIndex3 + 1);
+        }
+
+        function prevSlide3() {
+            showSlide2(slideIndex3 - 1);
         }
     </script>
 
