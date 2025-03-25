@@ -93,8 +93,8 @@ background: linear-gradient(120deg, white 0%, cyan 100%);
        <div class="slide1"><img src="rrr2.jpg" alt="Slide 4"></div>
        
         </div>
-        <button class="nav-button1 prev1" onclick="prevSlide()">&#10094;</button>
-        <button class="nav-button1 next1" onclick="nextSlide()">&#10095;</button>
+        <button class="nav-button1 prev1" onclick="prevSlide1()">&#10094;</button>
+        <button class="nav-button1 next1" onclick="nextSlide1()">&#10095;</button>
     </div>
     <div class="slider-container2">
         <h2>PRABHAS DRAWINGS</h2>
@@ -106,8 +106,8 @@ background: linear-gradient(120deg, white 0%, cyan 100%);
             <div class="slide2"><img src="master5.jpg" alt="Slide 4"></div>
        
         </div>
-        <button class="nav-button2 prev2" onclick="prevSlide()">&#10094;</button>
-        <button class="nav-button2 next2" onclick="nextSlide()">&#10095;</button>
+        <button class="nav-button2 prev2" onclick="prevSlide2()">&#10094;</button>
+        <button class="nav-button2 next2" onclick="nextSlide2()">&#10095;</button>
     </div>
 
     <script>
@@ -133,6 +133,54 @@ background: linear-gradient(120deg, white 0%, cyan 100%);
 
         function prevSlide() {
             showSlide(slideIndex - 1);
+        }
+
+        const slider1 = document.querySelector('.slider1');
+        const slides1 = document.querySelectorAll('.slide1');
+        const slideCount1 = slides.length;
+        let slideIndex1 = 0;
+
+        function showSlide1(index1) {
+            if (index1< 0) {
+                slideIndex1 = slideCount1 - 1;
+            } else if (index1 >= slideCount1) {
+                slideIndex1 = 0;
+            } else {
+                slideIndex1 = index1;
+            }
+            slider1.style.transform = `translateX(-${slideIndex1 * 100}%)`;
+        }
+
+        function nextSlide1() {
+            showSlide1(slideIndex1 + 1);
+        }
+
+        function prevSlide1() {
+            showSlide1(slideIndex1 - 1);
+        }
+
+        const slider2 = document.querySelector('.slider2');
+        const slides2 = document.querySelectorAll('.slide2');
+        const slideCount2 = slides.length;
+        let slideIndex2 = 0;
+
+        function showSlide2(index2) {
+            if (index2 < 0) {
+                slideIndex2 = slideCount2 - 1;
+            } else if (index2 >= slideCount2) {
+                slideIndex2 = 0;
+            } else {
+                slideIndex2 = index2;
+            }
+            slider2.style.transform = `translateX(-${slideIndex2 * 100}%)`;
+        }
+
+        function nextSlide2() {
+            showSlide2(slideIndex2 + 1);
+        }
+
+        function prevSlide2() {
+            showSlide2(slideIndex2 - 1);
         }
     </script>
 
