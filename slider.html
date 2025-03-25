@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Image Slider</title>
+    <style>
+        .slider-container {
+            width: 80%; /* Adjust as needed */
+            max-width: 800px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .slider-container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="https://via.placeholder.com/800x400/FF5733/FFFFFF?text=Slide+1" alt="Slide 1"></div>
+            <div class="slide"><img src="https://via.placeholder.com/800x400/33FF57/FFFFFF?text=Slide+2" alt="Slide 2"></div>
+            <div class="slide"><img src="https://via.placeholder.com/800x400/5733FF/FFFFFF?text=Slide+3" alt="Slide 3"></div>
+            <div class="slide"><img src="https://via.placeholder.com/800x400/FFFF33/000000?text=Slide+4" alt="Slide 4"></div>
+        </div>
+        <button class="nav-button prev" onclick="prevSlide()">&#10094;</button>
+        <button class="nav-button next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const slideCount = slides.length;
+        let slideIndex = 0;
+
+        function showSlide(index) {
+            if (index < 0) {
+                slideIndex = slideCount - 1;
+            } else if (index >= slideCount) {
+                slideIndex = 0;
+            } else {
+                slideIndex = index;
+            }
+            slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            showSlide(slideIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(slideIndex - 1);
+        }
+    </script>
+
+</body>
+</html>
