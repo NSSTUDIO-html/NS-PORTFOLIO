@@ -147,6 +147,7 @@ background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Y7vvX8gl
 border:5px ridge gold;
             color:gold;
             text-shadow:2px 2px black;
+            anination: font 5s infinite;
         }
         p{
             animation: word 5s infinite;
@@ -163,6 +164,20 @@ color:gold;
 }
             100%{
 color:black;
+            }
+        }
+        @keyframes font{
+0%{
+font-family:times;
+}
+            30%{
+font-family:courier;
+            }
+            60%{
+font-family:monospace;
+}
+            100%{
+font-family: cursive;
             }
         }
     </style>
