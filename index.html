@@ -147,7 +147,7 @@ background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Y7vvX8gl
 border:5px ridge gold;
             color:gold;
             text-shadow:2px 2px black;
-            anination: font 5s infinite;
+            anination: st 5s infinite;
         }
         p{
             animation: word 5s infinite;
@@ -166,18 +166,22 @@ color:gold;
 color:black;
             }
         }
-        @keyframes font{
+        @keyframes st{
 0%{
-background:grey;
+background: linear-gradient(120deg, silver 0%, gray 100%);
+
 }
             30%{
-background:silver;
+background: linear-gradient(120deg, yellow 0%, orange 100%);
+
             }
             60%{
-background:gold;
+background: linear-gradient(120deg, gold 0%, orange 100%);
+
 }
             100%{
-background:white;
+background: linear-gradient(120deg, cyan 0%, green 100%);
+
             }
         }
     </style>
