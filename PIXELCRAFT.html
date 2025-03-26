@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PIXELCRAFT studio Image & Font Editor (CSS)</title>
+<style>
+  body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background:linear-gradient(to right,yellow,orange);
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .image-container {
+    position: relative; /* For positioning text overlay */
+    border: 1px solid #ccc;
+    overflow: hidden; /* For clip-path */
+  }
+
+  .editable-image {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    filter: grayscale(0) brightness(1) contrast(1) blur(0px) sepia(0) hue-rotate(0deg) invert(0) opacity(1);
+    transform: rotate(0deg) scale(1) translateX(0) translateY(0);
+    clip-path: inset(0% 0% 0% 0%); /* Initial clip-path */
+    transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out, clip-path 0.3s ease-in-out;
+  }
+
+  .text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    user-select: none; /* Prevent text selection while dragging */
+    /* Initial font styles */
+    font-family: sans-serif;
+  }
+
+  .control-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+  }
+
+  .control-group input[type="range"],
+  .control-group input[type="number"],
+  .control-group select,
+  .control-group input[type="color"],
+  .control-group input[type="file"] {
+    width: 120px;
+    max-width: 100%;
+  }
+
+  .control-group input[type="checkbox"] {
+    margin-right: 5px;
+  }
+h1{
+  text-align:center;
+  font-family:times;
+  }
+  /* Add more styling for better appearance */
+</style>
+</head>
+<body>
+
+  <h1>PIXELCRAFT <br>-STUDIO-</h1>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="imageFile">Choose Image:</label>
+      <input type="file" id="imageFile" accept="image/*" onchange="loadImage(this)">
+    </div>
+    <hr style="width: 100%;">
+    <div class="control-group">
+      <label for="grayscale">Grayscale:</label>
+      <input type="range" id="grayscale" min="0" max="1" step="0.01" value="0" oninput="applyFilters()">
+    </div>
+    <div class="control-group">
+      <label for="brightness">Brightness:</label>
+      <input type="range" id="brightness" min="0" max="2" step="0.1" value="1" oninput="applyFilters()">
+    </div>
+    <div class="control-group">
+      <label for="contrast">Contrast:</label>
+      <input type="range" id="contrast" min="0" max="2" step="0.1" value="1" oninput="applyFilters()">
+    </div>
+    <div class="control-group">
+      <label for="blur">Blur:</label>
+      <input type="range" id="blur" min="0" max="10" step="1" value="0" oninput="applyFilters()">
+    </div>
+    <div class="control-group">
+      <label for="sepia">Sepia:</label>
+      <input type="range" id="sepia" min="0" max="1" step="0.01" value="0" oninput="applyFilters()">
+    </div>
+    <div class="control-group">
+      <label for="hueRotate">Hue Rotate:</label>
+      <input type="range" id="hueRotate" min="0" max="360" step="1" value="0" oninput="applyFilters()">
+    </div>
+    <div class="control-group">
+      <label for="invert">Invert:</label>
+      <input type="range" id="invert" min="0" max="1" step="0.01" value="0" oninput="applyFilters()">
+    </div>
+    <div class="control-group">
+      <label for="opacity">Opacity:</label>
+      <input type="range" id="opacity" min="0" max="1" step="0.01" value="1" oninput="applyFilters()">
+    </div>
+    <hr style="width: 100%;">
+    <div class="control-group">
+      <label for="rotate">Rotate (deg):</label>
+      <input type="number" id="rotate" value="0" oninput="applyTransforms()">
+    </div>
+    <div class="control-group">
+      <label for="scale">Scale:</label>
+      <input type="number" id="scale" value="1" step="0.1" oninput="applyTransforms()">
+    </div>
+    <div class="control-group">
+      <label for="translateX">Translate X (px):</label>
+      <input type="number" id="translateX" value="0" oninput="applyTransforms()">
+    </div>
+    <div class="control-group">
+      <label for="translateY">Translate Y (px):</label>
+      <input type="number" id="translateY" value="0" oninput="applyTransforms()">
+    </div>
+    <hr style="width: 100%;">
+    <div class="control-group">
+      <label for="clipTop">Clip Top (%):</label>
+      <input type="range" id="clipTop" min="0" max="100" value="0" oninput="applyClipPath()">
+    </div>
+    <div class="control-group">
+      <label for="clipRight">Clip Right (%):</label>
+      <input type="range" id="clipRight" min="0" max="100" value="0" oninput="applyClipPath()">
+    </div>
+    <div class="control-group">
+      <label for="clipBottom">Clip Bottom (%):</label>
+      <input type="range" id="clipBottom" min="0" max="100" value="0" oninput="applyClipPath()">
+    </div>
+    <div class="control-group">
+      <label for="clipLeft">Clip Left (%):</label>
+      <input type="range" id="clipLeft" min="0" max="100" value="0" oninput="applyClipPath()">
+    </div>
+    <hr style="width: 100%;">
+    <div class="control-group">
+      <label for="fontFamily">Font Family:</label>
+      <select id="fontFamily" onchange="document.getElementById('textOverlay').style.fontFamily = this.value;">
+        <option value="sans-serif">Sans-Serif</option>
+        <option value="serif">Serif</option>
+        <option value="monospace">Monospace</option>
+        <option value="cursive">Cursive</option>
+        <option value="fantasy">Fantasy</option>
+        </select>
+    </div>
+    <div class="control-group">
+      <label for="fontSize">Font Size:</label>
+      <input type="number" id="fontSize" value="2" min="0.5" step="0.1" oninput="document.getElementById('textOverlay').style.fontSize = this.value + 'em';">
+    </div>
+    <div class="control-group">
+      <label for="textColor">Text Color:</label>
+      <input type="color" id="textColor" value="#000" oninput="document.getElementById('textOverlay').style.color = this.value;">
+    </div>
+    <div class="control-group">
+      <label for="textShadow">Text Shadow (Horizontal px):</label>
+      <input type="number" id="textShadowX" value="0" oninput="applyTextShadow()">
+    </div>
+    <div class="control-group">
+      <label for="textShadow">Text Shadow (Vertical px):</label>
+      <input type="number" id="textShadowY" value="0" oninput="applyTextShadow()">
+    </div>
+    <div class="control-group">
+      <label for="textShadowBlur">Text Shadow Blur (px):</label>
+      <input type="number" id="textShadowBlur" value="0" min="0" oninput="applyTextShadow()">
+    </div>
+    <div class="control-group">
+      <label for="textShadowColor">Text Shadow Color:</label>
+      <input type="color" id="textShadowColor" value="#888" oninput="applyTextShadow()">
+    </div>
+    <div class="control-group">
+      <label for="overlayText">Overlay Text:</label>
+      <input type="text" id="overlayText" value="PIXELCRAFT" oninput="document.getElementById('textOverlay').textContent = this.value;">
+    </div>
+  </div>
+
+  <div class="image-container">
+    <img id="editableImage" class="editable-image" src="https://via.placeholder.com/400" alt="Editable Image">
+    <div id="textOverlay" class="text-overlay">PIXELCRAFT</div>
+  </div>
+
+  <script>
+    const image = document.getElementById('editableImage');
+    const grayscale = document.getElementById('grayscale');
+    const brightness = document.getElementById('brightness');
+    const contrast = document.getElementById('contrast');
+    const blur = document.getElementById('blur');
+    const sepia = document.getElementById('sepia');
+    const hueRotate = document.getElementById('hueRotate');
+    const invert = document.getElementById('invert');
+    const opacity = document.getElementById('opacity');
+
+    const rotate = document.getElementById('rotate');
+    const scale = document.getElementById('scale');
+    const translateX = document.getElementById('translateX');
+    const translateY = document.getElementById('translateY');
+
+    const clipTop = document.getElementById('clipTop');
+    const clipRight = document.getElementById('clipRight');
+    const clipBottom = document.getElementById('clipBottom');
+    const clipLeft = document.getElementById('clipLeft');
+
+    const textShadowX = document.getElementById('textShadowX');
+    const textShadowY = document.getElementById('textShadowY');
+    const textShadowBlur = document.getElementById('textShadowBlur');
+    const textShadowColor = document.getElementById('textShadowColor');
+    const textOverlayElement = document.getElementById('textOverlay');
+    const imageFile = document.getElementById('imageFile');
+
+    function applyFilters() {
+      image.style.filter = `grayscale(${grayscale.value}) brightness(${brightness.value}) contrast(${contrast.value}) blur(${blur.value}px) sepia(${sepia.value}) hue-rotate(${hueRotate.value}deg) invert(${invert.value}) opacity(${opacity.value})`;
+    }
+
+    function applyTransforms() {
+      image.style.transform = `rotate(${rotate.value}deg) scale(${scale.value}) translateX(${translateX.value}px) translateY(${translateY.value}px)`;
+    }
+
+    function applyClipPath() {
+      image.style.clipPath = `inset(${clipTop.value}% ${clipRight.value}% ${clipBottom.value}% ${clipLeft.value}%)`;
+    }
+
+    function applyTextShadow() {
+      const x = textShadowX.value;
+      const y = textShadowY.value;
+      const blur = textShadowBlur.value;
+      const color = textShadowColor.value;
+      textOverlayElement.style.textShadow = `${x}px ${y}px ${blur}px ${color}`;
+    }
+
+    function loadImage(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('editableImage').src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+
+</body>
+</html>
