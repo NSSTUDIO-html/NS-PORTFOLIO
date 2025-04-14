@@ -442,10 +442,26 @@ border:5px ridge gold;
         
         </div>
     
+<img id="myImage" src="sasankcv.jpg" alt="Image to Download" width="300" height="200">
+<br><br>
+<button onclick="downloadImage()">Download Image</button>
 
     <footer>
         <p>&copy; 2025 POLEPALLI NAGA SASANK</p>
     </footer>
+<script>
+function downloadImage() {
+  const image = document.getElementById('myImage');
+  const imageUrl = image.src;
+  const imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1); // Extract filename
 
+  const link = document.createElement('a');
+  link.href = imageUrl;
+  link.download = imageName; // Set the downloaded filename
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link); // Clean up the created link
+}
+</script>
 </body>
 </html>
