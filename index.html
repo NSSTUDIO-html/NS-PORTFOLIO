@@ -89,23 +89,16 @@
           height: 200px;
             object-fit:contain;
             animation:bor 10s linear infinite;
-            animation:size 10s linear 1;
+            
         }
-        @keyframes size{
-            from{
-                width:0%;
-            }
-            to{
-                width:100%;
-            }
-        }
+        
         @keyframes bor{
-            0%{border:10px solid gold;}
+            0%{border:10px solid gold;width:0%;}
             20%{border:10px double gold;}
             40%{border:10px inset gold;}
             60%{border:10px ridge gold;}
             80%{border:10px outset gold;}
-            100%{border:10px groove gold;}
+            100%{border:10px groove gold;width:100%;}
         }
         #ns{
             position:fixed;
