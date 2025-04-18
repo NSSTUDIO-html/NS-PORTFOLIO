@@ -213,7 +213,7 @@ border:5px ridge gold;
     </style>
 </head>
 <body>
-
+<audio id="audio"src="lonely.m4a"></audio>
     <header>
         <img id="s"src="SASANK.jpg"/>
         <h1>P NAGA SASANK</h1>
@@ -542,6 +542,20 @@ function downloadImage() {
   link.click();
   document.body.removeChild(link); // Clean up the created link
 }
+    const audio = document.getElementById('audio');
+    const btn = document.getElementById('ns');
+
+    btn.addEventListener('click',() =>{
+        if(audio.paused){
+            audio.play();
+
+        }
+        else{
+            audio.pause();
+
+        }
+
+    });
 </script>
 </body>
 </html>
