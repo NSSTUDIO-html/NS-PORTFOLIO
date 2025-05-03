@@ -497,6 +497,20 @@ I’m constantly learning and working on projects that combine web, AI, and game
             <a href="Rr.html">GO TO WEBSITE</a>
         
         </div>
+  <details id="matrixAI" onclick="checkPassword(event)">
+        <summary>Project UNKNOWN</summary>
+<div class="project"id="secret-content">
+            <h3>Project X: MATRIX AI</h3>
+                
+            <img src="ARU.PNG" alt="Project 14" class="img_portfolio"/>
+            <p>A NEW ETHICAL PROTECTION CYBER AI FOR OFFENSIVE AND DEFENCE CYBERSECURITY PURPOSES.</p>
+                
+            <a href="Rr.html">GO TO WEBSITE</a>
+        
+</div>
+    
+</details>
+        
         </section>
 
 <h1>OTHER PROJECTS</h1>
@@ -619,6 +633,21 @@ I’m constantly learning and working on projects that combine web, AI, and game
     </p>
     </footer>
 <script>
+     // Function to check the password before expanding <details>
+        function checkPassword(event) {
+            const password = "kali-X";
+            const userPassword = prompt("Enter the password to unlock Matrix AI:");
+
+            // Check if the password is correct
+            if (userPassword === password) {
+                // If password is correct, reveal the content
+                document.getElementById("secret-content").style.display = "block";
+            } else {
+                // If password is incorrect, prevent expanding the <details> and show alert
+                event.preventDefault();
+                alert("Incorrect password. Please try again.");
+            }
+        }
 function downloadImage() {
   const image = document.getElementById('myImage');
   const imageUrl = image.src;
