@@ -15,10 +15,28 @@
 background-size:100%;
         }
         #P{
-animation: slideIn 2s ease-in-out 1s infinite alternate;
+            position:absolute;
+animation: s1 2s ease-in-out 1s infinite alternate;
         }
         #S{
-            animation: slideIn 2s ease-in-out 1s infinite alternate;
+            position:absolute;
+            animation: s2 2s ease-in-out 1s infinite alternate;
+        }
+        @keyframes s1{
+            from{
+                left:0%;
+            }
+            to{
+                left:50%;
+            }
+        }
+        @keyframes s1{
+            from{
+                right:0%;
+            }
+            to{
+                right:50%;
+            }
         }
 
         header {
