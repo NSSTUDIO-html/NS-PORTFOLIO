@@ -14,39 +14,48 @@
             background: linear-gradient(80deg,silver 0%,white 100%);
 background-size:100%;
         }
-        #name{
-            display:flex;
-            font-size:30px;
-            font-style:bold;
-            font-family:cursive;
-            text-align:center;
-        }
-        #P{
-            
-            position:relative;
-animation: s1 2s ease-in-out 1s 1 alternate;
-        }
-        #S{
-            
-            position:relative;
-            animation: s2 2s ease-in-out 1s 1 alternate;
-        }
-        @keyframes s1{
-            from{
-                left:0%;
-            }
-            to{
-                left:50%;
-            }
-        }
-        @keyframes s2{
-            from{
-                right:0%;
-            }
-            to{
-                right:50%;
-            }
-        }
+        <style>
+  #name {
+    display: flex;
+    justify-content: center;  /* centers items horizontally */
+    align-items: center;      /* centers items vertically (if height is set) */
+    font-size: 30px;
+    font-weight: bold;        /* corrected */
+    font-family: cursive;
+    height: 100px;            /* optional: helps vertical centering */
+    gap: 20px;                /* spacing between <p> tags */
+  }
+
+  #P, #S {
+    position: relative;
+  }
+
+  #P {
+    animation: s1 2s ease-in-out 1s 1 alternate;
+  }
+
+  #S {
+    animation: s2 2s ease-in-out 1s 1 alternate;
+  }
+
+  @keyframes s1 {
+    from {
+      left: 0%;
+    }
+    to {
+      left: 50px;
+    }
+  }
+
+  @keyframes s2 {
+    from {
+      right: 0%;
+    }
+    to {
+      right: 50px;
+    }
+  }
+
 
         header {
             background: url('robo.jpg');
