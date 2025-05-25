@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Titan Core AI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      padding-bottom: 60px;
+    }
+    header {
+      background: black;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: #4b5563;
+      padding: 10px;
+    }
+    nav button {
+      background: #9ca3af;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background: #6b7280;
+    }
+    main {
+      padding: 20px;
+    }
+    .tab {
+      display: none;
+    }
+    .tab:not(.hidden) {
+      display: block;
+    }
+    .chat-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 600px;
+      margin: auto;
+    }
+    #chat-log {
+      background: #e5e7eb;
+      padding: 10px;
+      height: 250px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+    }
+    #user-input {
+      padding: 10px;
+      font-size: 1rem;
+    }
+    #voice-output {
+      margin-top: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: black;
+      color: white;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    @media (max-width: 600px) {
+      nav button {
+        flex: 1 1 100%;
+      }
+      .chat-box {
+        padding: 0 10px;
+      }
+    }
+  </style>
+  <script defer>
+    function showTab(id) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }function sendMessage() {
+  const input = document.getElementById('user-input');
+  const log = document.getElementById('chat-log');
+  const userMessage = input.value.trim();
+  if (!userMessage) return;
+  log.innerHTML += `<div><strong>You:</strong> ${userMessage}</div>`;
+  input.value = '';
+  generateBotResponse(userMessage).then(botReply => {
+    log.innerHTML += `<div><strong>Titan:</strong> ${botReply}</div>`;
+    log.scrollTop = log.scrollHeight;
+  });
+}
+
+async function generateBotResponse(text) {
+  // Simulate AI response using TensorFlow.js (placeholder logic)
+  await tf.ready();
+  const encoded = tf.tensor1d([...text].map(ch => ch.charCodeAt(0))).mean().arraySync();
+  const replies = [
+    "That's interesting!",
+    "Can you explain more?",
+    "I'm here to help you.",
+    "Let's explore that further.",
+    "Thanks for sharing."
+  ];
+  return replies[Math.floor(encoded) % replies.length];
+}
+
+function startListening() {
+  const output = document.getElementById('voice-output');
+  output.innerText = 'Listening... (mock response)';
+  setTimeout(() => {
+    output.innerText = 'Hello! I heard you say something.';
+  }, 2000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  showTab('chat');
+});
+
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Titan Core AI</h1>
+    <p>Your All-in-One AI Assistant</p>
+  </header>  <nav>
+    <button onclick="showTab('chat')">Chatbot</button>
+    <button onclick="showTab('tools')">AI Tools</button>
+    <button onclick="showTab('voice')">Voice Assistant</button>
+  </nav>  <main>
+    <section id="chat" class="tab">
+      <h2>Chatbot (Powered by TensorFlow.js)</h2>
+      <div class="chat-box">
+        <div id="chat-log"></div>
+        <input type="text" id="user-input" placeholder="Ask me anything..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </section><section id="tools" class="tab hidden">
+  <h2>AI Tools</h2>
+  <ul>
+    <li>Text Analyzer</li>
+    <li>Data Visualizer</li>
+    <li>NLP Summary</li>
+    <li>Custom Model Support</li>
+  </ul>
+</section>
+
+<section id="voice" class="tab hidden">
+  <h2>Voice Assistant</h2>
+  <button onclick="startListening()">Start Listening</button>
+  <p id="voice-output">Voice responses will appear here...</p>
+</section>
+
+  </main>  <footer>
+    <p>© 2025 Titan Core AI | Built by Naga Sasank</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Universe</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #e0f2f1, #80cbc4);
+      color: #004d40;
+    }
+    header {
+      background-color: #00695c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 960px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    button, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #00796b;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    video, canvas, model-viewer {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .ar-tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .ar-tools button {
+      background-color: #b2dfdb;
+      color: #004d40;
+    }
+    footer {
+      background-color: #00695c;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>AR Universe</h1>
+    <p>Play AR-based games and explore animated virtual worlds</p>
+  </header>  <main>
+    <section>
+      <h2>1. Activate AR Camera</h2>
+      <video id="arCamera" autoplay muted playsinline></video>
+      <button onclick="startARCamera()">Start Camera</button>
+    </section><section>
+  <h2>2. Choose AR Experience</h2>
+  <select>
+    <option>Select Game World</option>
+    <option>Space Shooter</option>
+    <option>Mythical Forest</option>
+    <option>Dino Battle</option>
+    <option>Super Speed Race</option>
+  </select>
+  <div class="ar-tools">
+    <button>Start Game</button>
+    <button>Load Environment</button>
+    <button>Spawn Enemies</button>
+    <button>Player Weapon</button>
+  </div>
+</section>
+
+<section>
+  <h2>3. 3D Model Preview</h2>
+  <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" alt="Astronaut" auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look"></model-viewer>
+</section>
+
+  </main>  <footer>
+    <p>© 2025 AR Universe | Powered by AnimeAI</p>
+  </footer>  <script>
+    function startARCamera() {
+      const video = document.getElementById('arCamera');
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => video.srcObject = stream)
+        .catch(err => alert('AR camera access denied'));
+    }
+  </script></body>
+</html>

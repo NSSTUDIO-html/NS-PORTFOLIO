@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reality Render</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      color: #111827;
+    }
+    header {
+      background: linear-gradient(to right, #0f172a, #1e3a8a);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    input, select, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+    }
+    button {
+      background-color: #1e3a8a;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #374151;
+    }
+    .output-box {
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px dashed #94a3b8;
+      border-radius: 10px;
+      background: white;
+      text-align: center;
+    }
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .tool {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .tool h4 {
+      margin-top: 0;
+      color: #1e3a8a;
+    }
+    footer {
+      background: #1e3a8a;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Reality Render</h1>
+    <p>Turn Images into Realistic 3D Scenes with AI</p>
+  </header>  <main>
+    <section>
+      <h2>1. Upload Image or Object</h2>
+      <input type="file" accept="image/*,model/*">
+    </section><section>
+  <h2>2. Choose Rendering Mode</h2>
+  <select>
+    <option value="photorealistic">Photorealistic</option>
+    <option value="stylized">Stylized Render</option>
+    <option value="3d-depth">3D Depth Mapping</option>
+    <option value="ar-ready">AR Ready Scene</option>
+  </select>
+  <button>Generate Reality Render</button>
+  <div class="output-box">
+    <p style="color:#6b7280">Render preview will appear here.</p>
+  </div>
+</section>
+
+<section>
+  <h2>3. AI Tools for Rendering</h2>
+  <div class="tools">
+    <div class="tool">
+      <h4>Lighting Estimator</h4>
+      <p>Automatically adds realistic light based on object geometry.</p>
+    </div>
+    <div class="tool">
+      <h4>Material Enhancer</h4>
+      <p>Refines texture and reflections using AI-based material prediction.</p>
+    </div>
+    <div class="tool">
+      <h4>Scene Reconstructor</h4>
+      <p>Transforms flat image into spatial 3D layout.</p>
+    </div>
+    <div class="tool">
+      <h4>360 View Generator</h4>
+      <p>Creates interactive 360° view of the rendered object or scene.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <button>Download Rendered Scene</button>
+</section>
+
+  </main>  <footer>
+    <p>© 2025 Reality Render | Created by Naga Sasank</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Sketcher</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #f0f4f8, #dbeafe);
+      color: #1a202c;
+    }
+    header {
+      background-color: #2563eb;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    input, button, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #2563eb;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #1e40af;
+    }
+    video, canvas {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .toolbox {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .toolbox button {
+      flex: 1 1 100px;
+      padding: 8px;
+      background: #e0e7ff;
+      border: none;
+      border-radius: 6px;
+      color: #1e3a8a;
+      font-weight: bold;
+    }
+    footer {
+      background-color: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AR Sketcher</h1>
+    <p>Draw on real-world surfaces using your mobile camera</p>
+  </header>  <main>
+    <section>
+      <h2>1. Enable Camera</h2>
+      <video id="camera" autoplay muted playsinline></video>
+      <button onclick="startCamera()">Start AR Camera</button>
+    </section><section>
+  <h2>2. Draw with Overlay</h2>
+  <canvas id="sketchCanvas" height="300"></canvas>
+  <div class="toolbox">
+    <button onclick="selectTool('pen')">Pen</button>
+    <button onclick="selectTool('eraser')">Eraser</button>
+    <button onclick="clearCanvas()">Clear</button>
+  </div>
+</section>
+
+<section>
+  <h2>3. AI Drawing Guide</h2>
+  <select>
+    <option>Select Drawing Step</option>
+    <option>Draw a Circle</option>
+    <option>Draw a House</option>
+    <option>Draw a Cartoon Character</option>
+  </select>
+  <button>Overlay Drawing Guide</button>
+</section>
+
+  </main>  <footer>
+    <p>© 2025 AR Sketcher | Created by Naga Sasank</p>
+  </footer>  <script>
+    function startCamera() {
+      const video = document.getElementById('camera');
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => video.srcObject = stream)
+        .catch(err => alert('Camera not available'));
+    }
+
+    const canvas = document.getElementById('sketchCanvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    canvas.addEventListener('mousedown', () => drawing = true);
+    canvas.addEventListener('mouseup', () => drawing = false);
+    canvas.addEventListener('mousemove', draw);
+
+    function draw(e) {
+      if (!drawing) return;
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function selectTool(tool) {
+      if (tool === 'eraser') ctx.strokeStyle = '#f0f4f8';
+      else ctx.strokeStyle = '#2563eb';
+    }
+  </script></body>
+</html>

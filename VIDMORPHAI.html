@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIDMORPH AI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    header {
+      background: linear-gradient(120deg,black,#1e3a8a);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    input[type="file"] {
+      display: block;
+      margin-bottom: 15px;
+    }
+    select, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    video, .preview-box {
+      width: 100%;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .status {
+      margin-top: 10px;
+      font-style: italic;
+      color: #4b5563;
+    }
+    .toolbox {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .tool {
+      padding: 20px;
+      background: white;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .tool h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1e40af;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #1e3a8a;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VIDMORPH AI</h1>
+    <p>Transform Your Videos with AI Magic</p>
+  </header>  <main>
+    <section class="section">
+      <h2>1. Upload Your Video</h2>
+      <input type="file" accept="video/*" id="video-upload">
+      <video id="video-preview" controls class="hidden"></video>
+    </section><section class="section">
+  <h2>2. Choose AI Transformation</h2>
+  <select id="effect-select">
+    <option value="cartoon">Cartoon</option>
+    <option value="anime">Anime</option>
+    <option value="sketch">Sketch</option>
+    <option value="style">Style Transfer</option>
+    <option value="viggle">Viggle AI Motion Clone</option>
+    <option value="face_swap">Face Swap</option>
+    <option value="lip_sync">Lip Sync</option>
+    <option value="pose_transfer">Pose Transfer</option>
+  </select>
+</section>
+
+<section class="section">
+  <button onclick="processVideo()">Apply Transformation</button>
+  <div class="status" id="status">No process started.</div>
+</section>
+
+<section class="section">
+  <h2>3. AI Output Preview</h2>
+  <div class="preview-box" id="output-preview">
+    <p style="text-align:center; color:#9ca3af;">AI result will appear here.</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>4. Additional AI Video Tools</h2>
+  <div class="toolbox">
+    <div class="tool">
+      <h3>Video Background Remover</h3>
+      <p>Automatically remove and replace video backgrounds.</p>
+    </div>
+    <div class="tool">
+      <h3>AI Green Screen</h3>
+      <p>Apply effects on virtual green screen videos using AI segmentation.</p>
+    </div>
+    <div class="tool">
+      <h3>Style Matching</h3>
+      <p>Match style between two videos (e.g., matching lighting or motion style).</p>
+    </div>
+    <div class="tool">
+      <h3>Motion to Animation</h3>
+      <p>Use real human motion to animate characters (Viggle-like feature).</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <button onclick="downloadVideo()">Download Result</button>
+</section>
+
+  </main>  <footer>
+    <p>© 2025 VIDMORPH AI | Powered by Naga Sasank</p>
+  </footer>  <script>
+    const videoInput = document.getElementById('video-upload');
+    const videoPreview = document.getElementById('video-preview');
+    const statusText = document.getElementById('status');
+
+    videoInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const url = URL.createObjectURL(file);
+        videoPreview.src = url;
+        videoPreview.classList.remove('hidden');
+        statusText.textContent = "Video ready for transformation.";
+      }
+    });
+
+    function processVideo() {
+      const effect = document.getElementById('effect-select').value;
+      statusText.textContent = `Applying '${effect}' transformation using AI...`;
+
+      // Placeholder for real AI processing
+      setTimeout(() => {
+        document.getElementById('output-preview').innerHTML = `
+          <video controls autoplay muted loop>
+            <source src="sample-output.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        `;
+        statusText.textContent = "Transformation complete! Preview generated.";
+      }, 2000);
+    }
+
+    function downloadVideo() {
+      alert("This would trigger a download in a real app.");
+    }
+  </script></body>
+</html>

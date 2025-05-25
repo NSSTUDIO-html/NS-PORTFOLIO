@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musical Land</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #fdf6e3, #fce4ec);
+      color: #1a202c;
+    }
+    header {
+      background: linear-gradient(to right, #9f7aea, #ed64a6);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    input, select, button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e0;
+    }
+    button {
+      background-color: #9f7aea;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #6b46c1;
+    }
+    .instrument-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .instrument {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .instrument h4 {
+      margin: 10px 0 5px;
+      color: #9f7aea;
+    }
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+    footer {
+      background: #9f7aea;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Musical Land</h1>
+    <p>Play, Learn & Create Music with Virtual Instruments</p>
+  </header>  <main>
+    <section>
+      <h2>1. Select Instrument</h2>
+      <select>
+        <option>Virtual Piano</option>
+        <option>Guitar Simulator</option>
+        <option>Drum Pad</option>
+        <option>Flute</option>
+        <option>Tabla</option>
+      </select>
+      <button>Load Instrument</button>
+    </section><section>
+  <h2>2. Explore Instruments</h2>
+  <div class="instrument-grid">
+    <div class="instrument">
+      <h4>Piano</h4>
+      <audio controls src="piano.mp3"></audio>
+    </div>
+    <div class="instrument">
+      <h4>Guitar</h4>
+      <audio controls src="guitar.mp3"></audio>
+    </div>
+    <div class="instrument">
+      <h4>Drums</h4>
+      <audio controls src="drums.mp3"></audio>
+    </div>
+    <div class="instrument">
+      <h4>Flute</h4>
+      <audio controls src="flute.mp3"></audio>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>3. AI Music Tools</h2>
+  <ul>
+    <li>AI Music Generator (Melody + Beat)</li>
+    <li>Chord Prediction Assistant</li>
+    <li>Voice-to-Music Converter</li>
+    <li>Beat Synchronizer</li>
+  </ul>
+  <button>Generate AI Music</button>
+</section>
+
+  </main>  <footer>
+    <p>© 2025 Musical Land | Created by Naga Sasank</p>
+  </footer>
+</body>
+</html>

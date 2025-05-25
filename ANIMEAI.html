@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIME AI</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    header {
+      background: linear-gradient(90deg, black, #9333ea);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    input, select, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+    }
+    button {
+      background-color: #7e22ce;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #6b21a8;
+    }
+    .output-box {
+      margin-top: 20px;
+      border: 2px dashed #d1d5db;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      background-color: white;
+    }
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .tool {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .tool h4 {
+      margin-top: 0;
+      color: #7e22ce;
+    }
+    footer {
+      background-color: #7e22ce;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ANIME AI</h1>
+    <p>Turn Yourself or Videos into Anime with AI</p>
+  </header>  <main>
+    <section class="section">
+      <h2>1. Upload Image or Video</h2>
+      <input type="file" accept="image/*,video/*" id="media-upload">
+    </section><section class="section">
+  <h2>2. Choose Anime Transformation</h2>
+  <select id="anime-style">
+    <option value="toonify">Toonify Face</option>
+    <option value="animegan">AnimeGAN Filter</option>
+    <option value="manga">Manga Style</option>
+    <option value="action">Anime Action FX</option>
+    <option value="bg_anime">Anime Background Replace</option>
+  </select>
+  <button onclick="transformAnime()">Apply Anime Style</button>
+  <div class="output-box" id="anime-output">
+    <p style="color:#6b7280">Anime transformation preview will appear here.</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>3. Anime AI Tools</h2>
+  <div class="tools">
+    <div class="tool">
+      <h4>Anime Voice Changer</h4>
+      <p>Convert your voice into anime character voices using AI.</p>
+    </div>
+    <div class="tool">
+      <h4>Pose Animator</h4>
+      <p>Animate characters using human body pose from video.</p>
+    </div>
+    <div class="tool">
+      <h4>AI Lip Sync</h4>
+      <p>Sync anime mouth movements with recorded voices.</p>
+    </div>
+    <div class="tool">
+      <h4>Anime Avatar Generator</h4>
+      <p>Generate your anime version profile picture with one click.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <button onclick="downloadAnimeResult()">Download Anime Result</button>
+</section>
+
+  </main>  <footer>
+    <p>© 2025 ANIME AI | Created by Naga Sasank</p>
+  </footer>  <script>
+    function transformAnime() {
+      const style = document.getElementById('anime-style').value;
+      const output = document.getElementById('anime-output');
+      output.innerHTML = `<p style='color: #7e22ce'>Applying '${style}' AI transformation...</p>`;
+
+      setTimeout(() => {
+        output.innerHTML = `
+          <img src="https://placekitten.com/400/300" alt="Anime Result" style="max-width:100%; border-radius: 10px;" />
+        `;
+      }, 2000);
+    }
+
+    function downloadAnimeResult() {
+      alert("Anime result would be downloaded in the full version.");
+    }
+  </script></body>
+</html>
