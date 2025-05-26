@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JARVIS AI Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle, #0a0a0a, #000000);
+      color: #00f9ff;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .jarvis-container {
+      text-align: center;
+      padding: 40px;
+      background: rgba(0, 255, 255, 0.1);
+      border: 2px solid #00f9ff;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #00f9ff;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00f9ff;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      height: 100px;
+      overflow-y: auto;
+    }
+
+    button {
+      background: transparent;
+      border: 2px solid #00f9ff;
+      color: #00f9ff;
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 10px;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00f9ff;
+      color: #000;
+    }
+
+    .glow-ring {
+      width: 200px;
+      height: 200px;
+      border: 5px solid #00f9ff;
+      border-radius: 50%;
+      margin: 20px auto;
+      box-shadow: 0 0 40px #00f9ff;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="jarvis-container">
+    <h1>J.A.R.V.I.S AI</h1>
+    <div class="glow-ring"></div>
+    <button onclick="startListening()">Talk to JARVIS</button>
+    <button onclick="showCommands()">Show Commands</button>
+    <div id="output">Awaiting command...</div>
+  </div>
+
+  <script>
+    const output = document.getElementById("output");
+    const synth = window.speechSynthesis;
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.1;
+      utterance.pitch = 1;
+      utterance.voice = synth.getVoices()[0];
+      synth.speak(utterance);
+    }
+
+    function showCommands() {
+      const cmds = [
+        "Say 'Hello', 'What is the time', 'What is the date'",
+        "Say 'Open Google', 'Open YouTube', 'Open my website'",
+        "Say 'Open WhatsApp', 'Open Instagram', 'Open Maps'",
+        "Say 'Search [query] on Google'",
+        "Say 'Play [video/song] on YouTube'",
+        "Say 'Weather in [city]'"
+      ];
+      const message = cmds.join('\n');
+      output.innerText = message;
+      speak("Here are my available commands.");
+    }
+
+    function getWeather(city) {
+      fetch(`https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${city}`)
+        .then(res => res.json())
+        .then(data => {
+          const temp = data.current.temp_c;
+          const condition = data.current.condition.text;
+          const response = `Weather in ${city} is ${condition} with ${temp}°C.`;
+          output.innerText = response;
+          speak(response);
+        })
+        .catch(() => {
+          const errorMsg = "Sorry, I couldn't fetch the weather.";
+          output.innerText = errorMsg;
+          speak(errorMsg);
+        });
+    }
+
+    function respond(command) {
+      const cmd = command.toLowerCase();
+      let response = "I didn't understand that.";
+
+      if (cmd.includes("hello") || cmd.includes("hi")) {
+        response = "Hello sir, how can I assist you?";
+      } else if (cmd.includes("time")) {
+        response = `The time is ${new Date().toLocaleTimeString()}`;
+      } else if (cmd.includes("date")) {
+        response = `Today's date is ${new Date().toDateString()}`;
+      } else if (cmd.includes("who are you")) {
+        response = "I am J.A.R.V.I.S., your AI assistant.";
+      } else if (cmd.includes("open google")) {
+        response = "Opening Google";
+        window.open("https://www.google.com", "_blank");
+      } else if (cmd.includes("open youtube")) {
+        response = "Opening YouTube";
+        window.open("https://www.youtube.com", "_blank");
+      } else if (cmd.includes("open my website")) {
+        response = "Opening NS website";
+        window.open("https://nsstudio-html.github.io/NS-PORTFOLIO/", "_blank");
+      } else if (cmd.includes("open whatsapp")) {
+        response = "Opening WhatsApp";
+        window.open("whatsapp://", "_blank");
+      } else if (cmd.includes("open instagram")) {
+        response = "Opening Instagram";
+        window.open("instagram://", "_blank");
+      } else if (cmd.includes("open maps")) {
+        response = "Opening Maps";
+        window.open("https://maps.google.com", "_blank");
+      } else if (cmd.includes("open facebook")) {
+        response = "Opening Facebook";
+        window.open("https://facebook.com", "_blank");
+      } else if (cmd.includes("search")) {
+        const searchTerm = cmd.split("search")[1].replace("on google", "").trim();
+        response = `Searching ${searchTerm} on Google`;
+        window.open(`https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`, "_blank");
+      } else if (cmd.includes("play")) {
+        const query = cmd.split("play")[1].replace("on youtube", "").trim();
+        response = `Playing ${query} on YouTube`;
+        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, "_blank");
+      } else if (cmd.includes("weather in")) {
+        const city = cmd.split("weather in")[1].trim();
+        getWeather(city);
+        return;
+      }
+
+      output.innerText = response;
+      speak(response);
+    }
+
+    function startListening() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Speech Recognition not supported in this browser.");
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        output.innerText = `You said: "${transcript}"`;
+        respond(transcript);
+      };
+
+      recognition.onerror = function(event) {
+        output.innerText = "Error occurred: " + event.error;
+      };
+    }
+  </script>
+</body>
+</html>
