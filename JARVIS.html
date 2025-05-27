@@ -2,204 +2,177 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JARVIS AI Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>J.A.R.V.I.S Mobile Master AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-
     body {
       margin: 0;
-      background: radial-gradient(circle, #0a0a0a, #000000);
-      color: #00f9ff;
+      padding: 0;
       font-family: 'Orbitron', sans-serif;
+      background: black;
+      color: #00ffcc;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
-    }
-
-    .jarvis-container {
-      text-align: center;
-      padding: 40px;
-      background: rgba(0, 255, 255, 0.1);
-      border: 2px solid #00f9ff;
-      border-radius: 20px;
-      box-shadow: 0 0 30px #00f9ff;
-      width: 90%;
-      max-width: 600px;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
+      color: #00ffff;
+      text-align: center;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px #00f9ff;
     }
 
     #output {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      height: 100px;
+      width: 100%;
+      max-width: 500px;
+      height: 200px;
       overflow-y: auto;
+      border: 2px solid #00ffcc;
+      padding: 15px;
+      background: #111;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      border-radius: 10px;
     }
 
     button {
-      background: transparent;
-      border: 2px solid #00f9ff;
-      color: #00f9ff;
-      padding: 10px 20px;
-      font-size: 1.1rem;
-      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 15px 30px;
+      background-color: #00ffcc;
+      color: black;
+      border: none;
       border-radius: 10px;
-      margin: 10px;
-      transition: 0.3s;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
     }
 
-    button:hover {
-      background: #00f9ff;
-      color: #000;
-    }
-
-    .glow-ring {
-      width: 200px;
-      height: 200px;
-      border: 5px solid #00f9ff;
-      border-radius: 50%;
-      margin: 20px auto;
-      box-shadow: 0 0 40px #00f9ff;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.7; }
-      100% { transform: scale(1); opacity: 1; }
+    button:active {
+      background-color: #00ffaa;
     }
   </style>
 </head>
 <body>
-  <div class="jarvis-container">
-    <h1>J.A.R.V.I.S AI</h1>
-    <div class="glow-ring"></div>
-    <button onclick="startListening()">Talk to JARVIS</button>
-    <button onclick="showCommands()">Show Commands</button>
-    <div id="output">Awaiting command...</div>
-  </div>
-
+  <h1>J.A.R.V.I.S Mobile</h1>
+  <div id="output"></div>
+  <button onclick="startListening()">Start Listening</button><br>
+  <button onclick="toggleCommands()">Show Commands</button>
+<div id="commands" style="display: none; margin-top: 15px; font-size: 0.95rem;">
+  <h3>Available Commands:</h3>
+  <ul style="text-align: left;">
+    <li>Say "Open YouTube"</li>
+    <li>Say "Open Google"</li>
+    <li>Say "Open GitHub"</li>
+    <li>Say "Open Mail"</li>
+    <li>Say "What is the time"</li>
+    <li>Say "What is the date"</li>
+    <li>Say "Set reminder buy milk"</li>
+    <li>Say "Show reminder"</li>
+    <li>Say "Clear reminder"</li>
+    <li>Say "Calculate 5 plus 3"</li>
+    <li>Say "Tell me a joke"</li>
+    <li>Say "Search Wikipedia for Elon Musk"</li>
+    <li>Say "Who are you"</li>
+    <li>Say "Shutdown" or "Goodbye"</li>
+  </ul>
+</div>
   <script>
     const output = document.getElementById("output");
     const synth = window.speechSynthesis;
-
+    const recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const rec = new recognition();
+    rec.continuous = false;
+    rec.lang = "en-US";
+ 
+   function toggleCommands() {
+  const cmdBox = document.getElementById("commands");
+  if (cmdBox.style.display === "none") {
+    cmdBox.style.display = "block";
+  } else {
+    cmdBox.style.display = "none";
+  }
+}
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 1.1;
-      utterance.pitch = 1;
-      utterance.voice = synth.getVoices()[0];
       synth.speak(utterance);
-    }
-
-    function showCommands() {
-      const cmds = [
-        "Say 'Hello', 'What is the time', 'What is the date'",
-        "Say 'Open Google', 'Open YouTube', 'Open my website'",
-        "Say 'Open WhatsApp', 'Open Instagram', 'Open Maps'",
-        "Say 'Search [query] on Google'",
-        "Say 'Play [video/song] on YouTube'",
-        "Say 'Weather in [city]'"
-      ];
-      const message = cmds.join('\n');
-      output.innerText = message;
-      speak("Here are my available commands.");
-    }
-
-    function getWeather(city) {
-      fetch(`https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${city}`)
-        .then(res => res.json())
-        .then(data => {
-          const temp = data.current.temp_c;
-          const condition = data.current.condition.text;
-          const response = `Weather in ${city} is ${condition} with ${temp}°C.`;
-          output.innerText = response;
-          speak(response);
-        })
-        .catch(() => {
-          const errorMsg = "Sorry, I couldn't fetch the weather.";
-          output.innerText = errorMsg;
-          speak(errorMsg);
-        });
-    }
-
-    function respond(command) {
-      const cmd = command.toLowerCase();
-      let response = "I didn't understand that.";
-
-      if (cmd.includes("hello") || cmd.includes("hi")) {
-        response = "Hello sir, how can I assist you?";
-      } else if (cmd.includes("time")) {
-        response = `The time is ${new Date().toLocaleTimeString()}`;
-      } else if (cmd.includes("date")) {
-        response = `Today's date is ${new Date().toDateString()}`;
-      } else if (cmd.includes("who are you")) {
-        response = "I am J.A.R.V.I.S., your AI assistant.";
-      } else if (cmd.includes("open google")) {
-        response = "Opening Google";
-        window.open("https://www.google.com", "_blank");
-      } else if (cmd.includes("open youtube")) {
-        response = "Opening YouTube";
-        window.open("https://www.youtube.com", "_blank");
-      } else if (cmd.includes("open my website")) {
-        response = "Opening NS website";
-        window.open("https://nsstudio-html.github.io/NS-PORTFOLIO/", "_blank");
-      } else if (cmd.includes("open whatsapp")) {
-        response = "Opening WhatsApp";
-        window.open("whatsapp://", "_blank");
-      } else if (cmd.includes("open instagram")) {
-        response = "Opening Instagram";
-        window.open("instagram://", "_blank");
-      } else if (cmd.includes("open maps")) {
-        response = "Opening Maps";
-        window.open("https://maps.google.com", "_blank");
-      } else if (cmd.includes("open facebook")) {
-        response = "Opening Facebook";
-        window.open("https://facebook.com", "_blank");
-      } else if (cmd.includes("search")) {
-        const searchTerm = cmd.split("search")[1].replace("on google", "").trim();
-        response = `Searching ${searchTerm} on Google`;
-        window.open(`https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`, "_blank");
-      } else if (cmd.includes("play")) {
-        const query = cmd.split("play")[1].replace("on youtube", "").trim();
-        response = `Playing ${query} on YouTube`;
-        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, "_blank");
-      } else if (cmd.includes("weather in")) {
-        const city = cmd.split("weather in")[1].trim();
-        getWeather(city);
-        return;
-      }
-
-      output.innerText = response;
-      speak(response);
+      output.innerHTML += `<div>> ${text}</div>`;
     }
 
     function startListening() {
-      if (!('webkitSpeechRecognition' in window)) {
-        alert("Speech Recognition not supported in this browser.");
-        return;
+      rec.start();
+    }
+
+    rec.onresult = function(event) {
+      const command = event.results[0][0].transcript.toLowerCase();
+      output.innerHTML += `<div><b>You:</b> ${command}</div>`;
+      processCommand(command);
+    };
+
+    function processCommand(cmd) {
+      if (cmd.includes("hello") || cmd.includes("hi")) {
+        speak("Hello sir, how can I assist you?");
+      } else if (cmd.includes("open youtube")) {
+        speak("Opening YouTube");
+        window.open("https://youtube.com");
+      } else if (cmd.includes("open google")) {
+        speak("Opening Google");
+        window.open("https://google.com");
+      } else if (cmd.includes("open github")) {
+        speak("Opening GitHub");
+        window.open("https://github.com");
+      } else if (cmd.includes("open mail")) {
+        speak("Opening Gmail");
+        window.open("https://mail.google.com");
+      } else if (cmd.includes("what is the time")) {
+        const time = new Date().toLocaleTimeString();
+        speak("Current time is " + time);
+      } else if (cmd.includes("what is the date")) {
+        const date = new Date().toDateString();
+        speak("Today is " + date);
+      } else if (cmd.includes("set reminder")) {
+        const task = cmd.replace("set reminder", "").trim();
+        localStorage.setItem("reminder", task);
+        speak("Reminder set for: " + task);
+      } else if (cmd.includes("show reminder")) {
+        const task = localStorage.getItem("reminder");
+        speak(task ? "Your reminder is: " + task : "You have no reminders");
+      } else if (cmd.includes("clear reminder")) {
+        localStorage.removeItem("reminder");
+        speak("Reminders cleared");
+      } else if (cmd.includes("calculate")) {
+        try {
+          const expression = cmd.replace("calculate", "").trim();
+          const result = eval(expression);
+          speak("The result is " + result);
+        } catch {
+          speak("I couldn't calculate that");
+        }
+      } else if (cmd.includes("joke")) {
+        const jokes = [
+          "Why did the computer go to the doctor? It had a virus.",
+          "I told my AI it was being too chatty. Now it’s giving me the silent treatment.",
+          "Why was the JavaScript developer sad? Because he didn’t know how to null his feelings."
+        ];
+        speak(jokes[Math.floor(Math.random() * jokes.length)]);
+      } else if (cmd.includes("who are you")) {
+        speak("I am J.A.R.V.I.S, your virtual assistant.");
+      } else if (cmd.includes("search wikipedia for")) {
+        const query = cmd.split("search wikipedia for")[1].trim();
+        fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${query}`)
+          .then(res => res.json())
+          .then(data => speak(data.extract || "No summary found"))
+          .catch(() => speak("I couldn’t find that on Wikipedia."));
+      } else if (cmd.includes("shutdown") || cmd.includes("goodbye")) {
+        speak("Shutting down. Goodbye, sir.");
+      } else {
+        speak("Sorry, I did not understand the command.");
       }
-
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = "en-US";
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-      recognition.start();
-
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        output.innerText = `You said: "${transcript}"`;
-        respond(transcript);
-      };
-
-      recognition.onerror = function(event) {
-        output.innerText = "Error occurred: " + event.error;
-      };
     }
   </script>
 </body>
