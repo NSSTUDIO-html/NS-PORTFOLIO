@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>3D iPhone with Three.js</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: white;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <script type="module">
+  import * as THREE from 'https://esm.sh/three@0.158.0';
+      
+  import { OrbitControls } from 'https://esm.sh/three@0.158.0/examples/jsm/controls/OrbitControls';
+      
+    // Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xffffff); // or any hex color
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+    const material = new THREE.MeshStandardMaterial({ color: 0x000000 });
+     const phoneGeometry = new THREE.BoxGeometry(2, 4, 0.2);
+    const phoneMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    const pb = new THREE.Group();
+  const textureL = new THREE.TextureLoader();
+  const text = textureL.load('https://opengameart.org/sites/default/files/circle4179.png');
+   
+  const text1 = textureL.load('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeEWWliBW0iQvS0r4t0zuQfxzoz-WrZd2ZLpgNZi066aLFh0rptC-2nCA&s=10');
+  function bodyi(){
+  // iPhone body (rounded box)
+    const phoneGeometry = new THREE.BoxGeometry(2, 4, 0.2);
+    const phoneMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    const phone = new THREE.Mesh(phoneGeometry, phoneMaterial);
+    phone.scale.set(0.8,1.048,1.1);
+  pb.add(phone);
+  const phoneGeometry1 = new THREE.BoxGeometry(2, 4, 0.2);
+    const phoneMaterial1 = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    const phone1 = new THREE.Mesh(phoneGeometry, phoneMaterial);
+    phone1.scale.set(1.09,0.9,1.1);
+  pb.add(phone1);
+//phone
+      const cy = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy.position.set(0.7,1.7,0);
+  cy.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy.scale.set(0.4,0.105,0.4);
+      pb.add(cy);
+  const cy1 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy1.position.set(-0.7,1.7,0);
+  cy1.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy1.scale.set(0.4,0.105,0.4);
+      pb.add(cy1);
+  const cy2 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy2.position.set(0.7,-1.7,0);
+  cy2.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy2.scale.set(0.4,0.105,0.4);
+      pb.add(cy2);
+  const cy12 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy12.position.set(-0.7,-1.7,0);
+  cy12.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy12.scale.set(0.4,0.105,0.4);
+      pb.add(cy12);
+    }
+  scene.add(pb);
+  bodyi();
+  function backc(){
+   const pc = pb.clone();
+    pc.scale.set(0.5,0.3,0.5);
+    pc.position.set(0.4,1.3,-0.15);
+    scene.add(pc);
+    const cy39 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy39.position.set(0.6,1.6,-0.2);
+  cy39.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy39.scale.set(0.25,0.05,0.25);
+      scene.add(cy39);
+    const cy391 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy391.position.set(0.6,1,-0.2);
+  cy391.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy391.scale.set(0.25,0.05,0.25);
+      scene.add(cy391);
+    const cy392 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy392.position.set(0.15,1.3,-0.2);
+  cy392.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy392.scale.set(0.25,0.05,0.25);
+      scene.add(cy392);
+    //lens
+    
+    const materialt = new THREE.MeshBasicMaterial({ map:text });
+    
+    const cy39y = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), materialt);
+      cy39y.position.set(0.6,1.6,-0.26);
+  cy39y.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy39y.scale.set(0.21,0.05,0.21);
+      scene.add(cy39y);
+    const cy391y = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), materialt);
+      cy391y.position.set(0.6,1,-0.26);
+  cy391y.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy391y.scale.set(0.21,0.05,0.21);
+      scene.add(cy391y);
+    const cy392y = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), materialt);
+      cy392y.position.set(0.15,1.3,-0.26);
+  cy392y.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy392y.scale.set(0.21,0.05,0.21);
+      scene.add(cy392y);
+  }
+  
+  backc();
+  function logo(){
+    const materialtt = new THREE.MeshBasicMaterial({ map:text1 });
+    
+    const cube = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), materialtt);
+      cube.position.set(0,0,-0.02);
+    cube.scale.set(0.4,0.4,0.1);
+      scene.add(cube);
+  }
+  logo();
+    // Screen (front)
+    const screenGeometry = new THREE.BoxGeometry(2, 4, 0.2);
+    const screenMaterial = new THREE.MeshBasicMaterial({ color: 0x00aaff });
+    const screen = new THREE.Mesh(screenGeometry, screenMaterial);
+    screen.position.z = 0.1;
+  screen.scale.set(0.72,0.99,0.5);
+    scene.add(screen);
+  const screen1 = new THREE.Mesh(screenGeometry, screenMaterial);
+    screen1.position.z = 0.1;
+  screen1.scale.set(0.982,0.76,0.5);
+    scene.add(screen1);
+  
+  const cy3 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), screenMaterial);
+      cy3.position.set(-0.6,1.6,0.1);
+  cy3.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy3.scale.set(0.4,0.05,0.4);
+      scene.add(cy3);
+  const cy4 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), screenMaterial);
+      cy4.position.set(0.6,1.6,0.1);
+  cy4.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy4.scale.set(0.4,0.05,0.4);
+      scene.add(cy4);
+  const cy33 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), screenMaterial);
+      cy33.position.set(-0.6,-1.6,0.1);
+  cy33.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy33.scale.set(0.4,0.05,0.4);
+      scene.add(cy33);
+  const cy44 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), screenMaterial);
+      cy44.position.set(0.6,-1.6,0.1);
+  cy44.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy44.scale.set(0.4,0.05,0.4);
+      scene.add(cy44);
+   
+  //front camera
+  const cy445 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy445.position.set(-0.2,1.8,0.12);
+  cy445.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy445.scale.set(0.1,0.05,0.1);
+      scene.add(cy445);
+  const cy446 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2, 32), material);
+      cy446.position.set(0.2,1.8,0.12);
+  cy446.rotation.set(Math.PI/2,Math.PI,Math.PI);
+  cy446.scale.set(0.1,0.05,0.1);
+      scene.add(cy446);
+   const cam = new THREE.Mesh(phoneGeometry, material);
+    cam.scale.set(0.2,0.05,0.7);
+  cam.position.set(0,1.8,0.1);
+  scene.add(cam);
+  
+  const sphere = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), material);
+      sphere.position.x = -4;
+      scene.add(sphere);
+      
+      const torus = new THREE.Mesh(new THREE.TorusGeometry(1, 0.4, 16, 100), material);
+      torus.position.x = 5;
+      scene.add(torus);
+
+    
+    
+    // Light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 30);
+        directionalLight.position.set(0, 1, 0);
+        scene.add(directionalLight);
+
+    // Camera position
+    camera.position.z = 6;
+
+    // Animation
+    function animate() {
+      requestAnimationFrame(animate);
+      //phone.rotation.y += 0.01;
+      //phone.rotation.x += 0.005;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth/window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
