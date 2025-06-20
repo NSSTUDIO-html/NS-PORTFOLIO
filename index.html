@@ -287,6 +287,29 @@ border:5px ridge blue;
             text-shadow:2px 2px blue;
             animation: stat 5s infinite;
         }
+        #sliderc{
+            display:flex;
+            animation:slidei 15s infinite;
+            width:300%;
+            overflow:hidden;
+            margin:30px auto;
+            border:2px outset cyan;
+            border-radius:20px;
+            box-shadow:0 0 10px blue;
+            
+        }
+        #img{
+            width:100%;
+            height:auto;
+            object-fit:contain;
+            border-radius:10px;
+        }
+        @keyframes slidei{
+            0%{translate:translateX(0%);}
+            33%{translate:translateX(-100%);}
+            66%{translate:translateX(-200%);}
+            100%{translate:translateX(0%);}
+        }
 
         
         
@@ -727,12 +750,15 @@ I’m constantly learning and working on projects that combine web, AI, and game
     <iframe src="CERTIFICATE.html" width="80%" height="500px" style="border: 2px solid black;"></iframe>
     
 <h2>IMPORTANT WEBSITES AND CONCEPTS</h2>
-    <img src="ALL.jpg"class="img_portfolio">
-    <img class="img_portfolio"src="PYTHONLIB.jpg">
-    <img class="img_portfolio"src="SaveVid.Net_490071066_969766374963269_6769959188868110147_n (1).jpg">
-    <img class="img_portfolio"src="Kaggle.jpeg">
-    <img class="img_portfolio"src="MATHS.jpg">
-    <img class="img_portfolio"src="lang.jpg">
+    <div id="sliderc">
+        <img src="ALL.jpg"class="img">
+    <img class="img"src="PYTHONLIB.jpg">
+    <img class="img"src="SaveVid.Net_490071066_969766374963269_6769959188868110147_n (1).jpg">
+    <img class="img"src="Kaggle.jpeg">
+    <img class="img"src="MATHS.jpg">
+    <img class="img"src="lang.jpg">
+    
+    </div>
     <footer>
         <p>&copy; 2025 POLEPALLI NAGA SASANK PORTFOLIO WEBSITE.
     </p>
