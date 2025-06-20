@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Catch the Ball Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      text-align: center;
+      background: #f0f8ff;
+    }
+
+    h2 {
+      margin-top: 10px;
+    }
+
+    canvas {
+      border: 2px solid #000;
+      background-color: #ffffff;
+      display: block;
+      margin: 10px auto;
+      max-width: 100%;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 10px 0;
+    }
+
+    .btn {
+      background: #0095DD;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      width: 100px;
+    }
+
+    .btn:active {
+      background-color: #0077bb;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Catch the Falling Ball Game 🎯</h2>
+
+<canvas id="gameCanvas" width="400" height="500"></canvas>
+
+<div class="controls">
+  <button class="btn" id="leftBtn">◀️</button>
+  <button class="btn" id="rightBtn">▶️</button>
+</div>
+
+<script>
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let paddle = {
+    x: 150,
+    y: 450,
+    width: 100,
+    height: 15,
+    speed: 7
+  };
+
+  let ball = {
+    x: Math.random() * 350 + 25,
+    y: 0,
+    radius: 15,
+    dy: 3
+  };
+
+  let score = 0;
+  let gameOver = false;
+  let keys = {};
+
+  // Keyboard Controls
+  document.addEventListener("keydown", (e) => keys[e.key] = true);
+  document.addEventListener("keyup", (e) => keys[e.key] = false);
+
+  // Mobile Touch Controls
+  const leftBtn = document.getElementById("leftBtn");
+  const rightBtn = document.getElementById("rightBtn");
+
+  leftBtn.addEventListener("touchstart", () => keys["ArrowLeft"] = true);
+  leftBtn.addEventListener("touchend", () => keys["ArrowLeft"] = false);
+  rightBtn.addEventListener("touchstart", () => keys["ArrowRight"] = true);
+  rightBtn.addEventListener("touchend", () => keys["ArrowRight"] = false);
+
+  function drawPaddle() {
+    ctx.fillStyle = "#0095DD";
+    ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+  }
+
+  function drawBall() {
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function movePaddle() {
+    if (keys["ArrowLeft"] && paddle.x > 0) {
+      paddle.x -= paddle.speed;
+    }
+    if (keys["ArrowRight"] && paddle.x + paddle.width < canvas.width) {
+      paddle.x += paddle.speed;
+    }
+  }
+
+  function checkCollision() {
+    if (
+      ball.y + ball.radius >= paddle.y &&
+      ball.x >= paddle.x &&
+      ball.x <= paddle.x + paddle.width
+    ) {
+      score++;
+      ball.y = 0;
+      ball.x = Math.random() * (canvas.width - 50) + 25;
+    } else if (ball.y > canvas.height) {
+      gameOver = true;
+    }
+  }
+
+  function drawScore() {
+    ctx.font = "18px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Score: " + score, 10, 25);
+  }
+
+  function drawGameOver() {
+    ctx.font = "28px Arial";
+    ctx.fillStyle = "red";
+    ctx.fillText("Game Over!", 120, 250);
+    ctx.fillText("Score: " + score, 140, 290);
+  }
+
+  function update() {
+    if (gameOver) {
+      drawGameOver();
+      return;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    movePaddle();
+    drawPaddle();
+
+    drawBall();
+    ball.y += ball.dy;
+
+    checkCollision();
+    drawScore();
+
+    requestAnimationFrame(update);
+  }
+
+  update();
+</script>
+
+</body>
+</html>

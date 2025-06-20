@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hut Drawing with Canvas</title>
+  <style>
+    body {
+      background-color: #e0f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    canvas {
+      border: 2px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="hutCanvas" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("hutCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Sky background
+    ctx.fillStyle = "skyblue";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Ground
+    ctx.fillStyle = "#228B22";
+    ctx.fillRect(0, 300, 400, 100);
+
+    // Hut body
+    ctx.fillStyle = "#8B4513";
+    ctx.fillRect(120, 200, 160, 120); // x, y, width, height
+
+    // Roof
+    ctx.beginPath();
+    ctx.moveTo(100, 200);    // Left corner
+    ctx.lineTo(200, 120);    // Top middle
+    ctx.lineTo(300, 200);    // Right corner
+    ctx.closePath();
+    ctx.fillStyle = "#A52A2A";
+    ctx.fill();
+
+    // Door
+    ctx.fillStyle = "#654321";
+    ctx.fillRect(180, 250, 40, 70);
+
+    // Window - left
+    ctx.fillStyle = "#ADD8E6";
+    ctx.fillRect(135, 230, 30, 30);
+    ctx.strokeRect(135, 230, 30, 30);
+    ctx.beginPath();
+    ctx.moveTo(135, 245);
+    ctx.lineTo(165, 245);
+    ctx.moveTo(150, 230);
+    ctx.lineTo(150, 260);
+    ctx.stroke();
+
+    // Window - right
+    ctx.fillStyle = "#ADD8E6";
+    ctx.fillRect(235, 230, 30, 30);
+    ctx.strokeRect(235, 230, 30, 30);
+    ctx.beginPath();
+    ctx.moveTo(235, 245);
+    ctx.lineTo(265, 245);
+    ctx.moveTo(250, 230);
+    ctx.lineTo(250, 260);
+    ctx.stroke();
+  </script>
+</body>
+</html>

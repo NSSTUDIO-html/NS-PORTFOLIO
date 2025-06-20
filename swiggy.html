@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swiggy Clone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fc8019;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #fc8019;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 40px;
+      background: white;
+    }
+
+    .hero-text {
+      max-width: 500px;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #282c3f;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #686b78;
+    }
+
+    .hero-text button {
+      background: #fc8019;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .hero img {
+      width: 50%;
+      border-radius: 10px;
+    }
+
+    /* Restaurant Section */
+    .restaurants {
+      padding: 40px;
+    }
+
+    .restaurants h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      color: #686b78;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      background: #282c3f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Swiggy</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Search</a>
+      <a href="#">Login</a>
+      <a href="#">Cart</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Order Food Online</h1>
+      <p>Get your favorite meals delivered to your doorstep with Swiggy Clone!</p>
+      <button>Explore Restaurants</button>
+    </div>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4AxH12PyDY6IBbFZa1aAwSKx8MP-EXcvNVt28-EMUBt6gmxvcaiMNcAg&s=10" alt="Food Delivery">
+  </section>
+
+  <section class="restaurants">
+    <h2>Top Restaurants</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT30T0p_NivfYWR76aYrCg8OndGK0J7EBZJOQBSPqbvWhByvm0COr-S0rI&s=10" alt="Burger">
+        <div class="card-content">
+          <h3>Burger King</h3>
+          <p>Burgers, Fast Food</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXKa87mQzYlF457SNGC31HuUKai3yR4ffyrXXQq-OyUQiCBjCt0stX5pMQ&s=10" alt="Pizza">
+        <div class="card-content">
+          <h3>Pizza Hut</h3>
+          <p>Pizza, Italian</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyxTYRDiDmnu7LZdE7x-4vHMGLUDsOjsHRizUNSzPZmQhY-cNMKv3H38w&s=10" alt="Indian Food">
+        <div class="card-content">
+          <h3>Desi Tadka</h3>
+          <p>Indian, North Indian</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Swiggy Clone by Naga Sasank
+  </footer>
+
+</body>
+</html>

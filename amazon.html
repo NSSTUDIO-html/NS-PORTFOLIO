@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon Mini Clone</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f2f2f2;
+    }
+
+    header {
+      background: #232f3e;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .products {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px;
+      flex-wrap: wrap;
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 8px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .product img {
+      width: 100%;
+    }
+
+    button {
+      background: #ffa41c;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      color: black;
+    }
+
+    button:hover {
+      background: #ff9900;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background: white;
+      margin: 10% auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 8px;
+    }
+
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>🛍️ Amazon Mini</h1>
+    <button id="cartBtn">🛒 Cart (<span id="cartCount">0</span>)</button>
+  </header>
+
+  <main class="products">
+    <div class="product" data-name="iPhone" data-price="799">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7C8W6gaj0xaoHDfkw0pK9AfOLz_nbYqOrB2YLpy2MjVOrFPXjDIJXKJg&s=10" alt="iPhone">
+      <h3>iPhone 16 Pro</h3>
+      <p>$799</p>
+      <button class="addToCart">Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="MacBook" data-price="1299">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxpL8gYp-0Y7Ou_Al7FIwj8Lm81y9OyWfH_kb5uUseXnI_9uI5FjhR7DA&s=10" alt="MacBook">
+      <h3>MacBook Pro</h3>
+      <p>$1299</p>
+      <button class="addToCart">Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Watch" data-price="199">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc632HUs8Ha5V8QqvH4E6aPLlNq7hSwmsJKgHcFmpMVUD-jHDMMdJjvBE&s=10" alt="Watch">
+      <h3>Smart Watch(APPLE)</h3>
+      <p>$199</p>
+      <button class="addToCart">Add to Cart</button>
+    </div>
+  </main>
+
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Your Cart</h2>
+      <ul id="cartItems"></ul>
+      <p>Total: $<span id="totalPrice">0</span></p>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      let cart = [];
+
+      function updateCart() {
+        $('#cartItems').empty();
+        let total = 0;
+        cart.forEach(item => {
+          $('#cartItems').append(`<li>${item.name} - $${item.price}</li>`);
+          total += item.price;
+        });
+        $('#cartCount').text(cart.length);
+        $('#totalPrice').text(total);
+      }
+
+      $('.addToCart').on('click', function () {
+        const product = $(this).closest('.product');
+        const name = product.data('name');
+        const price = parseFloat(product.data('price'));
+
+        cart.push({ name, price });
+        updateCart();
+      });
+
+      $('#cartBtn').on('click', function () {
+        $('#cartModal').fadeIn();
+      });
+
+      $('.close').on('click', function () {
+        $('#cartModal').fadeOut();
+      });
+
+      $(window).on('click', function (e) {
+        if ($(e.target).is('#cartModal')) {
+          $('#cartModal').fadeOut();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
