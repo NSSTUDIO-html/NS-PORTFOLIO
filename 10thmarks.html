@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SSC 10th Grade Google Charts</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawCharts);
+
+      function drawCharts() {
+        // Bar Chart
+        var data = google.visualization.arrayToDataTable([
+          ['Subject', 'Grade Point'],
+          ['Telugu', 9],
+          ['Hindi', 9],
+          ['English', 9],
+          ['Mathematics', 8],
+          ['General Science', 8],
+          ['Social Studies', 10]
+        ]);
+
+        var barOptions = {
+          title: 'SSC Subject-wise Grade Points',
+          hAxis: { title: 'Subjects' },
+          vAxis: { title: 'Grade Point', minValue: 0, maxValue: 10 },
+          legend: 'none',
+          colors: ['#1E88E5']
+        };
+
+        var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart'));
+        barChart.draw(data, barOptions);
+
+        // Pie Chart
+        var pieOptions = {
+          title: 'SSC Subject Contribution by Grade Points',
+          is3D: true
+        };
+
+        var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+        pieChart.draw(data, pieOptions);
+
+        // Line Chart
+        var lineOptions = {
+          title: 'Grade Progression Across Subjects',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          pointSize: 5
+        };
+
+        var lineChart = new google.visualization.LineChart(document.getElementById('line_chart'));
+        lineChart.draw(data, lineOptions);
+      }
+    </script>
+  </head>
+  <body>
+    <h2>SSC 10th Marks Visualized with Google Charts</h2>
+    <div id="bar_chart" style="width: 800px; height: 400px;"></div>
+    <div id="pie_chart" style="width: 800px; height: 400px;"></div>
+    <div id="line_chart" style="width: 800px; height: 400px;"></div>
+  </body>
+</html>

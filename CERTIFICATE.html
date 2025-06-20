@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My JavaScript Webpage</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1em;
+      width:100%;
+    }
+    main {
+      padding: 2em;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #output {
+      margin-top: 1.5em;
+      font-size: 1.2em;
+      color: #333;
+    }
+  h1{
+    border-bottom:5px double black;
+  }
+  h2{
+    border:6px ridge blue;
+  }
+  div{
+    border:4px inset black;
+  }
+  
+  </style>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to My JS WEBSITE I AM NAGA SASANK.</h1>
+  </header>
+
+  <main>
+    <p>Click the button to generate a random message:</p>
+    <button onclick="showMessage()">Click Me</button>
+    <div id="output"></div>
+  </main>
+
+  <div class="sasank-charts">
+    <h1>SASANK CERTIFICATE ANALYTICS</h1>
+    <h2>SEMESTER 1</h2>
+    <canvas id="sem1" width="400"height="200"></canvas>
+    <div id="s1i"></div>
+    <h2>SEMESTER 2</h2>
+    <canvas id="sem2" width="400"height="200"></canvas>
+    <canvas id="s2i" width="400"height="200"></canvas>
+    
+    
+    <h2>SEMESTER 3</h2>
+    <canvas id="sem3" width="400"height="200"></canvas>
+    <canvas id="s3i" width="400"height="200"></canvas>
+    
+    <div></div>
+    <h2>SEMESTER 4</h2>
+    <canvas id="sem4" width="400"height="200"></canvas>
+    <canvas id="sem4i" width="400"height="200"></canvas>
+    
+    <div></div>
+    <h2>SEMSSTER 5</h2>
+    <canvas id="sem5" width="400"height="200"></canvas>
+    <div></div>
+    <h2>SEMESTER 6</h2>
+    <canvas id="sem6" width="400"height="200"></canvas>
+    <div></div>
+  <h2>Bar Chart - CGPA Comparison</h2>
+  <canvas id="barChart"></canvas>
+
+  <h2>Radar Chart - CGPA Spread</h2>
+  <canvas id="radarChart"></canvas>
+
+  <h2>Pie Chart - CGPA Proportion</h2>
+  <canvas id="pieChart"></canvas>
+  </div>
+  
+  <script>
+    
+    const messages = [
+      "JavaScript is fun!",
+      "You clicked the button!",
+      "Welcome to interactive web apps!",
+      "Coding makes the web alive!",
+      "Great job! Keep learning."
+    ];
+
+    function showMessage() {
+      const index = Math.floor(Math.random() * messages.length);
+      document.getElementById('output').textContent = messages[index];
+    }
+  const s1 = document.getElementById('sem1').getContext('2d');
+   new Chart(s1,{
+     type : 'bar',
+     data:{
+       labels:['English-1','Telugu-1','Ethics','Electrical','Maths-1','Stats-1','C lang','Statlab','Clab'],
+       datasets:[{
+         label:'Marks External',
+         data:[50,58,24,46,42,65,42,50,50],
+         backgroundColor:['red','yellow','blue','cyan','green']
+       }]
+     }
+   });
+   var data =[{
+     values:[25,24,25,25,25],
+     labels:["English-1","Telugu-1","Maths-1","Stats-1","C lang"],
+     type:'pie'
+   }];
+  var layout = {
+    title:"INTERNAL MARKS OF FIRST SEM"
+  };
+  Plotly.newPlot('s1i',data,layout);
+  
+  const s2 = document.getElementById('sem2').getContext('2d');
+   new Chart(s2,{
+     type : 'bar',
+     data:{
+       labels:['English-2','Telugu-2','ELEMSTAT','DAIRYTECH','FVP','Maths-2','Stats-2','DSA IN C','Statlab2','DSALAB'],
+       datasets:[{
+         label:'Marks External',
+         data:[46,56,35,40,23,51,58,57,50,50],
+         backgroundColor:['red','orange','gold','cyan','green']
+       }]
+     }
+   });
+  const s2i = document.getElementById('s2i').getContext('2d');
+   new Chart(s2i,{
+     type : 'pie',
+     data:{
+       labels:['English-2','Telugu-2','Maths-2','Stats-2','DSA IN C'],
+       datasets:[{
+         label:'Marks Internal',
+         data:[25,25,25,25,25],
+         backgroundColor:['red','orange','gold','cyan','green']
+       }]
+     }
+   });
+  const s3 = document.getElementById('sem3').getContext('2d');
+   new Chart(s3,{
+     type : 'line',
+     data:{
+       labels:['English-3','Telugu-3','ANALYTICALSKILLS','ENVEDU','ENVAUDIT','Maths-3','Stats-3','DBMS','Statlab3','DBMSLAB'],
+       datasets:[{
+         label:'Marks External',
+         data:[49,30,33,25,28,73,39,50,47,50],
+         backgroundColor:['red','orange','gold','cyan','green']
+       }]
+     }
+   });
+  const s3i = document.getElementById('s3i').getContext('2d');
+   new Chart(s3i,{
+     type : 'pie',
+     data:{
+       labels:['ENGLISH-3','TELUGU-3','Maths-3','Stats-3','DBMS'],
+       datasets:[{
+         label:'Marks Internal',
+         data:[25,25,25,25,25],
+         backgroundColor:['orange','blue','gold','cyan','green']
+       }]
+     }
+   });
+  const s4 = document.getElementById('sem4').getContext('2d');
+   const s4in = document.getElementById('sem4i').getContext('2d');
+   
+  new Chart(s4,{
+     type : 'bar',
+     data:{
+       labels:['MATHS-4','STAT-4','JAVA','Maths-5','Stats-5','OS','Statlab4','JAVALAB','STATLAB5','OSLAB'],
+       datasets:[{
+         label:'Marks Total',
+         data:[61,92,74,86,63,57,100,100,90,100],
+         backgroundColor:['red','orange','gold','cyan','green']
+       }]
+     }
+   });
+  new Chart(s4in,{
+     type : 'pie',
+     data:{
+       labels:['SHORT TERM INTERNSHIP (MS OFFICE)'],
+       datasets:[{
+         label:'Marks Total',
+         data:[98],
+         backgroundColor:'orange'
+       }]
+     }
+   });
+  const s5 = document.getElementById('sem5').getContext('2d');
+   new Chart(s5,{
+     type : 'bar',
+     data:{
+       labels:['MATHS-6','STAT-6','FRONTEND WEBDEV','Maths-7','Stats-7','PHP&MYSQL','Statlab6','JAVALAB','STATLAB7','OSLAB'],
+       datasets:[{
+         label:'Marks Total',
+         data:[55,85,80,60,83,70,100,100,100,100],
+         backgroundColor:'blue'
+       }]
+     }
+   });
+  const s6 = document.getElementById('sem6').getContext('2d');
+   new Chart(s6,{
+     type : 'bar',
+     data:{
+       labels:['JAVA LONG TERM INTERNSHIP'],
+       datasets:[{
+         label:'Marks External',
+         data:[195],
+         backgroundColor:'cyan'
+       }]
+     }
+   });
+  const labels = ['Part-I (Languages)', 'Part-II (BSC MSCS)', 'Part-III (Foundation)'];
+    const data1 = [7.22, 8.39, 6.35];
+    const colors = ['#333333', '#f2fd3d', '#3cba9f'];
+
+    // Bar Chart
+    new Chart(document.getElementById("barChart"), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "CGPA",
+          backgroundColor: colors,
+          data: data1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 10
+          }
+        }
+      }
+    });
+
+    // Radar Chart
+    new Chart(document.getElementById("radarChart"), {
+      type: 'radar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: "CGPA",
+          data: data1,
+          backgroundColor: "rgba(62, 149, 205, 0.2)",
+          borderColor: "#3e95cd",
+          pointBackgroundColor: "gold"
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 10
+          }
+        }
+      }
+    });
+
+    // Pie Chart
+    new Chart(document.getElementById("pieChart"), {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          backgroundColor: colors,
+          data: data1
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  </script>
+
+</body>
+</html>
