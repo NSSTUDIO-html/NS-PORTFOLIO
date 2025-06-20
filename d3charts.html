@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>D3.js Chart Types</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .chart-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .chart {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    svg {
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>D3.js Chart Types</h1>
+  <div class="chart-container">
+    <div class="chart" id="barChart"><h3>Bar Chart</h3></div>
+    <div class="chart" id="pieChart"><h3>Pie Chart</h3></div>
+    <div class="chart" id="lineChart"><h3>Line Chart</h3></div>
+    <div class="chart" id="scatterChart"><h3>Scatter Plot</h3></div>
+  </div>
+
+  <script>
+    // Sample data
+    const data = [10, 15, 20, 25, 30];
+    const categories = ["A", "B", "C", "D", "E"];
+
+    // Bar Chart
+    const barSvg = d3.select("#barChart").append("svg");
+    const barWidth = 300;
+    const barHeight = 300;
+
+    const xBar = d3.scaleBand().domain(categories).range([0, barWidth]).padding(0.2);
+    const yBar = d3.scaleLinear().domain([0, d3.max(data)]).range([barHeight, 0]);
+
+    barSvg.append("g")
+      .attr("transform", "translate(30,10)")
+      .selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("x", (d, i) => xBar(categories[i]))
+      .attr("y", d => yBar(d))
+      .attr("width", xBar.bandwidth())
+      .attr("height", d => barHeight - yBar(d))
+      .attr("fill", "steelblue");
+
+    // Pie Chart
+    const pieSvg = d3.select("#pieChart").append("svg")
+      .attr("width", 300).attr("height", 300)
+      .append("g")
+      .attr("transform", "translate(150,150)");
+
+    const pie = d3.pie()(data);
+    const arc = d3.arc().innerRadius(0).outerRadius(100);
+
+    pieSvg.selectAll("path")
+      .data(pie)
+      .enter()
+      .append("path")
+      .attr("d", arc)
+      .attr("fill", (d, i) => d3.schemeSet2[i]);
+
+    // Line Chart
+    const lineSvg = d3.select("#lineChart").append("svg");
+    const line = d3.line()
+      .x((d, i) => i * 60 + 30)
+      .y(d => barHeight - d * 5);
+
+    lineSvg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "green")
+      .attr("stroke-width", 2)
+      .attr("d", line);
+
+    lineSvg.selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", (d, i) => i * 60 + 30)
+      .attr("cy", d => barHeight - d * 5)
+      .attr("r", 4)
+      .attr("fill", "green");
+
+    // Scatter Plot
+    const scatterData = [
+      { x: 10, y: 20 }, { x: 15, y: 35 },
+      { x: 20, y: 30 }, { x: 25, y: 45 },
+      { x: 30, y: 25 }
+    ];
+
+    const scatterSvg = d3.select("#scatterChart").append("svg");
+    const xScatter = d3.scaleLinear().domain([0, 40]).range([30, 270]);
+    const yScatter = d3.scaleLinear().domain([0, 50]).range([270, 30]);
+
+    scatterSvg.selectAll("circle")
+      .data(scatterData)
+      .enter()
+      .append("circle")
+      .attr("cx", d => xScatter(d.x))
+      .attr("cy", d => yScatter(d.y))
+      .attr("r", 5)
+      .attr("fill", "purple");
+
+    // Optional: Axes (for scatter plot only)
+    scatterSvg.append("g")
+      .attr("transform", "translate(0,270)")
+      .call(d3.axisBottom(xScatter));
+
+    scatterSvg.append("g")
+      .attr("transform", "translate(30,0)")
+      .call(d3.axisLeft(yScatter));
+  </script>
+
+</body>
+</html>

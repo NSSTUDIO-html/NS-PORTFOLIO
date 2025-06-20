@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Chart Types</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .chart-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .chart-box {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      .chart-title {
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+    </style>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['corechart', 'bar', 'scatter', 'geochart'],
+        'mapsApiKey': 'YOUR_API_KEY' // Optional: for GeoChart
+      });
+
+      google.charts.setOnLoadCallback(drawAllCharts);
+
+      function drawAllCharts() {
+        drawColumnChart();
+        drawPieChart();
+        drawLineChart();
+        drawAreaChart();
+        drawDonutChart();
+        drawScatterChart();
+        drawGeoChart();
+        drawBarChart();
+      }
+
+      function drawColumnChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['City', '2020', '2021'],
+          ['New York', 1000, 1170],
+          ['Los Angeles', 660, 1030],
+          ['Chicago', 1030, 1200]
+        ]);
+        var options = { title: 'Column Chart Example', height: 300 };
+        var chart = new google.visualization.ColumnChart(document.getElementById('column_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawPieChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work', 8], ['Eat', 2], ['TV', 4], ['Gym', 2], ['Sleep', 8]
+        ]);
+        var options = { title: 'Pie Chart Example', height: 300 };
+        var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawLineChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Sales'],
+          ['Jan',  1000], ['Feb',  1170],
+          ['Mar',  660], ['Apr',  1030]
+        ]);
+        var options = { title: 'Line Chart Example', curveType: 'function', legend: { position: 'bottom' }, height: 300 };
+        var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawAreaChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Profit'],
+          ['2018', 400], ['2019', 460], ['2020', 1120], ['2021', 540]
+        ]);
+        var options = { title: 'Area Chart Example', isStacked: true, height: 300 };
+        var chart = new google.visualization.AreaChart(document.getElementById('area_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawDonutChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Browser', 'Usage'],
+          ['Chrome', 70], ['Firefox', 15], ['Edge', 10], ['Safari', 5]
+        ]);
+        var options = {
+          title: 'Donut Chart Example',
+          pieHole: 0.4,
+          height: 300
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('donut_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawScatterChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Age', 'Weight'],
+          [8, 12], [4, 5.5], [11, 14], [4, 5], [3, 3.5], [6.5, 7]
+        ]);
+        var options = {
+          title: 'Scatter Chart Example',
+          hAxis: { title: 'Age' },
+          vAxis: { title: 'Weight' },
+          height: 300
+        };
+        var chart = new google.visualization.ScatterChart(document.getElementById('scatter_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawGeoChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Popularity'],
+          ['Germany', 200], ['United States', 300], ['Brazil', 400],
+          ['Canada', 500], ['France', 600], ['RU', 700]
+        ]);
+        var options = {
+          title: 'Geo Chart Example',
+          height: 300,
+          colorAxis: { colors: ['#aec7e8', '#1f77b4'] }
+        };
+        var chart = new google.visualization.GeoChart(document.getElementById('geo_chart'));
+        chart.draw(data, options);
+      }
+
+      function drawBarChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Genre', 'Sales'],
+          ['Fiction', 1000],
+          ['Non-Fiction', 1170],
+          ['Sci-Fi', 660],
+          ['Biography', 1030]
+        ]);
+        var options = {
+          title: 'Bar Chart Example',
+          chartArea: { width: '50%' },
+          hAxis: { title: 'Total Sales' },
+          vAxis: { title: 'Genre' },
+          height: 300
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Google Charts – All Chart Types</h1>
+    <div class="chart-container">
+      <div class="chart-box"><div class="chart-title">Column Chart</div><div id="column_chart"></div></div>
+      <div class="chart-box"><div class="chart-title">Pie Chart</div><div id="pie_chart"></div></div>
+      <div class="chart-box"><div class="chart-title">Line Chart</div><div id="line_chart"></div></div>
+      <div class="chart-box"><div class="chart-title">Area Chart</div><div id="area_chart"></div></div>
+      <div class="chart-box"><div class="chart-title">Donut Chart</div><div id="donut_chart"></div></div>
+      <div class="chart-box"><div class="chart-title">Scatter Chart</div><div id="scatter_chart"></div></div>
+      <div class="chart-box"><div class="chart-title">Geo Chart</div><div id="geo_chart"></div></div>
+      <div class="chart-box"><div class="chart-title">Bar Chart</div><div id="bar_chart"></div></div>
+    </div>
+  </body>
+</html>

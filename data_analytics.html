@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sales Dashboard - D3.js & Chart.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background-color: #f0f4f8;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .chart-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      padding: 20px;
+    }
+    canvas, svg {
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📊 Regional Sales Analytics Dashboard</h2>
+
+  <div class="chart-container">
+    <canvas id="barChart"></canvas>
+    <canvas id="pieChart"></canvas>
+    <svg id="lineChart" width="400" height="300"></svg>
+  </div>
+
+  <script>
+    // Sample Data
+    const salesData = [
+      { region: "North", sales: 200, profit: 50, date: "2025-01-01" },
+      { region: "South", sales: 300, profit: 70, date: "2025-02-01" },
+      { region: "East",  sales: 150, profit: 30, date: "2025-03-01" },
+      { region: "West",  sales: 400, profit: 120, date: "2025-04-01" },
+      { region: "North", sales: 250, profit: 60, date: "2025-05-01" },
+      { region: "South", sales: 350, profit: 90, date: "2025-06-01" },
+    ];
+
+    // ===== Chart.js - Bar Chart (Total Sales by Region) =====
+    const regions = [...new Set(salesData.map(d => d.region))];
+    const salesByRegion = regions.map(region =>
+      salesData.filter(d => d.region === region).reduce((sum, d) => sum + d.sales, 0)
+    );
+
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: regions,
+        datasets: [{
+          label: 'Total Sales',
+          data: salesByRegion,
+          backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Sales by Region'
+          }
+        }
+      }
+    });
+
+    // ===== Chart.js - Pie Chart (Profit Share by Region) =====
+    const profitByRegion = regions.map(region =>
+      salesData.filter(d => d.region === region).reduce((sum, d) => sum + d.profit, 0)
+    );
+
+    new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: {
+        labels: regions,
+        datasets: [{
+          label: 'Profit Share',
+          data: profitByRegion,
+          backgroundColor: ['#ff9f40', '#9966ff', '#00aaff', '#ff6384']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Profit Share by Region'
+          }
+        }
+      }
+    });
+
+    // ===== D3.js - Line Chart (Sales Over Time) =====
+    const svg = d3.select("#lineChart"),
+          width = +svg.attr("width") - 50,
+          height = +svg.attr("height") - 50;
+
+    const parseDate = d3.timeParse("%Y-%m-%d");
+    const data = salesData.map(d => ({ ...d, date: parseDate(d.date) }));
+
+    const x = d3.scaleTime()
+                .domain(d3.extent(data, d => d.date))
+                .range([40, width]);
+
+    const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d.sales)])
+                .range([height, 10]);
+
+    const line = d3.line()
+                   .x(d => x(d.date))
+                   .y(d => y(d.sales));
+
+    svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "#0074d9")
+      .attr("stroke-width", 2.5)
+      .attr("d", line);
+
+    svg.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).ticks(5));
+
+    svg.append("g")
+      .attr("transform", "translate(40,0)")
+      .call(d3.axisLeft(y));
+
+    svg.append("text")
+      .attr("x", width / 2)
+      .attr("y", 15)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("fill", "#333")
+      .text("Sales Over Time");
+
+  </script>
+</body>
+</html>

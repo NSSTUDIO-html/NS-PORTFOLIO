@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All JS Charts Library Website</title>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    h2 {
+      background: #333;
+      color: white;
+      padding: 10px;
+    }
+    .chart-container {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+    .chart {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>📊 All JavaScript Charts Showcase</h1>
+
+<!-- ApexCharts -->
+<div class="chart-container">
+  <h2>ApexCharts</h2>
+  <div id="apex-line" class="chart"></div>
+  <div id="apex-bar" class="chart"></div>
+  <div id="apex-pie" class="chart"></div>
+</div>
+
+<!-- Google Charts -->
+<div class="chart-container">
+  <h2>Google Charts</h2>
+  <div id="google-line" class="chart"></div>
+  <div id="google-bar" class="chart"></div>
+  <div id="google-pie" class="chart"></div>
+</div>
+
+<!-- Plotly.js -->
+<div class="chart-container">
+  <h2>Plotly.js</h2>
+  <div id="plotly-scatter" class="chart"></div>
+  <div id="plotly-bar" class="chart"></div>
+  <div id="plotly-pie" class="chart"></div>
+</div>
+
+<!-- Chart.js -->
+<div class="chart-container">
+  <h2>Chart.js</h2>
+  <canvas id="chartjs-line" class="chart"></canvas>
+  <canvas id="chartjs-bar" class="chart"></canvas>
+  <canvas id="chartjs-doughnut" class="chart"></canvas>
+</div>
+
+<!-- D3.js -->
+<div class="chart-container">
+  <h2>D3.js</h2>
+  <svg id="d3-bar" width="600" height="400"></svg>
+  <svg id="d3-pie" width="400" height="400"></svg>
+</div>
+
+<script>
+  // APEXCHARTS
+  new ApexCharts(document.querySelector("#apex-line"), {
+    chart: { type: 'line' },
+    series: [{ name: 'Sales', data: [10, 41, 35, 51, 49, 62, 69] }],
+    xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'] }
+  }).render();
+
+  new ApexCharts(document.querySelector("#apex-bar"), {
+    chart: { type: 'bar' },
+    series: [{ name: 'Profit', data: [30, 40, 45, 50, 49, 60, 70] }],
+    xaxis: { categories: ['2017', '2018', '2019', '2020', '2021'] }
+  }).render();
+
+  new ApexCharts(document.querySelector("#apex-pie"), {
+    chart: { type: 'pie' },
+    series: [44, 33, 54],
+    labels: ['Product A', 'Product B', 'Product C']
+  }).render();
+
+  // GOOGLE CHARTS
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawGoogleCharts);
+
+  function drawGoogleCharts() {
+    const data1 = google.visualization.arrayToDataTable([
+      ['Month', 'Visitors'],
+      ['Jan', 100], ['Feb', 120], ['Mar', 130], ['Apr', 90]
+    ]);
+    new google.visualization.LineChart(document.getElementById('google-line')).draw(data1, {title: 'Website Visitors'});
+
+    const data2 = google.visualization.arrayToDataTable([
+      ['Year', 'Sales'],
+      ['2019', 1000], ['2020', 1170], ['2021', 660], ['2022', 1030]
+    ]);
+    new google.visualization.ColumnChart(document.getElementById('google-bar')).draw(data2, {title: 'Yearly Sales'});
+
+    const data3 = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Work', 8], ['Sleep', 8], ['Eat', 2], ['Other', 6]
+    ]);
+    new google.visualization.PieChart(document.getElementById('google-pie')).draw(data3, {title: 'Daily Activities'});
+  }
+
+  // PLOTLY
+  Plotly.newPlot('plotly-scatter', [{
+    x: [1, 2, 3, 4], y: [10, 15, 13, 17],
+    mode: 'markers', type: 'scatter'
+  }]);
+
+  Plotly.newPlot('plotly-bar', [{
+    x: ['Q1', 'Q2', 'Q3', 'Q4'], y: [20, 14, 23, 25], type: 'bar'
+  }]);
+
+  Plotly.newPlot('plotly-pie', [{
+    values: [19, 26, 55], labels: ['Mobile', 'Desktop', 'Tablet'], type: 'pie'
+  }]);
+
+  // CHART.JS
+  new Chart(document.getElementById("chartjs-line"), {
+    type: 'line',
+    data: {
+      labels: ["Jan", "Feb", "Mar"],
+      datasets: [{ label: "Revenue", data: [65, 59, 80], fill: false, borderColor: "blue" }]
+    }
+  });
+
+  new Chart(document.getElementById("chartjs-bar"), {
+    type: 'bar',
+    data: {
+      labels: ["Red", "Blue", "Yellow"],
+      datasets: [{ label: '# Votes', data: [12, 19, 3], backgroundColor: ['red', 'blue', 'yellow'] }]
+    }
+  });
+
+  new Chart(document.getElementById("chartjs-doughnut"), {
+    type: 'doughnut',
+    data: {
+      labels: ['India', 'US', 'UK'],
+      datasets: [{ data: [55, 25, 20], backgroundColor: ['green', 'blue', 'purple'] }]
+    }
+  });
+
+  // D3.js BAR CHART
+  const data = [30, 80, 45, 60, 20, 90];
+  const svg = d3.select("#d3-bar");
+  svg.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => i * 90)
+    .attr("y", d => 400 - d * 4)
+    .attr("width", 60)
+    .attr("height", d => d * 4)
+    .attr("fill", "teal");
+
+  // D3.js PIE CHART
+  const pieData = [10, 20, 30];
+  const pieSvg = d3.select("#d3-pie"),
+        radius = 200,
+        color = d3.scaleOrdinal(["#ff6384", "#36a2eb", "#cc65fe"]),
+        arc = d3.arc().innerRadius(0).outerRadius(radius),
+        pie = d3.pie();
+
+  pieSvg.selectAll("path")
+    .data(pie(pieData))
+    .enter()
+    .append("path")
+    .attr("d", arc)
+    .attr("transform", "translate(200,200)")
+    .attr("fill", (d, i) => color(i));
+</script>
+
+</body>
+</html>

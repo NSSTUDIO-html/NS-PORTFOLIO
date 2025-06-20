@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plotly Gauge Chart</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    #myGauge {
+      width: 600px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>🚗 Vehicle Speed Gauge</h2>
+  <div id="myGauge"></div>
+
+  <script>
+    var data = [{
+      type: "indicator",
+      mode: "gauge+number+delta",
+      value: 270,
+      delta: { reference: 250 },
+      title: { text: "Speed (km/h)", font: { size: 24 } },
+      gauge: {
+        axis: { range: [0, 500], tickwidth: 1, tickcolor: "darkblue" },
+        bar: { color: "darkblue" },
+        bgcolor: "white",
+        borderwidth: 2,
+        bordercolor: "gray",
+        steps: [
+          { range: [0, 200], color: "#90ee90" },
+          { range: [200, 350], color: "#ffa500" },
+          { range: [350, 500], color: "#ff4c4c" }
+        ],
+        threshold: {
+          line: { color: "red", width: 6 },
+          thickness: 0.75,
+          value: 450
+        }
+      }
+    }];
+
+    var layout = {
+      width: 600,
+      height: 450,
+      margin: { t: 0, b: 0 }
+    };
+
+    Plotly.newPlot('myGauge', data, layout);
+  </script>
+</body>
+</html>

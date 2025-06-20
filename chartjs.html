@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chart.js Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f7;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 40px;
+    }
+    .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .chart-box {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      width: 400px;
+    }
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📊 Business Dashboard (Chart.js)</h1>
+
+  <div class="dashboard">
+    <div class="chart-box">
+      <h3>Monthly Sales (₹)</h3>
+      <canvas id="salesChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>New Users (This Year)</h3>
+      <canvas id="usersChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Device Usage</h3>
+      <canvas id="deviceChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Revenue Split</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Customer Satisfaction</h3>
+      <canvas id="satisfactionChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Monthly Sales (Bar Chart)
+    new Chart(document.getElementById('salesChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Sales (₹)',
+          data: [12000, 15000, 18000, 20000, 17000, 21000],
+          backgroundColor: 'rgba(75, 192, 192, 0.7)'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+
+    // New Users (Line Chart)
+    new Chart(document.getElementById('usersChart'), {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Users',
+          data: [50, 80, 100, 150, 120, 160],
+          fill: true,
+          borderColor: '#4bc0c0',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+
+    // Device Usage (Pie Chart)
+    new Chart(document.getElementById('deviceChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Mobile', 'Desktop', 'Tablet'],
+        datasets: [{
+          data: [60, 30, 10],
+          backgroundColor: ['#36a2eb', '#ff6384', '#ffcd56']
+        }]
+      },
+      options: { responsive: true }
+    });
+
+    // Revenue Split (Doughnut Chart)
+    new Chart(document.getElementById('revenueChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Products', 'Services', 'Ads'],
+        datasets: [{
+          data: [55, 30, 15],
+          backgroundColor: ['#ff6384', '#36a2eb', '#4bc0c0']
+        }]
+      },
+      options: { responsive: true }
+    });
+
+    // Customer Satisfaction (Radar Chart)
+    new Chart(document.getElementById('satisfactionChart'), {
+      type: 'radar',
+      data: {
+        labels: ['Quality', 'Support', 'Price', 'Delivery', 'UX'],
+        datasets: [{
+          label: 'Score',
+          data: [8, 7, 9, 6, 8],
+          backgroundColor: 'rgba(153, 102, 255, 0.3)',
+          borderColor: '#9966ff'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { r: { beginAtZero: true, max: 10 } }
+      }
+    });
+  </script>
+
+</body>
+</html>
