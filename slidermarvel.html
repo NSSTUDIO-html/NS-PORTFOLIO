@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Slider MARVEL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsDKiZoANfnMFw6Y2VPu7SISRGEDndatcW5dzuQvpdbPfObCsZ9m1wFS8p&s=10');
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: red;
+    }
+
+    .slider-container {
+      width: 90%;
+      max-width: 800px;
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    /* Navigation buttons */
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .nav-button:hover {
+      background: rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body>
+
+<h2>I'M MARVEL FAN - NS</h2>
+
+<div class="slider-container">
+  <div class="slider" id="slider">
+    <div class="slide">
+      <img src="/storage/emulated/0/Pictures/100PINT/Pins/burjkhalifa.jpg">
+    </div>
+    <div class="slide">
+        <img src="/storage/emulated/0/Pictures/100PINT/Pins/solarsystem.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/alien.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/map.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/falls.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/redmoon.jpg">
+    </div>
+    <div class="slide">
+      <img src="/storage/emulated/0/Pictures/100PINT/Pins/earth.jpg">
+    </div>
+    <div class="slide">
+        <img src="/storage/emulated/0/Pictures/100PINT/Pins/cthunder.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/pikachu.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/pikapi.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/ageofultron.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/marvel.jpg">
+    </div>
+    <div class="slide">
+      <img src="/storage/emulated/0/Pictures/100PINT/Pins/avengers.jpg">
+    </div>
+    <div class="slide">
+        <img src="/storage/emulated/0/Pictures/100PINT/Pins/marvel1.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/thor.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/stones.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/thanos.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/reda.jpg">
+    </div>
+    <div class="slide">
+      <img src="/storage/emulated/0/Pictures/100PINT/Pins/a.jpg">
+    </div>
+    <div class="slide">
+        <img src="/storage/emulated/0/Pictures/100PINT/Pins/groot.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/4.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/thor1.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/stark.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/spidey.jpg">
+    </div>
+    <div class="slide">
+      <img src="/storage/emulated/0/Pictures/100PINT/Pins/ageofultron1.jpg">
+    </div>
+    <div class="slide">
+        <img src="/storage/emulated/0/Pictures/100PINT/Pins/guardians.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/thor2.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/Avengers1.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/Ironman.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/pika.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/harry.jpg">
+    </div>
+    <div class="slide">
+         <img src="/storage/emulated/0/Pictures/100PINT/Pins/Pokemon.jpg">
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <button class="nav-button prev" onclick="prevSlide()">&#10094;</button>
+  <button class="nav-button next" onclick="nextSlide()">&#10095;</button>
+</div>
+
+<script>
+  let index = 0;
+  const slider = document.getElementById("slider");
+  const slides = document.querySelectorAll(".slide");
+
+  function showSlide(i) {
+    index = (i + slides.length) % slides.length;
+    slider.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function nextSlide() {
+    showSlide(index + 1);
+  }
+
+  function prevSlide() {
+    showSlide(index - 1);
+  }
+
+  // Auto-slide
+  setInterval(() => {
+    nextSlide();
+  }, 4000); // every 4 seconds
+</script>
+
+</body>
+</html>
