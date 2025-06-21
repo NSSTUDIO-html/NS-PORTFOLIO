@@ -71,6 +71,7 @@ font-family: TIMES;
 
         header {
             background: url('robo.jpg');
+            animation:bg 5s linear infinite;
             object-fit:cover;
             background-size: cover;
 
@@ -79,6 +80,16 @@ font-family: TIMES;
             padding: 2em 0;
             
 }
+        @keyframes bg{
+            0%{background: url('robo.jpg');}
+            20%{background: url('aa.jpg');}
+            30%{background: url('b.jpg');}
+            50%{background: url('c.jpg');}
+            60%{background: url('d.jpg');}
+            70%{background: url('e.jpg');}
+            80%{background: url('f.jpg');}
+            100%{background: url('g.jpg');}
+        }
         h1{
             text-align:center;
             color:blue;
