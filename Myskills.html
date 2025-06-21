@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Image Slider</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slider {
+      width: 90%;
+      max-width: 700px;
+      height: 400px;
+      position: absolute;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 1s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slider">
+  <div class="slides" id="slides">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/html.jpg" alt="Skill 1">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/css.jpg" alt="Skill 2">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/js.jpg" alt="Skill 3">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/tailwind.jpg" alt="Skill 4">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/bootstrap.jpg" alt="Skill 5">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/threejs.jpg" alt="Skill 6">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/react.jpg" alt="Skill 7">
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/jQuery.jpg" alt="Skill 8">
+    <img src="/storage/emulated/0/Download/chartjs.png" alt="Skill 9">
+    <img src="/storage/emulated/0/Download/plotly.png" alt="Skill 10">
+    <img src="/storage/emulated/0/Download/googlecharts.jpeg" alt="Skill 11">
+    <img src="/storage/emulated/0/Download/d3.png" alt="Skill 12">
+    <img src="/storage/emulated/0/Download/apex.png" alt="Skill 13">
+    <img src="/storage/emulated/0/Download/tfjs.png" alt="Skill 14">
+    <img src="/storage/emulated/0/Download/nodejs.png" alt="Skill 15">
+    <img src="/storage/emulated/0/Download/mongodb.png" alt="Skill 16">
+    <img src="/storage/emulated/0/Download/restapi.png" alt="Skill 17">
+    <img src="/storage/emulated/0/Download/express.png" alt="Skill 18">
+    <img src="/storage/emulated/0/Download/c.png" alt="Skill 19">
+    <img src="/storage/emulated/0/Download/java.png" alt="Skill 20">
+    <img src="/storage/emulated/0/Download/mysql.png" alt="Skill 21">
+    <img src="/storage/emulated/0/Download/python.jpeg" alt="Skill 22">
+    <img src="/storage/emulated/0/Download/django.png" alt="Skill 23">
+    <img src="/storage/emulated/0/Download/turtle.jpeg" alt="Skill 24">
+    <img src="/storage/emulated/0/Download/tkinter.jpeg" alt="Skill 25">
+    <img src="/storage/emulated/0/Download/numpy.png" alt="Skill 26">
+    <img src="/storage/emulated/0/Download/pandas.png" alt="Skill 27">
+    <img src="/storage/emulated/0/Download/matplotlib.jpeg" alt="Skill 28">
+    <img src="/storage/emulated/0/Download/scikit.png" alt="Skill 29">
+    <img src="/storage/emulated/0/Download/pytorch.png" alt="Skill 30">
+    <img src="/storage/emulated/0/Download/Tensorflow.png" alt="Skill 31">
+    <img src="/storage/emulated/0/Download/php.png" alt="Skill 32">
+    <img src="/storage/emulated/0/Download/ms office.png" alt="Skill 33">
+    <img src="/storage/emulated/0/Download/tally.png" alt="Skill 34">
+    <img src="/storage/emulated/0/Download/fundamentals.png" alt="Skill 35">
+    <img src="/storage/emulated/0/Download/wordpress.jpeg" alt="Skill 36">
+    <img src="/storage/emulated/0/Download/GitHub.png" alt="Skill 37">
+    <img src="/storage/emulated/0/Download/sql.png"alt="Skill 38">
+  
+  </div>
+</div>
+
+<script>
+  const slides = document.getElementById('slides');
+  const totalSlides = slides.children.length;
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % totalSlides;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }, 3000); // 3 seconds
+</script>
+
+</body>
+</html>
