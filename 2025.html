@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top Smartphones of 2025</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #0f1115;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #00ffe0;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #1e1f26;
+      border: 1px solid #333;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px rgba(0, 255, 224, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(0, 255, 224, 0.3);
+    }
+
+    .card h2 {
+      color: #00ffe0;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card ul {
+      list-style: number;
+    }
+
+    .card ul li {
+      padding: 5px 0;
+    }
+
+    .scroll-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00ffe0;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border: none;
+      box-shadow: 0 0 10px #00ffe0;
+      display: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌍 Top Smartphones of 2025</h1>
+
+  <div class="container">
+    <div class="card">
+      <h2>🏆 Best Overall: Galaxy S24 Ultra</h2>
+      <img style="width:100%;height:250px;object-fit:contain;"src="https://rukminid2.flixcart.com/image/750/1100/xif0q/mobile/5/i/7/-original-imahfu766ybd5h4z.jpeg?q=90&crop=false">
+      <ul>
+        <li>Snapdragon 8 Gen 3 / Exynos 2400</li>
+        <li>200MP Camera + 100x Zoom</li>
+        <li>S Pen, Bright AMOLED</li>
+        <li>4 Years OS Updates</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>📸 Best Camera: Pixel 8 Pro</h2>
+      <img style="width:100%;height:250px;object-fit:contain;"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKyED9SdMZy7ady8mPqcde_7MsVY7oUSTyGFhWxeW4ASF-fCNmnNLRaJcj&s=10">
+      <ul>
+        <li>Google Tensor G3</li>
+        <li>Best Night & AI Photography</li>
+        <li>Magic Editor, Audio Eraser</li>
+        <li>Clean Android</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🎮 Best Gaming: ASUS ROG Phone 8 Pro</h2>
+      <img style="width:100%;height:250px;object-fit:contain;"src="https://dlcdnwebimgs.asus.com/gain/1F082CCC-7F01-4057-B250-4B81B1651877">
+      <ul>
+        <li>Snapdragon 8 Gen 3</li>
+        <li>165Hz AMOLED Display</li>
+        <li>Gaming Triggers, Cooling</li>
+        <li>Massive Battery</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🔋 Best Battery: iPhone 16 Pro Max</h2>
+      <img style="width:100%;height:250px;object-fit:contain;"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR90l-yfxQgR4jTV5i_weECbIJaQLLXQM6uiyEvihC5Dx12Z5Imc9JjS2c&s=10">
+      <ul>
+        <li>A17 Pro Chip</li>
+        <li>iOS Optimization</li>
+        <li>Superb Camera + Video</li>
+        <li>Long-lasting Battery</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>💰 Best Budget: Nothing Phone (2a)</h2>
+      <img style="width:100%;height:250px;object-fit:contain;"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7YhIDbsC-YBL7YyirLDoXO0_NRt4k25HNkV3fqNkxmkL9ZNIJRh0leZq&s=10">
+      <ul>
+        <li>Unique Transparent Design</li>
+        <li>120Hz AMOLED</li>
+        <li>Good Battery + Performance</li>
+        <li>Clean UI, Android 14</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>💡 Best Value Flagship: OnePlus 12R</h2>
+      <img style="width:100%;height:250px;object-fit:contain;"src="https://rukminim2.flixcart.com/image/750/900/xif0q/mobile/r/w/j/12r-cph2585-oneplus-original-imah9zk6nddhcbsh.jpeg?q=90&crop=false">
+      <ul>
+        <li>Snapdragon 8 Gen 2</li>
+        <li>AMOLED 120Hz Display</li>
+        <li>Flagship Killer Under ₹40K</li>
+        <li>Fast Charging, Great Build</li>
+      </ul>
+    </div>
+  </div>
+
+  <button class="scroll-btn" id="topBtn">⬆️</button>
+
+  <script>
+    // Scroll to Top Button
+    const topBtn = document.getElementById("topBtn");
+
+    window.onscroll = function () {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        topBtn.style.display = "block";
+      } else {
+        topBtn.style.display = "none";
+      }
+    };
+
+    topBtn.onclick = function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  </script>
+
+</body>
+</html>
