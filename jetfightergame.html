@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodge JetFighter Game</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #111; overflow: hidden; font-family: sans-serif; }
+
+    #gameArea {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url('https://img.freepik.com/premium-photo/starfield-deep-space-many-light-years-far-from-earth_112293-501.jpg?semt=ais_hybrid&w=740');
+      background-size: cover;
+      background-position: center;
+    }
+
+    #player {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 150px;
+      background: url('pngherojet.png');
+      
+      
+      
+      background-size: cover;
+      background-position: center;
+    }
+
+    .block {
+      position: absolute;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      background: url('pngvillanjet.png');
+      
+      
+      
+      background-size: cover;
+      background-position: center;
+    }
+    
+
+    #score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      font-size: 40px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameArea">
+    <div id="player"></div>
+    <div id="score">Score: 0</div>
+  </div>
+
+  <script>
+    const player = document.getElementById('player');
+    const gameArea = document.getElementById('gameArea');
+    const scoreBoard = document.getElementById('score');
+    let score = 0;
+    let gameWidth = window.innerWidth;
+    let playerPos = gameWidth / 2 - 25;
+
+    // Move player
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') playerPos -= 50;
+      if (e.key === 'ArrowRight') playerPos += 50;
+
+      // Boundaries
+      if (playerPos < 0) playerPos = 0;
+      if (playerPos > gameWidth - 50) playerPos = gameWidth - 50;
+
+      player.style.left = playerPos + 'px';
+    });
+
+    // Create falling blocks
+    function createBlock() {
+      const block = document.createElement('div');
+      block.classList.add('block');
+      block.style.left = Math.random() * (gameWidth - 50) + 'px';
+      gameArea.appendChild(block);
+
+      let blockTop = 0;
+      const drop = setInterval(() => {
+        blockTop += 8;
+        block.style.top = blockTop + 'px';
+
+        // Collision
+        const playerRect = player.getBoundingClientRect();
+        const blockRect = block.getBoundingClientRect();
+        if (
+          blockRect.bottom > playerRect.top &&
+          blockRect.top < playerRect.bottom &&
+          blockRect.left < playerRect.right &&
+          blockRect.right > playerRect.left
+        ) {
+          alert('💥 Game Over!\nYour Score: ' + score);
+          window.location.reload();
+        }
+
+        // Remove block when it goes off screen
+        if (blockTop > window.innerHeight) {
+          clearInterval(drop);
+          block.remove();
+          score++;
+          scoreBoard.innerText = 'Score: ' + score;
+        }
+      }, 20);
+    }
+
+    // Game loop
+    setInterval(createBlock, 500);
+  </script>
+</body>
+</html>
