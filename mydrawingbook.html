@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Drawing Book</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #e0e0e0, #f9f9f9);
+      background-size:contain;
+      background-position:center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 70vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+  img{
+    background-size:100%;
+      background-position:center;
+  }
+
+    .book {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      transform-style: preserve-3d;
+      perspective: 2000px;
+    }
+
+    .page {
+      width: 100%;
+      height: 150%;
+      background: #fff;
+      border: 2px solid #ccc;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: left;
+      transition: transform 1s ease-in;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .page img {
+      width: 100%;
+      height: 100%;
+      object-fit:contain;
+    }
+
+    .page h2 {
+      margin: 10px;
+      text-align: center;
+    }
+
+    .page:nth-child(1) {
+      z-index: 6;
+    }
+
+    .page:nth-child(2) {
+      z-index: 5;
+    }
+
+    .page:nth-child(3) {
+      z-index: 4;
+    }
+
+    .page:nth-child(4) {
+      z-index: 3;
+    }
+  .page:nth-child(5) {
+      z-index: 2;
+    }
+  .page:nth-child(6) {
+      z-index: 1;
+    }
+
+    .page.flipped {
+      transform: rotateY(-180deg);
+      z-index: 0 !important;
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      
+      font-size: 20px;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2980b9;
+      transform:scale(1.5);
+    }
+
+    @media (max-width: 700px) {
+      .book {
+        width: 90vw;
+        height: 60vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="book" id="book">
+  <div class="page" onclick="flipPage(this)">
+    <h2>Cover Page</h2>
+    <img src="/storage/emulated/0/Download/IMG_20250711_200622.jpg" />
+  </div>
+  <div class="page" onclick="flipPage(this)">
+    <h2>Drawing 1</h2>
+    <img src="/storage/emulated/0/DCIM/MyAlbums/my drawings/IMG_20250327_112644.jpg" />
+  </div>
+  <div class="page" onclick="flipPage(this)">
+    <h2>Drawing 2</h2>
+    <img src="/storage/emulated/0/DCIM/MyAlbums/my drawings/yevadu.jpg" />
+  </div>
+  <div class="page" onclick="flipPage(this)">
+    <h2>Drawing 3</h2>
+    <img src="/storage/emulated/0/DCIM/MyAlbums/my drawings/cricket.jpg" />
+  </div>
+  <div class="page" onclick="flipPage(this)">
+    <h2>Drawing 4</h2>
+    <img src="/storage/emulated/0/DCIM/MyAlbums/my drawings/karna1.jpg" />
+  </div>
+  <div class="page" onclick="flipPage(this)">
+    <h2>Drawing 5</h2>
+    <img src="/storage/emulated/0/DCIM/Camera/ROLEX.jpg" />
+  </div>
+  <div class="page" onclick="flipPage(this)">
+    <h2>Back Page</h2>
+    <img src="/storage/emulated/0/Pictures/100PINT/Pins/SALAAR.jpg" />
+  </div>
+</div>
+
+<div class="controls">
+  <button onclick="prev()">Previous</button>
+  <button onclick="next()">Next</button>
+</div>
+
+<script>
+  let current = 0;
+  const pages = document.querySelectorAll('.page');
+
+  function flipPage(el) {
+    el.classList.toggle('flipped');
+  }
+
+  function next() {
+    if (current < pages.length) {
+      pages[current].classList.add('flipped');
+      current++;
+    }
+  }
+
+  function prev() {
+    if (current > 0) {
+      current--;
+      pages[current].classList.remove('flipped');
+    }
+  }
+</script>
+
+</body>
+</html>
