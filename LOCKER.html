@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matrix AI Locker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .vault-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .vault-door {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(to bottom, #111, #222);
+      box-shadow: inset 0 0 20px #00ff00;
+      z-index: 2;
+      transition: all 1.5s ease-in-out;
+    }
+
+    .left-door {
+      left: 0;
+      border-right: 2px solid #00ff00;
+    }
+
+    .right-door {
+      right: 0;
+      border-left: 2px solid #00ff00;
+    }
+
+    .vault-container.open .left-door {
+      transform: translateX(-100%);
+    }
+
+    .vault-container.open .right-door {
+      transform: translateX(100%);
+    }
+
+    .access-panel {
+      z-index: 3;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 30px;
+      border-radius: 30px;
+      box-shadow: 0 0 20px #00ff00;
+    }
+
+    .access-panel h1 {
+      color: #00ff00;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .access-panel input {
+      padding: 10px;
+      width: 200px;
+      background: black;
+      color: #0f0;
+      border: 2px solid #0f0;
+      border-radius: 5px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .access-panel button {
+      padding: 10px 20px;
+      background: #0f0;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    .secret-project {
+      display: none;
+      text-align: center;
+      color: #00ffff;
+      z-index: 4;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .vault-container.open .secret-project {
+      display: block;
+    }
+
+    .secret-project h2 {
+      margin-bottom: 10px;
+    }
+
+    .secret-project a {
+      color: #00ffff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .secret-project a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="vault-container" id="vault">
+  <div class="vault-door left-door"></div>
+  <div class="vault-door right-door"></div>
+
+  <div class="access-panel">
+    <h1>🔒 ENTER MATRIX PASSWORD</h1>
+    <input type="password" id="password" placeholder="Matrix Access Key">
+    <br>
+    <button onclick="unlockVault()">UNLOCK</button>
+
+    <div class="secret-project" id="project">
+      <h2>✅ MATRIX AI PROJECT UNLOCKED</h2>
+      <p><a href="https://your-matrix-ai-link.com" target="_blank">Launch Matrix AI 🚀</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function unlockVault() {
+    const pwd = document.getElementById('password').value;
+    const vault = document.getElementById('vault');
+    const project = document.getElementById('project');
+
+    if (pwd === "matrix2025") {
+      vault.classList.add('open');
+      project.style.display = "block";
+    } else {
+      alert("❌ Incorrect password. Access denied.");
+    }
+  }
+
+  // MATRIX RAIN EFFECT
+  const canvas = document.getElementById('matrix');
+  const ctx = canvas.getContext('2d');
+
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letters = "01アカサタナハマヤラワABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#0f0";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const char = letters[Math.floor(Math.random() * letters.length)];
+      ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 33);
+</script>
+
+</body>
+</html>
