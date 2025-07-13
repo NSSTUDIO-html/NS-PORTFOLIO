@@ -25,10 +25,10 @@
       animation:bg 15s linear infinite;
     }
     @keyframes bg{
-      0%{ background:url('titancore.png');}
-      25%{background:url('matrixcore.png');}
-      50%{background:url('jarviscore.png');}
-      75%{background:url('guardcore.png');}
+      0%{ background:url('titancore.png'); background-position:center;}
+      25%{background:url('matrixcore.png'); background-position:center;}
+      50%{background:url('jarviscore.png'); background-position:center;}
+      75%{background:url('guardcore.png'); background-position:center;}
       100%{background:black;}
     }
     nav {
@@ -68,11 +68,15 @@
       background:url('titancore.png');
     }
     #chat-log {
-      background: #e5e7eb;
+      
       padding: 10px;
       height: 250px;
       overflow-y: auto;
       border: 1px solid #ccc;
+      background:url('titancore.png');
+      background-position:center;
+      background-size:contain;
+      filter: opacity(0.5);
     }
     #user-input {
       padding: 10px;
@@ -161,7 +165,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <input type="text" id="user-input" placeholder="Ask me anything..." />
         <button onclick="sendMessage()">Send</button>
       </div>
-    </section><section id="tools" class="tab hidden">
+    </section>
+    
+    <section id="tools" class="tab hidden">
   <h2>AI Tools</h2>
   <ul>
     <li><button style="border-radius:50px;border:5px inset silver;box-shadow:0 0 20px black; background:linear-gradient(120deg,lime,black); padding:50px; color:white;">Matrix AI</button> <img style="height:400px;width:100%;object-fit:contain;" src="matrixcore.png"></li>
