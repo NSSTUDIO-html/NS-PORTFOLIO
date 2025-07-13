@@ -22,6 +22,14 @@
       color: #fff;
       padding: 20px;
       text-align: center;
+      animation:bg 15s linear infinite;
+    }
+    @keyframes bg{
+      0%{ background:url('titancore.png');}
+      25%{background:url('matrixcore.png');}
+      50%{background:url('jarviscore.png');}
+      75%{background:url('guardcore.png');}
+      100%{background:black;}
     }
     nav {
       display: flex;
@@ -57,6 +65,7 @@
       gap: 10px;
       max-width: 600px;
       margin: auto;
+      background:url('titancore.png');
     }
     #chat-log {
       background: #e5e7eb;
@@ -146,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <button onclick="showTab('voice')">Voice Assistant</button>
   </nav>  <main>
     <section id="chat" class="tab">
-      <h2>Chatbot (Powered by TensorFlow.js)</h2>
+      <h2>Chatbot (Powered by Tensorflow.js, Python)</h2>
       <div class="chat-box">
         <div id="chat-log"></div>
         <input type="text" id="user-input" placeholder="Ask me anything..." />
