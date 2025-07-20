@@ -2,7 +2,9 @@
 
 Welcome to my personal portfolio website built with HTML, CSS, and JavaScript. This portfolio represents **Naga Sasank** (NS Studio) – a passionate developer, AI enthusiast, game creator, and tech explorer.
 
-🌐 Live Site: [NS Portfolio](https://nsstudio-html.github.io/NS-PORTFOLIO/)
+<a href="https://nsstudio-html.github.io/NS-PORTFOLIO/" target="_blank">
+  <img src="https://img.shields.io/badge/🌐 NS%20Portfolio-Silver?style=for-the-badge&logo=githubpages&logoColor=white&color=silver" alt="NS Portfolio Badge">
+</a>
 
 ---
 
