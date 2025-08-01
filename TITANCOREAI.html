@@ -1,12 +1,16 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Titan Core AI</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" />
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
     }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -14,98 +18,253 @@
       color: #333;
       padding-bottom: 60px;
     }
-    h1{
-      font-family: courier;
+
+    h1 {
+      font-family: 'Courier Prime', monospace;
     }
+
     header {
       background: black;
-      color: #fff;
+      color: white;
       padding: 20px;
       text-align: center;
-      animation:bg 15s linear infinite;
+      animation: bg 15s linear infinite;
     }
-    @keyframes bg{
-      0%{ background:url('titancore.png'); background-position:center;}
-      25%{background:url('matrixcore.png'); background-position:center;}
-      50%{background:url('jarviscore.png'); background-position:center;}
-      75%{background:url('guardcore.png'); background-position:center;}
-      100%{background:black;}
+
+    @keyframes bg {
+      0% { background-image: url('titancore.png'); }
+      25% { background-image: url('matrixcore.png'); }
+      50% { background-image: url('jarviscore.png'); }
+      75% { background-image: url('guardcore.png'); }
+      100% { background-color: black; }
+      background-position: center;
+      background-size: cover;
     }
+
     nav {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      background: #4b5563;
+      justify-content: center;
+      background: #374151;
       padding: 10px;
     }
+
     nav button {
       background: #9ca3af;
       color: white;
       padding: 10px 20px;
       margin: 5px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
     }
+
     nav button:hover {
       background: #6b7280;
     }
+
     main {
       padding: 20px;
     }
+
     .tab {
       display: none;
     }
-    .tab:not(.hidden) {
+
+    .tab.active {
       display: block;
     }
+
     .chat-box {
+      max-width: 600px;
+      margin: auto;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      max-width: 600px;
-      margin: auto;
-      background:url('titancore.png');
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
     }
+
     #chat-log {
-      color:white;
-      padding: 10px;
+      color: #fff;
+      padding: 15px;
       height: 250px;
       overflow-y: auto;
+      background: url('titancore.png') center/contain no-repeat;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
       border: 1px solid #ccc;
-      background:url('titancore.png');
-      background-position:center;
-      background-size:contain;
-      filter: opacity(0.8);
     }
+
     #user-input {
       padding: 10px;
       font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #aaa;
     }
-    #voice-output {
-      margin-top: 10px;
+
+    #send-btn {
+      padding: 10px;
+      font-weight: bold;
+      background-color: #10b981;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
+
+    #send-btn:hover {
+      background-color: #059669;
+    }
+
     footer {
       text-align: center;
       padding: 10px;
       background: black;
       color: white;
       position: fixed;
-      width: 100%;
       bottom: 0;
+      width: 100%;
     }
+
+    .tool-button {
+      display: block;
+      width: 100%;
+      margin: 20px 0;
+      padding: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 0 20px black;
+    }
+
+    .tool-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      margin-bottom: 40px;
+    }
+
     @media (max-width: 600px) {
       nav button {
         flex: 1 1 100%;
       }
       .chat-box {
-        padding: 0 10px;
+        padding: 10px;
       }
     }
   </style>
-  <script defer>
+</head>
+<body>
+  <header>
+    <h1>Titan Core AI</h1>
+    <p>Your All-in-One AI Assistant</p>
+  </header>
+
+  <nav>
+    <button onclick="showTab('chat')">Chatbot</button>
+    <button onclick="showTab('tools')">AI Tools</button>
+    <button onclick="showTab('voice')">Voice Assistant</button>
+  </nav>
+
+  <main>
+    <section id="chat" class="tab active">
+      <h2>Chatbot (Powered by TensorFlow.js)</h2>
+      <div class="chat-box">
+        <div id="chat-log"></div>
+        <input type="text" id="user-input" placeholder="Ask me anything..." />
+        <button id="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+    </section>
+
+    <section id="tools" class="tab">
+      <h2>AI Tools</h2>
+      <div>
+        <div class="tool-button" style="background:linear-gradient(120deg,lime,black); border:5px inset silver;">Matrix AI</div>
+        <img class="tool-image" src="matrixcore.png" />
+
+        <div class="tool-button" style="background:linear-gradient(120deg,blue,cyan,white); border:5px solid black;">J.A.R.V.I.S AI</div>
+        <img class="tool-image" src="jarviscore.png" />
+
+        <div class="tool-button" style="background:linear-gradient(120deg,gray,black,gray); border:5px ridge gray;">GUARD AI</div>
+        <img class="tool-image" src="guardcore.png" />
+
+        <div class="tool-button" style="background:linear-gradient(-120deg,blue,black); border:5px solid blue;">ONESHOT 3D</div>
+
+        <div class="tool-button" style="background:linear-gradient(120deg,purple,black); border:5px groove purple;">VIDMORPH AI</div>
+
+        <div class="tool-button" style="background:linear-gradient(160deg,violet,purple); border:5px solid violet;">ANIME AI</div>
+
+        <div class="tool-button" style="background:linear-gradient(12deg,gold,black,silver); border:5px solid silver;">AR SKETCHER</div>
+
+        <div class="tool-button" style="background:linear-gradient(90deg,red,orange,black); border:5px solid red;">STOCKS AI</div>
+
+        <div class="tool-button" style="background:linear-gradient(100deg,green,lime,black); border:5px solid green;">AR-AI</div>
+      </div>
+    </section>
+
+    <section id="voice" class="tab">
+      <h2>Voice Assistant</h2>
+      <button onclick="startListening()">Start Listening</button>
+      <p id="voice-output">Voice responses will appear here...</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Titan Core AI | Built by Naga Sasank</p>
+  </footer>
+
+  <script>
     function showTab(id) {
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.add('hidden'));
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('user-input');
+      const log = document.getElementById('chat-log');
+      const message = input.value.trim();
+      if (!message) return;
+
+      log.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+      input.value = '';
+      const response = await generateBotResponse(message);
+      log.innerHTML += `<div><strong>Titan:</strong> ${response}</div>`;
+      log.scrollTop = log.scrollHeight;
+    }
+
+    async function generateBotResponse(text) {
+      await tf.ready();
+      const encoded = tf.tensor1d([...text].map(c => c.charCodeAt(0))).mean().arraySync();
+      const replies = [
+        "That's interesting!",
+        "Can you explain more?",
+        "I'm here to help you.",
+        "Let's explore that further.",
+        "Thanks for sharing."
+      ];
+      return replies[Math.floor(encoded) % replies.length];
+    }
+
+    function startListening() {
+      const output = document.getElementById('voice-output');
+      output.innerText = 'Listening... (mock)';
+      setTimeout(() => {
+        output.innerText = 'Hello! I heard you say something.';
+      }, 2000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      showTab('chat');
+    });
+  </script>
+</body>
+</html>      document.querySelectorAll('.tab').forEach(tab => tab.classList.add('hidden'));
       document.getElementById(id).classList.remove('hidden');
     }function sendMessage() {
   const input = document.getElementById('user-input');
