@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Persistent To-Do List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-green-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-2xl rounded-2xl w-full max-w-md p-6 space-y-4">
+    <h1 class="text-2xl font-bold text-center text-blue-800">📝 Daily To-Do List</h1>
+    <ul id="todo-list" class="space-y-3">
+      <!-- Checkboxes will be inserted here via JavaScript -->
+    </ul>
+  </div>
+
+  <script>
+    const tasks = [
+      "Wake up and freshen up",
+      "Light exercise or walk",
+      "Eat breakfast",
+      "Drawing Session 1",
+      "Coding Session 1",
+      "Short break / snack",
+      "Coding Session 2",
+      "Lunch and relax",
+      "Drawing Session 2",
+      "Personal tasks or errands",
+      "Optional learning (video/book)",
+      "Dinner and unwind",
+      "Free time (social/planning)",
+      "Project updates or goal check",
+      "Prepare for bed",
+      "Sleep"
+    ];
+
+    const todoList = document.getElementById('todo-list');
+
+    tasks.forEach((task, index) => {
+      const taskId = `task${index + 1}`;
+      const checked = localStorage.getItem(taskId) === 'true' ? 'checked' : '';
+
+      const listItem = document.createElement('li');
+      listItem.className = "flex items-center";
+
+      listItem.innerHTML = `
+        <input type="checkbox" id="${taskId}" class="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-400" ${checked}>
+        <label for="${taskId}" class="ml-3 text-gray-800">${task}</label>
+      `;
+
+      todoList.appendChild(listItem);
+
+      listItem.querySelector('input').addEventListener('change', (e) => {
+        localStorage.setItem(taskId, e.target.checked);
+      });
+    });
+  </script>
+</body>
+</html>
