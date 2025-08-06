@@ -445,8 +445,22 @@ border-bottom:5px solid cyan;
         border-radius:0%;
         border:5px solid blue;
         background:linear-gradient(to left, black,blue,cyan);
+        animation:w 5s linear infinite;
     
     }
+    @keyframes w {
+        from{
+            border:5px solid blue;
+        background:linear-gradient(to left, black,blue,cyan);
+        
+        }
+        to{
+            border:5px solid black;
+        background:linear-gradient(to right, black,blue,cyan);
+        
+        }
+    }
+    
         
     </style>
     <!-- Add this in your <head> -->
