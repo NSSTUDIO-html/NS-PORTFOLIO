@@ -1,0 +1,742 @@
+@media only screen and (min-width: 769px) {
+ 
+        body {
+            font-family: Times;
+            margin: 0;
+            padding: 0;
+            width:100%;
+            line-height: 1.6;
+            background: linear-gradient(to left,blue,black 90%);
+background-size:contain;
+            color:white;
+        }
+         header {
+    background: url('buildingsw2.jpg');
+      object-fit:contain;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding:2rem 50px;
+  }
+        p{
+font-family: TIMES;
+        }
+        
+  #name {
+    display: flex;
+    justify-content: center;  /* centers items horizontally */
+    align-items: center;      /* centers items vertically (if height is set) */
+    font-size: 30px;
+    font-weight: bold;        /* corrected */
+    font-family: cursive;
+    height: 100px;            /* optional: helps vertical centering */
+    gap: 2px;                /* spacing between <p> tags */
+  }
+
+  #P, #S {
+      font-size: 30px;
+      font-weight: bold;
+      font-family: cursive;
+    position: relative;
+  }
+
+  #P {
+    animation: s1 2s ease-in-out 1s 1 alternate;
+  }
+
+  #S {
+    animation: s2 2s ease-in-out 1s 1 alternate;
+  }
+
+  @keyframes s1 {
+    0% {
+      left: 0%;
+    }
+    50% {
+      left: 50%;
+    }
+      100%{
+        right: 0%;
+      }
+  }
+
+  @keyframes s2 {
+    0% {
+      right: 0%;
+    }
+    50% {
+      right: 50%;
+    }
+      100%{
+          left: 0%;
+      }
+  }
+
+
+     
+        
+        h1{
+            text-align:center;
+            color:silver;
+            border-bottom:8px double gold;
+            
+
+        }
+        a{color:white;}
+        a:hover{color:black; background:white;}
+        nav {
+            background-image: linear-gradient(100deg, cyan 0%, blue 100%);
+border-radius:none;
+            align-items:center;
+            justify-content:center;
+            display:flex;
+            color:white;
+            font-style:bold;
+            font-weight:bold;
+            text-align: center;
+            padding: 10px;
+            margin:1px;
+        }
+    #nsb{
+        background: transparent;
+        color:white;
+        font-weight:bold;
+        padding:5px 5px;
+        border:none;
+        border-radius:0%;
+    }
+    #nsb:hover{
+        background:linear-gradient(120deg,cyan,blue,black);
+        border:3px solid blue;
+        border-radius:0%;
+        color:white
+        font-style:bold;
+        text-shadow:0 0 20px white;
+        box-shadow:0 0 20px black;
+    }
+
+        nav a {
+            text-decoration: none;
+            border-bottom:3px solid white;
+            color: white;
+            margin:5px;
+            border-radius:none;
+            
+        }
+
+        section {
+            padding: 2em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project {
+            border: 5px inset white;
+            margin-bottom: 1em;
+            padding: 1em;
+        }
+
+        footer {
+            background: linear-gradient(120deg, cyan 0%, blue 100%);
+
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .img_portfolio{
+          max-width: 100%;
+          height: auto;
+            
+        }
+        #s{
+          max-width: 100%;
+          height: 200px;
+            object-fit:contain;
+            
+            border:10px solid blue;
+            
+        }
+        #s:hover{
+            background:url('NSP.jpg');
+        }
+        
+        #myImage{
+max-width: 100%;
+          height: 400px;
+            object-fit:contain;
+        }
+        #d{
+         border-radius:20%;
+            border:5px inset black;
+            background:black;
+            color:white;
+            text-shadow:5px 5px 5px;
+    
+    
+        }
+        
+        
+        #ns{
+            position:fixed;
+            bottom:0px;right:0px;
+            background:url('https://nsstudio-html.github.io/RS-RISING-SHOOTERS/Images/NSSTUDIO.png');
+            background-size:cover;
+            
+            border-radius:50%;
+            padding:25px;
+            animation:logo 40s linear infinite;
+        }
+        @keyframes logo{
+            0%{background:url('./ns.jpg');background-size:cover;}
+            10%{background:url('./NS1.jpg');background-size:cover;}
+            20%{background:url('./NS2.jpg');background-size:cover;}
+            30%{background:url('./ns3.jpg');background-size:cover;}
+            40%{background:url('./ns4.jpg');background-size:cover;}
+            50%{background:url('./ns5.jpg');background-size:cover;}
+            60%{background:url('./ns6.jpg');background-size:cover;}
+            70%{background:url('./ns7.jpg');background-size:cover;}
+            80%{background:url('./ns8.jpg');background-size:cover;}
+            90%{background:url('./ns9.jpg');background-size:cover;}
+            100%{background:url('./ns0.jpg');background-size:cover;}
+        }
+        #ns:active{
+            background:url('./nsf.jpg');
+            background-size:cover;
+            border-color:silver;
+        }
+        #icons{
+            display: grid;
+            justify-content:center;
+            align-items:center;
+            text-align: center;
+            width:100%;
+        }
+        button{
+            background-position:center;
+            background-size:cover;
+            border:20px outset blue;
+            border-radius:50%;
+            padding:25px;
+            font-style:bold;
+        }
+        button:active{
+            transform:scale(1.3);
+        }
+        
+        
+        
+        h2{
+border-bottom:5px solid cyan;
+            
+            color:white;
+            text-shadow:0 0 10px white;
+            
+        }
+        
+        .slider-container {
+      width: 100%;
+      max-width: 800px;
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative;
+            justify-content:center;
+            align-items:center;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 40rem;
+        object-fit:contain;
+      display: block;
+      border-radius: 12px;
+    }
+
+    /* Navigation buttons */
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .nav-button:hover {
+      background: rgba(0,0,0,0.8);
+    }
+        
+
+        
+        
+        
+        .secret-content {
+            display: none;
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    #pdp{
+        font-style:bold;
+        font-family:cursive;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:50px;
+        border:10px inset blue;
+        background:linear-gradient(120deg, black,blue);
+    }
+    #dvv{
+        font-style:bold;
+        font-family:courier;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:50px;
+        border:10px inset cyan;
+        background:linear-gradient(90deg, black,blue,cyan);
+    }
+    #a{
+        font-style:bold;
+        font-family:TIMES;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:50px;
+        border:10px outset black;
+        background:linear-gradient(160deg, black,blue,black);
+    
+    }
+    #w{
+        font-style:bold;
+        font-family:times;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:0%;
+        border:5px solid blue;
+        background:linear-gradient(to left, black,blue,cyan);
+        animation:w 5s ease infinite;
+        transition: transform 2s ease;
+    
+    }
+    #all{
+        font-style:bold;
+        font-family:times;
+        color:white;
+        padding:25px;
+        margin:5px;
+        border-radius:0%;
+        border:25px solid black;
+        background:linear-gradient(to left, black,blue);
+        
+    
+    }
+    @keyframes w {
+        0%{
+            border:5px solid blue;
+        background:linear-gradient(to left, black,blue,cyan);
+        
+        }
+        50%{
+            border:5px solid cyan;
+        background:linear-gradient(to top, black,blue,cyan);
+        
+        }
+        100%{
+            border:5px solid black;
+        background:linear-gradient(to right, black,blue,cyan);
+        
+        }
+    }
+    
+    }
+
+    @media only screen and (max-width: 768px) {
+        body {
+            font-family: Times;
+            margin: 0;
+            padding: 0;
+            width:100%;
+            line-height: 1.6;
+            background: linear-gradient(to left,blue,black 90%);
+background-size:contain;
+            color:white;
+        }
+        p{
+font-family: TIMES;
+        }
+        
+  #name {
+    display: flex;
+    justify-content: center;  /* centers items horizontally */
+    align-items: center;      /* centers items vertically (if height is set) */
+    font-size: 30px;
+    font-weight: bold;        /* corrected */
+    font-family: cursive;
+    height: 100px;            /* optional: helps vertical centering */
+    gap: 2px;                /* spacing between <p> tags */
+  }
+
+  #P, #S {
+      font-size: 30px;
+      font-weight: bold;
+      font-family: cursive;
+    position: relative;
+  }
+
+  #P {
+    animation: s1 2s ease-in-out 1s 1 alternate;
+  }
+
+  #S {
+    animation: s2 2s ease-in-out 1s 1 alternate;
+  }
+
+  @keyframes s1 {
+    0% {
+      left: 0%;
+    }
+    50% {
+      left: 50%;
+    }
+      100%{
+        right: 0%;
+      }
+  }
+
+  @keyframes s2 {
+    0% {
+      right: 0%;
+    }
+    50% {
+      right: 50%;
+    }
+      100%{
+          left: 0%;
+      }
+  }
+
+
+        header {
+            background: url('buildingsw.jpg');
+            
+            object-fit:contain;
+            background-size: cover;
+
+            color: white;
+            text-align: center;
+            padding:2rem 50px;
+        
+            
+}
+        
+        h1{
+            text-align:center;
+            color:silver;
+            border-bottom:8px double gold;
+            
+
+        }
+        a{color:white;}
+        a:hover{color:black; background:white;}
+        nav {
+            background-image: linear-gradient(100deg, cyan 0%, blue 100%);
+border-radius:none;
+            align-items:center;
+            justify-content:center;
+            display:flex;
+            color:white;
+            font-style:bold;
+            font-weight:bold;
+            text-align: center;
+            padding: 10px;
+            margin:1px;
+        }
+    #nsb{
+        background: transparent;
+        color:white;
+        font-weight:bold;
+        padding:5px 5px;
+        border:none;
+        border-radius:0%;
+    }
+    #nsb:hover{
+        background:linear-gradient(120deg,cyan,blue,black);
+        border:3px solid blue;
+        border-radius:0%;
+        color:white
+        font-style:bold;
+        text-shadow:0 0 20px white;
+        box-shadow:0 0 20px black;
+    }
+
+        nav a {
+            text-decoration: none;
+            border-bottom:3px solid white;
+            color: white;
+            margin:5px;
+            border-radius:none;
+            
+        }
+
+        section {
+            padding: 2em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project {
+            border: 5px inset white;
+            margin-bottom: 1em;
+            padding: 1em;
+        }
+
+        footer {
+            background: linear-gradient(120deg, cyan 0%, blue 100%);
+
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .img_portfolio{
+          max-width: 100%;
+          height: auto;
+            
+        }
+        #s{
+          max-width: 100%;
+          height: 200px;
+            object-fit:contain;
+            
+            border:10px solid blue;
+            
+        }
+        #s:hover{
+            background:url('NSP.jpg');
+        }
+        
+        #myImage{
+max-width: 100%;
+          height: 400px;
+            object-fit:contain;
+        }
+        #d{
+         border-radius:20%;
+            border:5px inset black;
+            background:black;
+            color:white;
+            text-shadow:5px 5px 5px;
+    
+    
+        }
+        
+        
+        #ns{
+            position:fixed;
+            bottom:0px;right:0px;
+            background:url('https://nsstudio-html.github.io/RS-RISING-SHOOTERS/Images/NSSTUDIO.png');
+            background-size:cover;
+            
+            border-radius:50%;
+            padding:25px;
+            animation:logo 40s linear infinite;
+        }
+        @keyframes logo{
+            0%{background:url('./ns.jpg');background-size:cover;}
+            10%{background:url('./NS1.jpg');background-size:cover;}
+            20%{background:url('./NS2.jpg');background-size:cover;}
+            30%{background:url('./ns3.jpg');background-size:cover;}
+            40%{background:url('./ns4.jpg');background-size:cover;}
+            50%{background:url('./ns5.jpg');background-size:cover;}
+            60%{background:url('./ns6.jpg');background-size:cover;}
+            70%{background:url('./ns7.jpg');background-size:cover;}
+            80%{background:url('./ns8.jpg');background-size:cover;}
+            90%{background:url('./ns9.jpg');background-size:cover;}
+            100%{background:url('./ns0.jpg');background-size:cover;}
+        }
+        #ns:active{
+            background:url('./nsf.jpg');
+            background-size:cover;
+            border-color:silver;
+        }
+        #icons{
+            display: grid;
+            justify-content:center;
+            align-items:center;
+            text-align: center;
+            width:100%;
+        }
+        button{
+            background-position:center;
+            background-size:cover;
+            border:20px outset blue;
+            border-radius:50%;
+            padding:25px;
+            font-style:bold;
+        }
+        button:active{
+            transform:scale(1.3);
+        }
+        
+        
+        
+        h2{
+border-bottom:5px solid cyan;
+            
+            color:white;
+            text-shadow:0 0 10px white;
+            
+        }
+        
+        .slider-container {
+      width: 100%;
+      max-width: 800px;
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative;
+            justify-content:center;
+            align-items:center;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 40rem;
+        object-fit:contain;
+      display: block;
+      border-radius: 12px;
+    }
+
+    /* Navigation buttons */
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .nav-button:hover {
+      background: rgba(0,0,0,0.8);
+    }
+        
+
+        
+        
+        
+        .secret-content {
+            display: none;
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    #pdp{
+        font-style:bold;
+        font-family:cursive;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:50px;
+        border:10px inset blue;
+        background:linear-gradient(120deg, black,blue);
+    }
+    #dvv{
+        font-style:bold;
+        font-family:courier;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:50px;
+        border:10px inset cyan;
+        background:linear-gradient(90deg, black,blue,cyan);
+    }
+    #a{
+        font-style:bold;
+        font-family:TIMES;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:50px;
+        border:10px outset black;
+        background:linear-gradient(160deg, black,blue,black);
+    
+    }
+    #w{
+        font-style:bold;
+        font-family:times;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:0%;
+        border:5px solid blue;
+        background:linear-gradient(to left, black,blue,cyan);
+        animation:w 5s ease infinite;
+        transition: transform 2s ease;
+    
+    }
+    #all{
+        font-style:bold;
+        font-family:times;
+        color:white;
+        padding:25px;
+        margin:5px;
+        border-radius:0%;
+        border:25px solid black;
+        background:linear-gradient(to left, black,blue);
+        
+    
+    }
+    @keyframes w {
+        0%{
+            border:5px solid blue;
+        background:linear-gradient(to left, black,blue,cyan);
+        
+        }
+        50%{
+            border:5px solid cyan;
+        background:linear-gradient(to top, black,blue,cyan);
+        
+        }
+        100%{
+            border:5px solid black;
+        background:linear-gradient(to right, black,blue,cyan);
+        
+        }
+    }
+    }
