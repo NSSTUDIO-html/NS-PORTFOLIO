@@ -330,7 +330,7 @@ border-bottom:5px solid cyan;
         color:white;
         padding:20px;
         margin:5px;
-        border-radius:50px;
+        border-radius:0%;
         border:10px outset white;
         background:linear-gradient(160deg, black,blue,cyan,black);
     
@@ -714,7 +714,7 @@ border-bottom:5px solid cyan;
         color:white;
         padding:20px;
         margin:5px;
-        border-radius:50px;
+        border-radius:0%;
         border:10px outset white;
         background:linear-gradient(160deg, black,blue,cyan,black);
     
