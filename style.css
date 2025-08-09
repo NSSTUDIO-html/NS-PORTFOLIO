@@ -301,7 +301,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px inset blue;
-        background:linear-gradient(120deg, black,blue);
+        background:linear-gradient(120deg, black,blue,yellow);
     }
     #dvv{
         font-style:bold;
@@ -321,7 +321,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px outset black;
-        background:linear-gradient(160deg, black,blue,black);
+        background:linear-gradient(170deg, black,blue,red);
     
     }
  #u{
@@ -685,7 +685,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px inset blue;
-        background:linear-gradient(120deg, black,blue);
+        background:linear-gradient(120deg, black,blue,yellow);
     }
     #dvv{
         font-style:bold;
@@ -705,7 +705,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px outset black;
-        background:linear-gradient(160deg, black,blue,black);
+        background:linear-gradient(170deg, black,blue,red);
     
     }
      #u{
