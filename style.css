@@ -716,7 +716,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:0%;
         border:10px outset white;
-        background:linear-gradient(160deg, black,blue,cyan,black);
+        background:black;
     
      }
     #w{
@@ -740,7 +740,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:0%;
         border:25px solid black;
-        background: black;
+        background: linear-gradient(to left,black,blue);
         
     
     }
