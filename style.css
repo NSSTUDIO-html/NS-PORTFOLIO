@@ -9,6 +9,8 @@
             background: linear-gradient(to left,blue,black 90%);
 background-size:contain;
             color:white;
+         box-shadow:0 0 10px black;
+         text-shadow:0 0 10px black;
         }
          header {
     background: url('buildingsw2.jpg');
