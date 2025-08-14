@@ -11,7 +11,8 @@ background-size:contain;
             color:white;
          box-shadow:0 0 10px black;
          text-shadow:0 0 10px black;
-         cursor: url('/cursor.png'),auto;
+         cursor: url('cursor.png'), auto;
+
         }
          header {
     background: url('buildingsw2.jpg');
@@ -88,7 +89,7 @@ font-family: TIMES;
         a{color:white;}
         a:hover{
          color:black; background:white;
-        cursor:url('/cursor-hover.png'),pointer;
+        cursor: url('cursor-hover.png'),pointer;
         }
         nav {
             background-image: linear-gradient(100deg, cyan 0%, blue 100%);
