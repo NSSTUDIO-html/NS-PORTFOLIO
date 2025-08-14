@@ -120,6 +120,7 @@ border-radius:none;
         font-style:bold;
         text-shadow:0 0 20px white;
         box-shadow:0 0 20px black;
+     cursor: url('cursor-hover (1).png'),pointer;
     }
 
         nav a {
@@ -166,6 +167,7 @@ border-radius:none;
         }
         #s:hover{
             background:url('NSP.jpg');
+         cursor: url('cursor-hover (1).png'),pointer;
         }
         
         #myImage{
@@ -229,6 +231,7 @@ max-width: 100%;
         }
         button:active{
             transform:scale(1.3);
+         cursor: url('cursor-hover (1).png'),pointer;
         }
         
         
@@ -287,6 +290,7 @@ border-bottom:5px solid cyan;
 
     .nav-button:hover {
       background: rgba(0,0,0,0.8);
+     cursor: url('cursor-hover (1).png'),pointer;
     }
         
 
