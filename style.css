@@ -408,7 +408,7 @@ border-bottom:5px solid cyan;
             padding: 0;
             width:100%;
             line-height: 1.6;
-            background: linear-gradient(to left,blue,black 90%);
+            background: black;
 background-size:contain;
             color:white;
          box-shadow:0 0 10px black;
