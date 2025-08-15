@@ -181,7 +181,7 @@ max-width: 100%;
             background:black;
             color:white;
             text-shadow:5px 5px 5px;
-    
+    cursor: url('cursor-hover (1).png'),pointer;
     
         }
         
@@ -229,6 +229,7 @@ max-width: 100%;
             border-radius:50%;
             padding:25px;
             font-style:bold;
+         cursor: url('cursor (1).png'),pointer;
         }
         button:active{
             transform:scale(1.3);
@@ -253,6 +254,7 @@ border-bottom:5px solid cyan;
       position: relative;
             justify-content:center;
             align-items:center;
+         cursor: url('cursor (1).png'),pointer;
     }
 
     .slider {
@@ -284,6 +286,7 @@ border-bottom:5px solid cyan;
       padding: 10px 10px;
       cursor: pointer;
       z-index: 10;
+     cursor: url('cursor (1).png'),pointer;
     }
 
     .prev { left: 10px; }
@@ -304,6 +307,7 @@ border-bottom:5px solid cyan;
             padding: 20px;
             background-color: #f0f0f0;
             border-radius: 5px;
+         cursor: url('cursor-hover (1).png'),pointer;
         }
     #pdp{
         font-style:bold;
@@ -314,6 +318,7 @@ border-bottom:5px solid cyan;
         border-radius:50px;
         border:10px inset blue;
         background:linear-gradient(120deg, blue,black,yellow);
+     cursor: url('cursor (1).png'),pointer;
     }
     #dvv{
         font-style:bold;
@@ -324,6 +329,7 @@ border-bottom:5px solid cyan;
         border-radius:50px;
         border:10px inset cyan;
         background:linear-gradient(90deg, black,blue,cyan);
+     cursor: url('cursor (1).png'),pointer;
     }
     #a{
         font-style:bold;
@@ -334,6 +340,7 @@ border-bottom:5px solid cyan;
         border-radius:50px;
         border:10px outset black;
         background:linear-gradient(170deg, black,blue,red);
+     cursor: url('cursor (1).png'),pointer;
     
     }
  #u{
@@ -345,7 +352,7 @@ border-bottom:5px solid cyan;
         border-radius:0%;
         border:10px outset white;
         background: black;
-    
+    cursor: url('cursor (1).png'),pointer;
  }
     #w{
         font-style:bold;
@@ -358,6 +365,7 @@ border-bottom:5px solid cyan;
         background:linear-gradient(to left, black,blue,cyan);
         animation:w 5s ease infinite;
         transition: transform 2s ease;
+     cursor: url('cursor (1).png'),pointer;
     
     }
     #all{
@@ -369,6 +377,7 @@ border-bottom:5px solid cyan;
         border-radius:0%;
         border:25px solid black;
         background:linear-gradient(to left, black,blue);
+     cursor: url('cursor (1).png'),pointer;
         
     
     }
