@@ -103,6 +103,8 @@ border-radius:none;
             text-align: center;
             padding: 10px;
             margin:1px;
+         position:sticky;
+     top:0;
         }
     #nsb{
         background: transparent;
@@ -511,6 +513,8 @@ border-radius:none;
             text-align: center;
             padding: 10px;
             margin:1px;
+         position:sticky;
+     top:0;
         }
     #nsb{
         background: transparent;
