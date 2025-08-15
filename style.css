@@ -112,6 +112,7 @@ border-radius:none;
         border:none;
         border-radius:0%;
      position:sticky;
+     top:0;
     }
     #nsb:hover{
         background:linear-gradient(120deg,cyan,blue,black);
@@ -120,6 +121,7 @@ border-radius:none;
         color:white
         font-style:bold;
      position:sticky;
+     top:0;
         text-shadow:0 0 20px white;
         box-shadow:0 0 20px black;
      cursor: url('cursor-hover (1).png'),pointer;
@@ -518,6 +520,7 @@ border-radius:none;
         border:none;
         border-radius:0%;
      position:sticky;
+     top:0;
     }
     #nsb:hover{
         background:linear-gradient(120deg,cyan,blue,black);
@@ -526,6 +529,7 @@ border-radius:none;
         color:white
         font-style:bold;
      position:sticky;
+     top:0;
         text-shadow:0 0 20px white;
         box-shadow:0 0 20px black;
     }
