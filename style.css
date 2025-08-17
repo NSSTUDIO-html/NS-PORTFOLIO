@@ -326,6 +326,7 @@ border-bottom:5px solid cyan;
         border:10px inset blue;
         background: url('pdp.jpg');
      background-size:cover;
+     text-shadow:0 0 5px black;
      cursor: url('cursor (1).png'),pointer;
     }
     #dvv{
@@ -338,6 +339,7 @@ border-bottom:5px solid cyan;
         border:10px inset cyan;
         background: url('3d.jpg');
      background-size:cover;
+     text-shadow:0 0 5px black;
      cursor: url('cursor (1).png'),pointer;
     }
     #a{
@@ -350,6 +352,7 @@ border-bottom:5px solid cyan;
         border:10px outset black;
         background: url('adp.jpg');
      background-size:cover;
+     text-shadow:0 0 5px black;
      cursor: url('cursor (1).png'),pointer;
     
     }
@@ -363,6 +366,7 @@ border-bottom:5px solid cyan;
         border:10px outset white;
         background: url('uiux.jpg');
   background-size:cover;
+  text-shadow:0 0 5px black;
     cursor: url('cursor (1).png'),pointer;
  }
     #w{
@@ -732,6 +736,7 @@ border-bottom:5px solid cyan;
         border:10px inset blue;
         background:url('pdp.jpg');
      background-size:cover;
+     text-shadow:0 0 5px black;
     }
     #dvv{
         font-style:bold;
@@ -743,6 +748,7 @@ border-bottom:5px solid cyan;
         border:10px inset cyan;
         background: url('3d.jpg');
      background-size:cover;
+     text-shadow:0 0 5px black;
     }
     #a{
         font-style:bold;
@@ -754,6 +760,7 @@ border-bottom:5px solid cyan;
         border:10px outset black;
         background: url('adp.jpg');
     background-size:cover;
+     text-shadow:0 0 5px black;
     }
      #u{
   font-style:bold;
@@ -765,6 +772,7 @@ border-bottom:5px solid cyan;
         border:10px outset white;
         background:url('uiux.jpg');
     background-size:cover;
+      text-shadow:0 0 5px black;
      }
     #w{
         font-style:bold;
