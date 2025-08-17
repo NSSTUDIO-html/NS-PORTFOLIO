@@ -324,7 +324,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px inset blue;
-        background:linear-gradient(120deg, blue,black,yellow);
+        background: url('pdp.jpg');
      cursor: url('cursor (1).png'),pointer;
     }
     #dvv{
@@ -335,7 +335,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px inset cyan;
-        background:linear-gradient(90deg, black,blue,cyan);
+        background: url('3d.jpg');
      cursor: url('cursor (1).png'),pointer;
     }
     #a{
@@ -346,7 +346,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px outset black;
-        background:linear-gradient(170deg, black,blue,red);
+        background: url('adp.jpg');
      cursor: url('cursor (1).png'),pointer;
     
     }
@@ -358,7 +358,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:0%;
         border:10px outset white;
-        background: black;
+        background: url('uiux.jpg');
     cursor: url('cursor (1).png'),pointer;
  }
     #w{
@@ -726,7 +726,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px inset blue;
-        background:linear-gradient(120deg, blue,black,yellow);
+        background:url('pdp.jpg');
     }
     #dvv{
         font-style:bold;
@@ -736,7 +736,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px inset cyan;
-        background:linear-gradient(90deg, black,blue,cyan);
+        background: url('3d.jpg');
     }
     #a{
         font-style:bold;
@@ -746,7 +746,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:10px outset black;
-        background:linear-gradient(170deg, black,blue,red);
+        background: url('adp.jpg');
     
     }
      #u{
@@ -757,7 +757,7 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:0%;
         border:10px outset white;
-        background:black;
+        background:url('uiux.jpg');
     
      }
     #w{
