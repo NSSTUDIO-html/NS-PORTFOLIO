@@ -194,7 +194,7 @@ max-width: 100%;
         
         
         #ns{
-         z-index:15;
+         z-index:20;
          box-shadow:0 0 20px black;
             position:fixed;
             bottom:0px;right:0px;
@@ -219,6 +219,7 @@ max-width: 100%;
             100%{background:url('./ns0.jpg');background-size:cover;}
         }
         #ns:active{
+         z-index:20;
             background:url('./nsf.jpg');
             background-size:cover;
             border-color:silver;
