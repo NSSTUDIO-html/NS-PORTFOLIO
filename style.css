@@ -25,6 +25,11 @@
         p{
 font-family: TIMES;
         }
+ .roles {
+      flex-direction: row;  /* row layout */
+      flex-wrap: wrap;      /* wrap if too long */
+      align-items: center;
+    }
         
   #name {
     display: flex;
@@ -436,6 +441,13 @@ background-size:contain;
         p{
 font-family: TIMES;
         }
+     
+     .roles {
+    display: flex;
+    gap: 12px;
+    flex-direction: column; /* default: mobile = column */
+    align-items: flex-start;
+  }
         
   #name {
     display: flex;
