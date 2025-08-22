@@ -26,9 +26,9 @@
 font-family: TIMES;
         }
  .roles {
-      flex-direction: row;  /* row layout */
-      flex-wrap: wrap;      /* wrap if too long */
-      align-items: center;
+      flex-direction: row;   /* PC: horizontal */
+      flex-wrap: wrap;
+      gap: 20px;             /* more spacing for PC */
     }
         
   #name {
@@ -444,9 +444,8 @@ font-family: TIMES;
      
      .roles {
     display: flex;
+    flex-direction: column;  /* default mobile: vertical */
     gap: 12px;
-    flex-direction: column; /* default: mobile = column */
-    align-items: flex-start;
   }
         
   #name {
