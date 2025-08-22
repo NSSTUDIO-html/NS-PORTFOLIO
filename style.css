@@ -30,6 +30,9 @@ font-family: TIMES;
       flex-wrap: wrap;
       gap: 20px;             /* more spacing for PC */
     }
+ .roles span {
+      display: inline-block; /* nicely aligned in row */
+    }
         
   #name {
     display: flex;
