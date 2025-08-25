@@ -314,6 +314,12 @@ border-bottom:5px solid cyan;
       background: rgba(0,0,0,0.8);
      cursor: url('cursor-hover (1).png'),pointer;
     }
+ li{
+  padding:20px;
+  background:brown;
+  border:2px ridge black;
+  
+ }
         
 
         
@@ -426,6 +432,7 @@ border-bottom:5px solid cyan;
     }
     
     }
+
 
     @media only screen and (max-width: 768px) {
         body {
@@ -735,6 +742,12 @@ border-bottom:5px solid cyan;
     .nav-button:hover {
       background: rgba(0,0,0,0.8);
     }
+     li{
+  padding:20px;
+  background:brown;
+  border:2px ridge black;
+  
+     }
         
 
         
