@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Viewer & Downloader</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white dark:bg-gray-900 shadow-2xl rounded-2xl max-w-4xl w-full overflow-hidden">
+    
+    <!-- Header -->
+    <div class="flex items-center gap-4 p-6 bg-gradient-to-r from-blue-500 to-green-600 text-white">
+      <img src="/storage/emulated/0/Download/1000050777.png" alt="Profile" class="w-16 h-16 rounded-full border-2 border-white">
+      <div>
+        <h1 class="text-2xl font-bold">Naga Sasank</h1>
+        <p class="text-sm opacity-80">Full Stack Developer | AI & Cybersecurity Enthusiast</p>
+      </div>
+    </div>
+
+    <!-- Resume Viewer -->
+    <div class="p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Resume Preview</h2>
+      <div class="border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden shadow-lg">
+        <iframe id="resumeViewer" src="/storage/emulated/0/Documents/NS ATS RESUME.pdf" class="w-full h-[600px]" frameborder="0"></iframe>
+      </div>
+    </div>
+
+    <!-- Download Button -->
+    <div class="flex justify-center p-6">
+      <button id="downloadBtn" class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Download Resume
+      </button>
+    </div>
+    
+  </div>
+
+  <script>
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resumeFile = '/storage/emulated/0/Documents/NS ATS RESUME.pdf'; // Replace with your resume path
+
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = resumeFile;
+      link.download = 'Naga_Sasank_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  </script>
+
+</body>
+</html>
