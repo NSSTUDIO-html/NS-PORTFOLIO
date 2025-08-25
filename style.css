@@ -315,10 +315,10 @@ border-bottom:5px solid cyan;
      cursor: url('cursor-hover (1).png'),pointer;
     }
  li{
-  padding:20px;
+  padding:10px;
   background:brown;
   border:2px ridge black;
-  
+  border-radius:50px;
  }
         
 
@@ -743,11 +743,11 @@ border-bottom:5px solid cyan;
       background: rgba(0,0,0,0.8);
     }
      li{
-  padding:20px;
+  padding:10px;
   background:brown;
   border:2px ridge black;
-  
-     }
+  border-radius:50px;
+ }
         
 
         
