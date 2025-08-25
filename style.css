@@ -316,7 +316,7 @@ border-bottom:5px solid cyan;
     }
  li{
   padding:10px;
-  background:brown;
+  background: radial-gradient(brown,black);
   border:2px ridge black;
   border-radius:50px;
  }
@@ -744,7 +744,7 @@ border-bottom:5px solid cyan;
     }
      li{
   padding:10px;
-  background:brown;
+  background: radial-gradient(brown,black);
   border:2px ridge black;
   border-radius:50px;
  }
