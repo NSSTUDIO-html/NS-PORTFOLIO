@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>10-in-1 AI + Cyber Dashboard</title>
+
+  <!-- Tailwind (cdn) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- TensorFlow.js core -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js"></script>
+
+  <!-- TFJS Models -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.0.7/dist/handpose.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2/dist/coco-ssd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet@2.2.2/dist/posenet.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.6.0/dist/speech-commands.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder@1.3.3/dist/universal-sentence-encoder.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@1.0.2/dist/face-landmarks-detection.min.js"></script>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* small custom */
+    body { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    .card { backdrop-filter: blur(8px); }
+    video { image-rendering: -webkit-optimize-contrast; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-black to-slate-900 text-white p-6">
+
+  <header class="max-w-7xl mx-auto mb-6">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-2">
+      ⚡ AI Toolkit — 10 Tools in One Dashboard
+    </h1>
+    <p class="text-center text-gray-300">Tailwind + TensorFlow.js demo — webcam & mic access required for some tools.</p>
+  </header>
+
+  <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Row 1: Hand, Object -->
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">🤖 Hand Gesture</h2>
+      <video id="cam_hand" autoplay playsinline class="w-full rounded-lg mb-2"></video>
+      <p id="hand_status" class="font-medium text-lg">Loading hand model...</p>
+      <p class="mt-2 text-sm text-gray-400">Detects if a hand is present. Extend with fingerpose for gestures.</p>
+    </section>
+
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">🔍 Object Detector (COCO-SSD)</h2>
+      <video id="cam_obj" autoplay playsinline class="w-full rounded-lg mb-2"></video>
+      <div id="obj_box" class="relative w-full h-48"></div>
+      <p id="obj_status" class="font-medium text-lg">Loading object model...</p>
+    </section>
+
+    <!-- Row 2: Pose, Face Emotion -->
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">🏋️ Pose Fitness (PoseNet)</h2>
+      <video id="cam_pose" autoplay playsinline class="w-full rounded-lg mb-2"></video>
+      <p id="pose_status" class="font-medium text-lg">Loading pose model...</p>
+      <p id="exercise_count" class="text-green-400 font-bold mt-2">Reps: 0</p>
+      <p class="mt-2 text-sm text-gray-400">Counts rep heuristically (e.g., push-up squat example).</p>
+    </section>
+
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">🙂 Face Emotion (Landmarks)</h2>
+      <video id="cam_face" autoplay playsinline class="w-full rounded-lg mb-2"></video>
+      <p id="face_status" class="font-medium text-lg">Loading face model...</p>
+      <p id="face_emotion" class="text-yellow-300 font-bold mt-2">Emotion: -</p>
+    </section>
+
+    <!-- Row 3: Phishing URL, Email classifier -->
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">🔐 Phishing URL Checker</h2>
+      <input id="url_input" class="w-full p-3 rounded-lg bg-black/30 border border-gray-700 mb-2" placeholder="Enter URL (https://...)" />
+      <button id="btn_check_url" class="w-full py-2 rounded-lg bg-green-500 hover:bg-green-600 font-semibold">Check URL</button>
+      <p id="url_result" class="mt-3 font-bold text-lg">Result: -</p>
+      <p class="mt-2 text-sm text-gray-400">Heuristic + simple checks. Replace with trained model for production.</p>
+    </section>
+
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">📧 Email Classifier (Train in-browser)</h2>
+      <textarea id="email_input" rows="5" class="w-full p-3 rounded-lg bg-black/30 border border-gray-700" placeholder="Paste email body here..."></textarea>
+      <div class="flex gap-2 mt-3">
+        <button id="btn_train_email" class="flex-1 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 font-semibold">Train Demo Classifier</button>
+        <button id="btn_classify_email" class="flex-1 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 font-semibold">Classify</button>
+      </div>
+      <p id="email_result" class="mt-3 font-bold text-lg">Result: -</p>
+      <p class="mt-2 text-sm text-gray-400">Trains a tiny classifier on a tiny demo dataset (phishing vs safe) using USE embeddings.</p>
+    </section>
+
+    <!-- Row 4: Voice, Sentiment -->
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">🎙️ Voice Command (Speech Commands)</h2>
+      <div class="flex gap-2">
+        <button id="btn_listen" class="flex-1 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 font-semibold">Start Listening</button>
+        <button id="btn_stop_listen" class="flex-1 py-2 rounded-lg bg-rose-500 hover:bg-rose-600 font-semibold">Stop</button>
+      </div>
+      <p id="voice_status" class="mt-3 font-bold text-lg">Status: Idle</p>
+      <p class="mt-2 text-sm text-gray-400">Recognizes a small set of commands with pre-trained model.</p>
+    </section>
+
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">💬 Text Sentiment (USE)</h2>
+      <input id="sentiment_input" class="w-full p-3 rounded-lg bg-black/30 border border-gray-700 mb-2" placeholder="Type a sentence..." />
+      <button id="btn_sentiment" class="w-full py-2 rounded-lg bg-yellow-500 hover:bg-yellow-600 font-semibold">Analyze Sentiment</button>
+      <p id="sentiment_result" class="mt-3 font-bold text-lg">Sentiment: -</p>
+      <p class="mt-2 text-sm text-gray-400">Tiny heuristic uses similarity to small positive/negative seed lists via USE embeddings.</p>
+    </section>
+
+    <!-- Row 5: Music, Password -->
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">🎵 AI Music Composer</h2>
+      <button id="btn_compose" class="w-full py-2 rounded-lg bg-purple-600 hover:bg-purple-700 font-semibold">Generate Melody</button>
+      <p id="music_info" class="mt-3 font-bold text-lg">Status: idle</p>
+      <audio id="music_audio" controls class="mt-3 w-full"></audio>
+      <p class="mt-2 text-sm text-gray-400">Simple WebAudio melody generator. Replace with TFJS RNN for creative output.</p>
+    </section>
+
+    <section class="card bg-white/5 p-5 rounded-2xl border border-white/10 shadow-lg">
+      <h2 class="text-2xl font-semibold mb-3">🔑 Password Strength Checker</h2>
+      <input id="pwd_input" type="password" class="w-full p-3 rounded-lg bg-black/30 border border-gray-700 mb-2" placeholder="Enter password..." />
+      <button id="btn_pwd_check" class="w-full py-2 rounded-lg bg-sky-500 hover:bg-sky-600 font-semibold">Check Strength</button>
+      <p id="pwd_result" class="mt-3 font-bold text-lg">Strength: -</p>
+      <p class="mt-2 text-sm text-gray-400">Simple entropy & pattern checks; use zxcvbn for production-grade checks.</p>
+    </section>
+
+  </main>
+
+  <footer class="max-w-7xl mx-auto mt-8 text-center text-gray-400">
+    Built with Tailwind + TensorFlow.js • Demo starter kit
+  </footer>
+
+<script>
+/* ============================
+   Global models + utilities
+   ============================ */
+let handposeModel = null;
+let cocoModel = null;
+let posenetModel = null;
+let faceModel = null;
+let speechRecognizer = null;
+let useModel = null;
+let emailClassifier = null; // tiny TFJS model trained on embeddings
+let listening = false;
+
+/* ------- Utility helpers ------- */
+function el(id){ return document.getElementById(id); }
+function safeText(t){ return (t||'').toString().slice(0,5000); }
+
+/* ============================
+   1) Hand Gesture (handpose)
+   ============================ */
+async function startHand() {
+  const video = el('cam_hand');
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video.srcObject = stream;
+  } catch(e) { el('hand_status').innerText = 'Camera permission denied'; return; }
+
+  el('hand_status').innerText = 'Loading handpose...';
+  handposeModel = await handpose.load();
+  el('hand_status').innerText = 'Handpose loaded — detecting...';
+
+  setInterval(async () => {
+    if (!handposeModel) return;
+    const preds = await handposeModel.estimateHands(video, true);
+    if (preds && preds.length) {
+      el('hand_status').innerText = `Hand detected (${preds.length})`;
+    } else {
+      el('hand_status').innerText = 'No hand';
+    }
+  }, 250);
+}
+
+/* ============================
+   2) Object Detector (coco-ssd)
+   ============================ */
+async function startObject() {
+  const video = el('cam_obj');
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video.srcObject = stream;
+  } catch(e) { el('obj_status').innerText = 'Camera permission denied'; return; }
+
+  el('obj_status').innerText = 'Loading COCO-SSD...';
+  cocoModel = await cocoSsd.load();
+  el('obj_status').innerText = 'COCO-SSD loaded — detecting...';
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 640; canvas.height = 480;
+  canvas.style.position = 'absolute';
+  canvas.style.top = '0'; canvas.style.left='0';
+  el('obj_box').appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  video.addEventListener('loadeddata', function() {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+  });
+
+  async function detect() {
+    if (!cocoModel) return;
+    const predictions = await cocoModel.detect(video);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2; ctx.font = '18px sans-serif'; ctx.fillStyle='#00ff99';
+    predictions.forEach(p => {
+      const [x,y,w,h] = p.bbox;
+      ctx.strokeRect(x,y,w,h);
+      ctx.fillText(`${p.class} (${(p.score*100).toFixed(0)}%)`, x, y>10?y-6:10);
+    });
+    requestAnimationFrame(detect);
+  }
+  detect();
+}
+
+/* ============================
+   3) Pose Fitness (PoseNet)
+   ============================ */
+let repCount = 0;
+let lastY = null;
+let repState = 'up';
+async function startPose() {
+  const video = el('cam_pose');
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video.srcObject = stream;
+  } catch(e){ el('pose_status').innerText = 'Camera permission denied'; return; }
+
+  el('pose_status').innerText = 'Loading PoseNet...';
+  posenetModel = await posenet.load();
+  el('pose_status').innerText = 'PoseNet loaded — analyzing...';
+
+  async function detect() {
+    if (!posenetModel) return;
+    const pose = await posenetModel.estimateSinglePose(video, {flipHorizontal: true});
+    // Simple heuristic: track nose y position for vertical movement (e.g., squat/push-up)
+    const nose = pose.keypoints.find(k=>k.part==='nose');
+    if (nose && nose.score > 0.4) {
+      const y = nose.position.y;
+      if (lastY !== null) {
+        if (repState === 'up' && (y - lastY) > 20) { repState='down'; repCount++; el('exercise_count').innerText = `Reps: ${repCount}`; }
+        if (repState === 'down' && (lastY - y) > 20) { repState='up'; }
+      }
+      lastY = y;
+    }
+    requestAnimationFrame(detect);
+  }
+  detect();
+}
+
+/* ============================
+   4) Face Emotion (face-landmarks)
+   ============================ */
+async function startFace() {
+  const video = el('cam_face');
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video.srcObject = stream;
+  } catch(e){ el('face_status').innerText = 'Camera permission denied'; return; }
+
+  el('face_status').innerText = 'Loading face-landmarks-detection...';
+  faceModel = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
+  el('face_status').innerText = 'Face model loaded — analyzing...';
+
+  async function detect() {
+    if (!faceModel) return;
+    const faces = await faceModel.estimateFaces({input: video});
+    if (faces && faces.length) {
+      const f = faces[0];
+      // heuristic: mouth openness and eyebrow distance
+      const upperLip = f.annotations.lipsUpperInner[3];
+      const lowerLip = f.annotations.lipsLowerInner[3];
+      const mouthOpen = Math.hypot(upperLip[0]-lowerLip[0], upperLip[1]-lowerLip[1]);
+      // eyebrows
+      const leftB = f.annotations.leftEyebrowUpper[2];
+      const leftEye = f.annotations.leftEyeUpper0[3];
+      const browDist = leftEye[1] - leftB[1];
+      let emotion = 'Neutral';
+      if (mouthOpen > 8) emotion = 'Surprised/Happy';
+      else if (browDist < -3) emotion = 'Angry/Frowning';
+      el('face_emotion').innerText = `Emotion: ${emotion}`;
+      el('face_status').innerText = 'Face detected';
+    } else {
+      el('face_emotion').innerText = 'Emotion: -';
+      el('face_status').innerText = 'No face';
+    }
+    requestAnimationFrame(detect);
+  }
+  detect();
+}
+
+/* ============================
+   5) Phishing URL (heuristic)
+   ============================ */
+el('btn_check_url').addEventListener('click', () => {
+  const u = (el('url_input').value||'').trim().toLowerCase();
+  if (!u) { el('url_result').innerText = 'Result: Enter a URL'; return; }
+  let score = 0;
+  if (!u.startsWith('http://') && !u.startsWith('https://')) score += 2;
+  if (!u.startsWith('https://')) score += 1;
+  if (u.length > 60) score += 1;
+  if (u.includes('login')||u.includes('signin')||u.includes('verify')||u.includes('update')) score += 2;
+  if (u.includes('free')||u.includes('offer')||u.includes('win')||u.includes('prize')) score += 2;
+  if (u.split('.').length > 4) score += 1;
+  const res = score >= 3 ? 'PHISHING ⚠️' : (score === 2 ? 'Suspicious ⚠' : 'SAFE ✅');
+  el('url_result').innerText = `Result: ${res} (score ${score})`;
+});
+
+/* ============================
+   6) Email Classifier (USE + tiny TFJS model)
+   ============================ */
+async function loadUSE() {
+  el('email_result').innerText = 'Loading Universal Sentence Encoder...';
+  useModel = await use.load();
+  el('email_result').innerText = 'USE loaded';
+}
+// tiny demo dataset for phishing vs safe (very small — expand offline for production)
+const demoEmails = [
+  {text: 'Your account is suspended. Click here to verify your password', label: 1},
+  {text: 'Congratulations, you won a lottery. Click to claim your prize', label: 1},
+  {text: 'Please update your billing information', label: 1},
+  {text: 'Meeting notes and agenda for next week', label: 0},
+  {text: 'Invoice for your recent purchase attached', label: 0},
+  {text: 'Team lunch on Friday — RSVP', label: 0},
+];
+
+el('btn_train_email').addEventListener('click', async () => {
+  if (!useModel) { el('email_result').innerText = 'Loading USE...'; await loadUSE(); }
+  el('email_result').innerText = 'Training tiny classifier... (demo)';
+  // embed demo texts
+  const texts = demoEmails.map(d=>d.text);
+  const embeddings = await useModel.embed(texts);
+  const xs = embeddings.arraySync();
+  const ys = demoEmails.map(d=>[d.label]);
+  // Build tiny model
+  emailClassifier = tf.sequential();
+  emailClassifier.add(tf.layers.dense({units: 16, activation:'relu', inputShape:[xs[0].length]}));
+  emailClassifier.add(tf.layers.dropout({rate:0.2}));
+  emailClassifier.add(tf.layers.dense({units: 1, activation:'sigmoid'}));
+  emailClassifier.compile({optimizer:'adam', loss:'binaryCrossentropy', metrics:['accuracy']});
+  const xs_t = tf.tensor2d(xs);
+  const ys_t = tf.tensor2d(ys);
+  await emailClassifier.fit(xs_t, ys_t, {epochs:30, batchSize:2, verbose:0});
+  xs_t.dispose(); ys_t.dispose();
+  el('email_result').innerText = 'Demo classifier trained!';
+});
+
+el('btn_classify_email').addEventListener('click', async () => {
+  const txt = safeText(el('email_input').value);
+  if (!txt) { el('email_result').innerText = 'Result: Enter email text'; return; }
+  if (!useModel) { el('email_result').innerText = 'Loading USE...'; await loadUSE(); }
+  if (!emailClassifier) { el('email_result').innerText = 'Train demo classifier first'; return; }
+  el('email_result').innerText = 'Classifying...';
+  const emb = await useModel.embed([txt]);
+  const embA = emb.arraySync();
+  const pred = emailClassifier.predict(tf.tensor2d(embA)).arraySync()[0][0];
+  const res = pred > 0.5 ? `Phishing/Spam (${(pred*100).toFixed(1)}%)` : `Legitimate (${((1-pred)*100).toFixed(1)}%)`;
+  el('email_result').innerText = `Result: ${res}`;
+});
+
+/* ============================
+   7) Voice Commands (speech-commands)
+   ============================ */
+el('btn_listen').addEventListener('click', async () => {
+  if (listening) return;
+  el('voice_status').innerText = 'Loading recognizer...';
+  if (!speechRecognizer) {
+    speechRecognizer = speechCommands.create('BROWSER_FFT');
+    await speechRecognizer.ensureModelLoaded();
+  }
+  el('voice_status').innerText = 'Listening... (say words like "up", "down", "left", "right", "stop")';
+  speechRecognizer.listen(result => {
+    const scores = result.scores; // probabilities for each word
+    const labels = speechRecognizer.wordLabels();
+    const maxIdx = scores.indexOf(Math.max(...scores));
+    el('voice_status').innerText = `Heard: ${labels[maxIdx]} (${(scores[maxIdx]*100).toFixed(1)}%)`;
+  }, {probabilityThreshold: 0.90});
+  listening = true;
+});
+
+el('btn_stop_listen').addEventListener('click', () => {
+  if (!speechRecognizer) return;
+  speechRecognizer.stopListening();
+  el('voice_status').innerText = 'Stopped';
+  listening = false;
+});
+
+/* ============================
+   8) Text Sentiment (USE + seeds)
+   ============================ */
+const positiveSeeds = ['good','great','happy','excellent','nice','love','wonderful','positive'];
+const negativeSeeds = ['bad','terrible','sad','hate','awful','worst','negative','angry'];
+
+el('btn_sentiment').addEventListener('click', async () => {
+  const text = safeText(el('sentiment_input').value);
+  if (!text) { el('sentiment_result').innerText = 'Sentiment: Enter text'; return; }
+  if (!useModel) { el('sentiment_result').innerText = 'Loading USE...'; await loadUSE(); }
+  el('sentiment_result').innerText = 'Analyzing...';
+  // embed input and seeds
+  const [vText, vPos, vNeg] = await Promise.all([
+    useModel.embed([text]),
+    useModel.embed(positiveSeeds),
+    useModel.embed(negativeSeeds)
+  ]);
+  const textVec = vText.arraySync()[0];
+  // compute similarity (cosine) avg to seeds
+  const posVecs = vPos.arraySync();
+  const negVecs = vNeg.arraySync();
+  function cosSim(a,b) {
+    let da=0, db=0, dot=0;
+    for (let i=0;i<a.length;i++){ dot += a[i]*b[i]; da+=a[i]*a[i]; db+=b[i]*b[i]; }
+    return dot / (Math.sqrt(da)*Math.sqrt(db)+1e-9);
+  }
+  let posAvg=0, negAvg=0;
+  posVecs.forEach(v=> posAvg += cosSim(textVec, v)); posAvg /= posVecs.length;
+  negVecs.forEach(v=> negAvg += cosSim(textVec, v)); negAvg /= negVecs.length;
+  const res = posAvg > negAvg ? `Positive (score ${(posAvg-negAvg).toFixed(3)})` : `Negative (score ${(negAvg-posAvg).toFixed(3)})`;
+  el('sentiment_result').innerText = `Sentiment: ${res}`;
+});
+
+/* ============================
+   9) AI Music Composer (WebAudio simple)
+   ============================ */
+el('btn_compose').addEventListener('click', async () => {
+  el('music_info').innerText = 'Composing...';
+  // simple melody: sequence of frequencies
+  const melody = [440, 494, 523, 587, 659, 698, 784]; // A4 to G5
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const tempo = 200; // ms per note
+  // offline render to WAV is complex; here we play live and also produce downloadable blob via MediaRecorder of oscillator connected to destination
+  // Simpler: play sequence and show status
+  let i=0;
+  const gain = ctx.createGain(); gain.gain.value = 0.05; gain.connect(ctx.destination);
+  const playNote = (freq, dur) => {
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    osc.connect(gain);
+    osc.start();
+    setTimeout(()=>{ osc.stop(); }, dur);
+  }
+  const seq = setInterval(()=> {
+    playNote(melody[i % melody.length], tempo);
+    i++;
+    if (i>15) { clearInterval(seq); el('music_info').innerText = 'Done — played melody'; }
+  }, tempo);
+});
+
+/* ============================
+   10) Password Strength (heuristic entropy)
+   ============================ */
+el('btn_pwd_check').addEventListener('click', () => {
+  const pw = el('pwd_input').value || '';
+  if (!pw) { el('pwd_result').innerText = 'Strength: Enter password'; return; }
+  let charset = 0;
+  if (/[a-z]/.test(pw)) charset += 26;
+  if (/[A-Z]/.test(pw)) charset += 26;
+  if (/[0-9]/.test(pw)) charset += 10;
+  if (/[^A-Za-z0-9]/.test(pw)) charset += 32;
+  // estimate entropy
+  const entropy = Math.log2(Math.pow(charset || 1, pw.length));
+  let verdict = 'Weak';
+  if (entropy > 60) verdict = 'Very Strong';
+  else if (entropy > 40) verdict = 'Strong';
+  else if (entropy > 28) verdict = 'Moderate';
+  el('pwd_result').innerText = `Strength: ${verdict} (entropy ≈ ${Math.round(entropy)} bits)`;
+});
+
+/* ============================
+   Boot: start necessary models
+   ============================ */
+(async function initAll(){
+  // kick off camera-based models in parallel but allow permissions to be requested only once per camera usage.
+  startHand();          // handpose on cam_hand
+  startObject();        // coco-ssd on cam_obj
+  startPose();          // posenet on cam_pose
+  startFace();          // face-landmarks on cam_face
+
+  // load USE proactively for text tasks
+  loadUSE().catch(e=>{ console.warn('USE load failed', e); });
+
+  // load coco and others handled inside start functions
+  // small UI readiness
+  el('obj_status').innerText = 'Waiting for camera/model...';
+  el('pose_status').innerText = 'Waiting for camera/model...';
+  el('hand_status').innerText = 'Waiting for camera/model...';
+  el('face_status').innerText = 'Waiting for camera/model...';
+})();
+</script>
+</body>
+</html>

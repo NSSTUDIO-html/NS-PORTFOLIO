@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrix AI Cyber Suite</title>
+<style>
+    body {
+        background-color: #0f0f0f;
+        color: #00ff00;
+        font-family: 'Courier New', monospace;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .tool {
+        background-color: #111;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #00ff00;
+    }
+    button {
+        background-color: #00ff00;
+        border: none;
+        color: #000;
+        padding: 8px 12px;
+        cursor: pointer;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #00cc00;
+    }
+    input {
+        width: 70%;
+        padding: 6px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #00ff00;
+        background-color: #111;
+        color: #00ff00;
+    }
+    pre {
+        background-color: #000;
+        color: #00ff00;
+        padding: 10px;
+        border-radius: 5px;
+        max-height: 200px;
+        overflow-y: auto;
+        margin-top: 10px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    @media (max-width: 600px) {
+        input {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Matrix AI Cyber Suite</h1>
+
+    <!-- SYSTEM INFO -->
+    <div class="tool">
+        <h2>System Info</h2>
+        <button onclick="systemInfo()">Get System Info</button>
+        <pre id="systemInfoOutput"></pre>
+    </div>
+
+    <!-- PORT SCANNER -->
+    <div class="tool">
+        <h2>IP & Port Scanner (Simulated)</h2>
+        <input type="text" id="targetIP" placeholder="Enter IP (example: 127.0.0.1)">
+        <button onclick="portScanner()">Scan Ports</button>
+        <pre id="portOutput"></pre>
+    </div>
+
+    <!-- WEBSITE STATUS -->
+    <div class="tool">
+        <h2>Website Status Checker</h2>
+        <input type="text" id="websiteURL" placeholder="Enter URL (example: https://example.com)">
+        <button onclick="webScan()">Check Website</button>
+        <pre id="webOutput"></pre>
+    </div>
+
+    <!-- IP GEOLOCATION -->
+    <div class="tool">
+        <h2>IP Geolocation (Simulated)</h2>
+        <input type="text" id="geoIP" placeholder="Enter IP (example: 8.8.8.8)">
+        <button onclick="ipGeolocation()">Check Location</button>
+        <pre id="geoOutput"></pre>
+    </div>
+
+    <!-- WHOIS LOOKUP -->
+    <div class="tool">
+        <h2>WHOIS Lookup (Simulated)</h2>
+        <input type="text" id="whoisDomain" placeholder="Enter domain (example: example.com)">
+        <button onclick="whoisLookup()">Lookup</button>
+        <pre id="whoisOutput"></pre>
+    </div>
+
+    <!-- DNS LOOKUP -->
+    <div class="tool">
+        <h2>DNS Lookup (Simulated)</h2>
+        <input type="text" id="dnsDomain" placeholder="Enter domain (example: example.com)">
+        <button onclick="dnsLookup()">Lookup</button>
+        <pre id="dnsOutput"></pre>
+    </div>
+
+    <!-- PING TEST -->
+    <div class="tool">
+        <h2>Network Ping (Simulated)</h2>
+        <input type="text" id="pingIP" placeholder="Enter IP or domain">
+        <button onclick="pingTest()">Ping</button>
+        <pre id="pingOutput"></pre>
+    </div>
+
+</div>
+
+<script>
+// SYSTEM INFO
+function systemInfo() {
+    let output = `
+Browser: ${navigator.userAgent}
+Platform: ${navigator.platform}
+Language: ${navigator.language}
+Cookies Enabled: ${navigator.cookieEnabled}
+Screen: ${window.screen.width}x${window.screen.height}
+    `;
+    document.getElementById('systemInfoOutput').textContent = output;
+}
+
+// PORT SCANNER (SIMULATED)
+function portScanner() {
+    let ip = document.getElementById('targetIP').value;
+    if (!ip) { alert("Enter an IP address!"); return; }
+    let ports = [21, 22, 23, 25, 53, 80, 443, 8080];
+    let output = `Scanning ports on ${ip}...\n`;
+    ports.forEach(port => {
+        let status = Math.random() > 0.5 ? "OPEN" : "CLOSED";
+        output += `Port ${port}: ${status}\n`;
+    });
+    document.getElementById('portOutput').textContent = output;
+}
+
+// WEBSITE STATUS CHECKER
+async function webScan() {
+    let url = document.getElementById('websiteURL').value;
+    if (!url) { alert("Enter a website URL!"); return; }
+    let output = `Checking website: ${url}\n`;
+    try {
+        let response = await fetch(url, { method: 'GET' });
+        output += `Status Code: ${response.status}\n`;
+        output += response.ok ? "Website is ONLINE ✅" : "Website returned an error ❌";
+    } catch (err) {
+        output += "Error connecting to website ❌";
+    }
+    document.getElementById('webOutput').textContent = output;
+}
+
+// IP GEOLOCATION (SIMULATED)
+function ipGeolocation() {
+    let ip = document.getElementById('geoIP').value;
+    if (!ip) { alert("Enter an IP address!"); return; }
+    const locations = ["New York, USA", "London, UK", "Tokyo, Japan", "Sydney, Australia", "Berlin, Germany"];
+    let loc = locations[Math.floor(Math.random() * locations.length)];
+    document.getElementById('geoOutput').textContent = `IP: ${ip}\nLocation: ${loc}`;
+}
+
+// WHOIS LOOKUP (SIMULATED)
+function whoisLookup() {
+    let domain = document.getElementById('whoisDomain').value;
+    if (!domain) { alert("Enter a domain!"); return; }
+    let output = `
+Domain: ${domain}
+Registrar: Simulated Registrar
+Creation Date: 2015-01-01
+Expiration Date: 2025-01-01
+Status: ACTIVE
+    `;
+    document.getElementById('whoisOutput').textContent = output;
+}
+
+// DNS LOOKUP (SIMULATED)
+function dnsLookup() {
+    let domain = document.getElementById('dnsDomain').value;
+    if (!domain) { alert("Enter a domain!"); return; }
+    const ips = ["192.168.1.1", "8.8.8.8", "172.16.0.1"];
+    let ip = ips[Math.floor(Math.random() * ips.length)];
+    document.getElementById('dnsOutput').textContent = `Domain: ${domain}\nIP: ${ip}`;
+}
+
+// PING TEST (SIMULATED)
+function pingTest() {
+    let target = document.getElementById('pingIP').value;
+    if (!target) { alert("Enter IP or domain!"); return; }
+    let output = `Pinging ${target}...\n`;
+    for (let i = 1; i <= 4; i++) {
+        let time = (Math.random() * 100).toFixed(2);
+        output += `Reply from ${target}: time=${time}ms\n`;
+    }
+    document.getElementById('pingOutput').textContent = output;
+}
+</script>
+</body>
+</html>
