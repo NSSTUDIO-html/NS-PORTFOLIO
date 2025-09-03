@@ -1,241 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive DRAWINGS OF ME slider</title>
-    <style>
-        body{
-background: linear-gradient(120deg, white 0%, cyan 100%);
-        }
-        .slider-container,.slider-container1,.slider-container2 {
-            width: 80%; /* Adjust as needed */
-            max-width: 800px;
-            margin: 50px auto;
-            overflow: hidden;
-            position: relative;
-            background: linear-gradient(120deg, orange , white,cyan,green );
-        border:5px ridge blue;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive DRAWINGS OF ME slider</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffffff, #a8e6ff);
+      color: #222;
+      text-align: center;
+    }
 
-        .slider,.slider1,.slider2{
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-.slider3{
-        display: grid;
-            transition: transform 0.5s ease-in-out;
-        }
+    h1 {
+      font-size: 3rem;
+      margin: 20px 0;
+      background: linear-gradient(to right, #ff6a00, #ee0979, #00c6ff, #00ff6a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
 
-        .slide,.slide1,.slide2 {
-            min-width: 300px;
-            box-sizing: border-box;
-            background-size:cover;
-            background-position:center;
-        }
+    marquee {
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ff8a00, #da1b60);
+      color: white;
+      padding: 8px 0;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
 
-         img {
-            width: 100%;
-            height: 100%;
-            background-size:cover;
-            display: block;
-             object-fit:contain;
-             border:10px groove gold;
-        }
+    .slider-container,
+    .slider-container1,
+    .slider-container2 {
+      width: 90%;
+      max-width: 950px;
+      margin: 50px auto;
+      overflow: hidden;
+      position: relative;
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border: 3px solid #00c6ff;
+    }
 
-        .nav-button ,.nav-button1,.nav-button2{
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            z-index: 1;
-        }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #333;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, #ff512f, #dd2476);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .prev,.prev1,.prev2 {
-            left: 10px;
-        }
+    .slider,
+    .slider1,
+    .slider2 {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
 
-        .next,.next1,.next2 {
-            right: 10px;
-        }
+    .slider3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .slider-container,.slider-container1,.slider-container2 {
-                width: 95%;
-            }
-        }
-    </style>
+    .slide,
+    .slide1,
+    .slide2,
+    .slide3 {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .slide img,
+    .slide1 img,
+    .slide2 img,
+    .slide3 img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 5px solid #ffae00;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .slide img:hover,
+    .slide1 img:hover,
+    .slide2 img:hover,
+    .slide3 img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+    }
+
+    .nav-button,
+    .nav-button1,
+    .nav-button2 {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      color: white;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .nav-button:hover,
+    .nav-button1:hover,
+    .nav-button2:hover {
+      transform: translateY(-50%) scale(1.1);
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+    }
+
+    .prev,
+    .prev1,
+    .prev2 {
+      left: 15px;
+    }
+
+    .next,
+    .next1,
+    .next2 {
+      right: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      .slide img,
+      .slide1 img,
+      .slide2 img {
+        height: 250px;
+      }
+      marquee {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div id="name">
+  <div id="name">
     <h1>ART GALLERY</h1>
-</div>
-    <marquee behavior="scroll" direction="left" scrollamount="6">
+  </div>
+  <marquee behavior="scroll" direction="left" scrollamount="6">
     I AM THE ARTIST CHECK OUT MY NEW PRABHAS DRAWING AND PSPK DRAWINGS.
-    </marquee>
-    <div class="slider-container">
-        <h2>MASTER DRAWINGS</h2>
-        <div class="slider">
-            <div class="slide"><img src="master1.jpg" alt="Slide 1"></div>
-            <div class="slide"><img src="master2.jpg" alt="Slide 2"></div>
-            <div class="slide"><img src="master3.jpg" alt="Slide 3"></div>
-            <div class="slide"><img src="master4.jpg" alt="Slide 4"></div>
-            <div class="slide"><img src="master5.jpg" alt="Slide 4"></div>
-            <div class="slide"><img src="masterx.jpg" alt="Slide 4"></div>
-       
-        </div>
-        <button class="nav-button prev" onclick="prevSlide()">&#10094;</button>
-        <button class="nav-button next" onclick="nextSlide()">&#10095;</button>
+  </marquee>
+
+  <!-- MASTER DRAWINGS -->
+  <div class="slider-container">
+    <h2>MASTER DRAWINGS</h2>
+    <div class="slider">
+      <div class="slide"><img src="master1.jpg" alt="Slide 1"></div>
+      <div class="slide"><img src="master2.jpg" alt="Slide 2"></div>
+      <div class="slide"><img src="master3.jpg" alt="Slide 3"></div>
+      <div class="slide"><img src="master4.jpg" alt="Slide 4"></div>
+      <div class="slide"><img src="master5.jpg" alt="Slide 5"></div>
+      <div class="slide"><img src="masterx.jpg" alt="Slide 6"></div>
     </div>
-    <div class="slider-container1">
-        <h2>RRR DRAWINGS</h2>
-        <div class="slider1">
-            <div class="slide1"><img src="ram.jpeg" alt="Slide 1"></div>
-            <div class="slide1"><img src="bheem.jpeg" alt="Slide 2"></div>
-            <div class="slide1"><img src="bheem1.jpg" alt="Slide 3"></div>
-            <div class="slide1"><img src="bheem2.jpg" alt="Slide 4"></div>
-            <div class="slide1"><img src="bheem4.jpg" alt="Slide 4"></div>
-            <div class="slide1"><img src="bheemflag.jpg" alt="Slide 4"></div>
-            <div class="slide1"><img src="rrr1.jpg" alt="Slide 4"></div>
-       <div class="slide1"><img src="rrr2.jpg" alt="Slide 4"></div>
-       
-        </div>
-        <button class="nav-button1 prev1" onclick="prevSlide1()">&#10094;</button>
-        <button class="nav-button1 next1" onclick="nextSlide1()">&#10095;</button>
+    <button class="nav-button prev" onclick="prevSlide()">&#10094;</button>
+    <button class="nav-button next" onclick="nextSlide()">&#10095;</button>
+  </div>
+
+  <!-- RRR DRAWINGS -->
+  <div class="slider-container1">
+    <h2>RRR DRAWINGS</h2>
+    <div class="slider1">
+      <div class="slide1"><img src="ram.jpeg" alt="Slide 1"></div>
+      <div class="slide1"><img src="bheem.jpeg" alt="Slide 2"></div>
+      <div class="slide1"><img src="bheem1.jpg" alt="Slide 3"></div>
+      <div class="slide1"><img src="bheem2.jpg" alt="Slide 4"></div>
+      <div class="slide1"><img src="bheem4.jpg" alt="Slide 5"></div>
+      <div class="slide1"><img src="bheemflag.jpg" alt="Slide 6"></div>
+      <div class="slide1"><img src="rrr1.jpg" alt="Slide 7"></div>
+      <div class="slide1"><img src="rrr2.jpg" alt="Slide 8"></div>
     </div>
-    <div class="slider-container2">
-        <h2>PRABHAS DRAWINGS</h2>
-        <div class="slider2">
-            <div class="slide2"><img src="saaho.jpg" alt="Slide 1"></div>
-            <div class="slide2"><img src="nsaaho.jpeg" alt="Slide 2"></div>
-            <div class="slide2"><img src="kalkikarna.jpg" alt="Slide 3"></div>
-            <div class="slide2"><img src="Salaar.jpg" alt="Slide 4"></div>
-            <div class="slide2"><img src="IMG_20250328_111831.jpg" alt="Slide 5"></div>
-       
-        </div>
-        <button class="nav-button2 prev2" onclick="prevSlide2()">&#10094;</button>
-        <button class="nav-button2 next2" onclick="nextSlide2()">&#10095;</button>
+    <button class="nav-button1 prev1" onclick="prevSlide1()">&#10094;</button>
+    <button class="nav-button1 next1" onclick="nextSlide1()">&#10095;</button>
+  </div>
+
+  <!-- PRABHAS DRAWINGS -->
+  <div class="slider-container2">
+    <h2>PRABHAS DRAWINGS</h2>
+    <div class="slider2">
+      <div class="slide2"><img src="saaho.jpg" alt="Slide 1"></div>
+      <div class="slide2"><img src="nsaaho.jpeg" alt="Slide 2"></div>
+      <div class="slide2"><img src="kalkikarna.jpg" alt="Slide 3"></div>
+      <div class="slide2"><img src="Salaar.jpg" alt="Slide 4"></div>
+      <div class="slide2"><img src="IMG_20250328_111831.jpg" alt="Slide 5"></div>
     </div>
+    <button class="nav-button2 prev2" onclick="prevSlide2()">&#10094;</button>
+    <button class="nav-button2 next2" onclick="nextSlide2()">&#10095;</button>
+  </div>
 
-    <div class="slider-container2">
-        <h2>MISCELLANEOUS DRAWINGS</h2>
-        <div class="slider3">
-            <div class="slide3"><img src="svp.jpg" alt="Slide 1"></div>
-            <div class="slide3"><img src="v.jpg" alt="Slide 2"></div>
-            <div class="slide3"><img src="bn.jpg" alt="Slide 3"></div>
-            <div class="slide3"><img src="cricket.jpg" alt="Slide 4"></div>
-            <div class="slide3"><img src="newyork.jpg" alt="Slide 5"></div>
-            <div class="slide3"><img src="yevadu.jpg" alt="Slide 6"></div>
-            <div class="slide3"><img src="leo.jpg" alt="Slide 7"></div>
-            <div class="slide3"><img src="rolexr.jpg" alt="Slide 8"></div>
-            <div class="slide3"><img src="rashmika.jpg" alt="Slide 9"></div>
-       <div class="slide3"><img src="hhvm.jpg" alt="Slide 10"></div>
-       
-        </div>
-        </div>
+  <!-- MISCELLANEOUS -->
+  <div class="slider-container2">
+    <h2>MISCELLANEOUS DRAWINGS</h2>
+    <div class="slider3">
+      <div class="slide3"><img src="svp.jpg" alt="Slide 1"></div>
+      <div class="slide3"><img src="v.jpg" alt="Slide 2"></div>
+      <div class="slide3"><img src="bn.jpg" alt="Slide 3"></div>
+      <div class="slide3"><img src="cricket.jpg" alt="Slide 4"></div>
+      <div class="slide3"><img src="newyork.jpg" alt="Slide 5"></div>
+      <div class="slide3"><img src="yevadu.jpg" alt="Slide 6"></div>
+      <div class="slide3"><img src="leo.jpg" alt="Slide 7"></div>
+      <div class="slide3"><img src="rolexr.jpg" alt="Slide 8"></div>
+      <div class="slide3"><img src="rashmika.jpg" alt="Slide 9"></div>
+      <div class="slide3"><img src="hhvm.jpg" alt="Slide 10"></div>
+    </div>
+  </div>
 
-    <script>
-        const slider = document.querySelector('.slider');
-        const slides = document.querySelectorAll('.slide');
-        const slideCount = slides.length;
-        let slideIndex = 0;
+  <script>
+    // MASTER SLIDER
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+    const slideCount = slides.length;
+    let slideIndex = 0;
 
-        function showSlide(index) {
-            if (index < 0) {
-                slideIndex = slideCount - 1;
-            } else if (index >= slideCount) {
-                slideIndex = 0;
-            } else {
-                slideIndex = index;
-            }
-            slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-        }
+    function showSlide(index) {
+      slideIndex = (index + slideCount) % slideCount;
+      slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+    function nextSlide() { showSlide(slideIndex + 1); }
+    function prevSlide() { showSlide(slideIndex - 1); }
+    setInterval(nextSlide, 4000);
 
-        function nextSlide() {
-            showSlide(slideIndex + 1);
-        }
+    // RRR SLIDER
+    const slider1 = document.querySelector('.slider1');
+    const slides1 = document.querySelectorAll('.slide1');
+    const slideCount1 = slides1.length;
+    let slideIndex1 = 0;
 
-        function prevSlide() {
-            showSlide(slideIndex - 1);
-        }
+    function showSlide1(index) {
+      slideIndex1 = (index + slideCount1) % slideCount1;
+      slider1.style.transform = `translateX(-${slideIndex1 * 100}%)`;
+    }
+    function nextSlide1() { showSlide1(slideIndex1 + 1); }
+    function prevSlide1() { showSlide1(slideIndex1 - 1); }
+    setInterval(nextSlide1, 4500);
 
-        const slider1 = document.querySelector('.slider1');
-        const slides1 = document.querySelectorAll('.slide1');
-        const slideCount1 = slides.length;
-        let slideIndex1 = 0;
+    // PRABHAS SLIDER
+    const slider2 = document.querySelector('.slider2');
+    const slides2 = document.querySelectorAll('.slide2');
+    const slideCount2 = slides2.length;
+    let slideIndex2 = 0;
 
-        function showSlide1(index1) {
-            if (index1< 0) {
-                slideIndex1 = slideCount1 - 1;
-            } else if (index1 >= slideCount1) {
-                slideIndex1 = 0;
-            } else {
-                slideIndex1 = index1;
-            }
-            slider1.style.transform = `translateX(-${slideIndex1 * 100}%)`;
-        }
-
-        function nextSlide1() {
-            showSlide1(slideIndex1 + 1);
-        }
-
-        function prevSlide1() {
-            showSlide1(slideIndex1 - 1);
-        }
-
-        const slider2 = document.querySelector('.slider2');
-        const slides2 = document.querySelectorAll('.slide2');
-        const slideCount2 = slides.length;
-        let slideIndex2 = 0;
-
-        function showSlide2(index2) {
-            if (index2 < 0) {
-                slideIndex2 = slideCount2 - 1;
-            } else if (index2 >= slideCount2) {
-                slideIndex2 = 0;
-            } else {
-                slideIndex2 = index2;
-            }
-            slider2.style.transform = `translateX(-${slideIndex2 * 100}%)`;
-        }
-
-        function nextSlide2() {
-            showSlide2(slideIndex2 + 1);
-        }
-
-        function prevSlide2() {
-            showSlide2(slideIndex2 - 1);
-        }
-
-        const slider3 = document.querySelector('.slider3');
-        const slides3 = document.querySelectorAll('.slide3');
-        const slideCount3 = slides.length;
-        let slideIndex3 = 0;
-
-        function showSlide3(index3) {
-            if (index3 < 0) {
-                slideIndex3 = slideCount3- 1;
-            } else if (index3 >= slideCount3) {
-                slideIndex3 = 0;
-            } else {
-                slideIndex3 = index3;
-            }
-            slider3.style.transform = `translateX(-${slideIndex3 * 100}%)`;
-        }
-
-        function nextSlide3() {
-            showSlide2(slideIndex3 + 1);
-        }
-
-        function prevSlide3() {
-            showSlide2(slideIndex3 - 1);
-        }
-    </script>
-
+    function showSlide2(index) {
+      slideIndex2 = (index + slideCount2) % slideCount2;
+      slider2.style.transform = `translateX(-${slideIndex2 * 100}%)`;
+    }
+    function nextSlide2() { showSlide2(slideIndex2 + 1); }
+    function prevSlide2() { showSlide2(slideIndex2 - 1); }
+    setInterval(nextSlide2, 5000);
+  </script>
 </body>
 </html>
