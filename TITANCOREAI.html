@@ -1,36 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Titan Core AI</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" />
   <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #333;
-      padding-bottom: 60px;
-    }
-
-    h1 {
-      font-family: 'Courier Prime', monospace;
-    }
-
-    header {
-      background: black;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      animation: bg 15s linear infinite;
-    }
-
+    h1 { font-family: 'Courier Prime', monospace; }
     @keyframes bg {
       0% { background-image: url('titancore.png'); }
       25% { background-image: url('matrixcore.png'); }
@@ -40,189 +17,67 @@
       background-position: center;
       background-size: cover;
     }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background: #374151;
-      padding: 10px;
-    }
-
-    nav button {
-      background: #9ca3af;
-      color: white;
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-
-    nav button:hover {
-      background: #6b7280;
-    }
-
-    main {
-      padding: 20px;
-    }
-
-    .tab {
-      display: none;
-    }
-
-    .tab.active {
-      display: block;
-    }
-
-    .chat-box {
-      max-width: 600px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    #chat-log {
-      color: #fff;
-      padding: 15px;
-      height: 250px;
-      overflow-y: auto;
-      background: url('titancore.png') center/contain no-repeat;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-
-    #user-input {
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: 1px solid #aaa;
-    }
-
-    #send-btn {
-      padding: 10px;
-      font-weight: bold;
-      background-color: #10b981;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #send-btn:hover {
-      background-color: #059669;
-    }
-
-    footer {
-      text-align: center;
-      padding: 10px;
-      background: black;
-      color: white;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-
-    .tool-button {
-      display: block;
-      width: 100%;
-      margin: 20px 0;
-      padding: 20px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      border-radius: 20px;
-      color: white;
-      text-align: center;
-      box-shadow: 0 0 20px black;
-    }
-
-    .tool-image {
-      width: 100%;
-      max-height: 400px;
-      object-fit: contain;
-      margin-bottom: 40px;
-    }
-
-    @media (max-width: 600px) {
-      nav button {
-        flex: 1 1 100%;
-      }
-      .chat-box {
-        padding: 10px;
-      }
-    }
+    header { animation: bg 15s linear infinite; }
   </style>
 </head>
-<body>
-  <header>
-    <h1>Titan Core AI</h1>
-    <p>Your All-in-One AI Assistant</p>
-  </header>
-
-  <nav>
-    <button onclick="showTab('chat')">Chatbot</button>
-    <button onclick="showTab('tools')">AI Tools</button>
-    <button onclick="showTab('voice')">Voice Assistant</button>
-  </nav>
-
-  <main>
-    <section id="chat" class="tab active">
-      <h2>Chatbot (Powered by TensorFlow.js)</h2>
-      <div class="chat-box">
-        <div id="chat-log"></div>
-        <input type="text" id="user-input" placeholder="Ask me anything..." />
-        <button id="send-btn" onclick="sendMessage()">Send</button>
+<body class="bg-gray-100 text-gray-800 pb-16">
+  <!-- Header -->
+  <header class="text-center text-white p-6 bg-black">
+    <h1 class="text-4xl font-bold">Titan Core AI</h1>
+    <p class="text-lg">Your All-in-One AI Assistant</p>
+  </header>  <!-- Navigation -->  <nav class="flex flex-wrap justify-center gap-3 bg-gray-700 p-3">
+    <button onclick="showTab('chat')" class="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-500">Chatbot</button>
+    <button onclick="showTab('tools')" class="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-500">AI Tools</button>
+    <button onclick="showTab('voice')" class="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-500">Voice Assistant</button>
+  </nav>  <!-- Main Content -->  <main class="p-6">
+    <!-- Chatbot -->
+    <section id="chat" class="tab block">
+      <h2 class="text-2xl font-bold mb-4">Chatbot (Powered by TensorFlow.js)</h2>
+      <div class="chat-box max-w-xl mx-auto flex flex-col gap-3 bg-black/70 p-4 rounded-xl">
+        <div id="chat-log" class="text-white p-3 h-64 overflow-y-auto rounded-lg border border-gray-300 bg-black/60 bg-[url('titancore.png')] bg-center bg-contain bg-no-repeat"></div>
+        <input type="text" id="user-input" placeholder="Ask me anything..." class="p-2 rounded-md border border-gray-400 text-black" />
+        <button id="send-btn" onclick="sendMessage()" class="px-4 py-2 bg-emerald-500 text-white font-bold rounded-md hover:bg-emerald-600">Send</button>
       </div>
-    </section>
+    </section><!-- AI Tools -->
+<section id="tools" class="tab hidden">
+  <h2 class="text-2xl font-bold mb-6">AI Tools</h2>
+  <div class="grid gap-6">
+    <div class="tool-button bg-gradient-to-r from-lime-500 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-silver">Matrix AI</div>
+    <img class="tool-image w-full max-h-96 object-contain mb-6" src="matrixcore.png" />
 
-    <section id="tools" class="tab">
-      <h2>AI Tools</h2>
-      <div>
-        <div class="tool-button" style="background:linear-gradient(120deg,lime,black); border:5px inset silver;">Matrix AI</div>
-        <img class="tool-image" src="matrixcore.png" />
+    <div class="tool-button bg-gradient-to-r from-blue-500 via-cyan-300 to-white text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-black">J.A.R.V.I.S AI</div>
+    <img class="tool-image w-full max-h-96 object-contain mb-6" src="jarviscore.png" />
 
-        <div class="tool-button" style="background:linear-gradient(120deg,blue,cyan,white); border:5px solid black;">J.A.R.V.I.S AI</div>
-        <img class="tool-image" src="jarviscore.png" />
+    <div class="tool-button bg-gradient-to-r from-gray-400 via-black to-gray-400 text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-gray-400">GUARD AI</div>
+    <img class="tool-image w-full max-h-96 object-contain mb-6" src="guardcore.png" />
 
-        <div class="tool-button" style="background:linear-gradient(120deg,gray,black,gray); border:5px ridge gray;">GUARD AI</div>
-        <img class="tool-image" src="guardcore.png" />
+    <div class="tool-button bg-gradient-to-r from-blue-700 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-blue-700">ONESHOT 3D</div>
 
-        <div class="tool-button" style="background:linear-gradient(-120deg,blue,black); border:5px solid blue;">ONESHOT 3D</div>
+    <div class="tool-button bg-gradient-to-r from-purple-700 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-purple-700">VIDMORPH AI</div>
 
-        <div class="tool-button" style="background:linear-gradient(120deg,purple,black); border:5px groove purple;">VIDMORPH AI</div>
+    <div class="tool-button bg-gradient-to-r from-violet-500 to-purple-700 text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-violet-500">ANIME AI</div>
 
-        <div class="tool-button" style="background:linear-gradient(160deg,violet,purple); border:5px solid violet;">ANIME AI</div>
+    <div class="tool-button bg-gradient-to-r from-yellow-400 via-black to-gray-300 text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-gray-300">AR SKETCHER</div>
 
-        <div class="tool-button" style="background:linear-gradient(12deg,gold,black,silver); border:5px solid silver;">AR SKETCHER</div>
+    <div class="tool-button bg-gradient-to-r from-red-600 via-orange-500 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-red-600">STOCKS AI</div>
 
-        <div class="tool-button" style="background:linear-gradient(90deg,red,orange,black); border:5px solid red;">STOCKS AI</div>
+    <div class="tool-button bg-gradient-to-r from-green-600 via-lime-400 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-green-600">AR-AI</div>
+  </div>
+</section>
 
-        <div class="tool-button" style="background:linear-gradient(100deg,green,lime,black); border:5px solid green;">AR-AI</div>
-      </div>
-    </section>
+<!-- Voice Assistant -->
+<section id="voice" class="tab hidden">
+  <h2 class="text-2xl font-bold mb-4">Voice Assistant</h2>
+  <button onclick="startListening()" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700">Start Listening</button>
+  <p id="voice-output" class="mt-4 text-gray-700">Voice responses will appear here...</p>
+</section>
 
-    <section id="voice" class="tab">
-      <h2>Voice Assistant</h2>
-      <button onclick="startListening()">Start Listening</button>
-      <p id="voice-output">Voice responses will appear here...</p>
-    </section>
-  </main>
-
-  <footer>
+  </main>  <!-- Footer -->  <footer class="text-center py-4 bg-black text-white fixed bottom-0 w-full">
     <p>© 2025 Titan Core AI | Built by Naga Sasank</p>
-  </footer>
-
-  <script>
+  </footer>  <!-- Script -->  <script>
     function showTab(id) {
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
     }
 
     async function sendMessage() {
@@ -262,6 +117,5 @@
     document.addEventListener('DOMContentLoaded', () => {
       showTab('chat');
     });
-  </script>
-</body>
+  </script></body>
 </html>
