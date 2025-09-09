@@ -413,6 +413,18 @@ border-bottom:5px solid cyan;
         
     
     }
+ #100{
+  font-style:bold;
+        font-family:times;
+        color:white;
+        padding:25px;
+        margin:5px;
+        border-radius:50px;
+        border:25px solid white;
+        background:linear-gradient(to left, black,silver,white);
+     cursor: url('cursor (1).png'),pointer;
+        
+ }
     @keyframes w {
         0%{
             border:5px solid blue;
@@ -833,6 +845,17 @@ border-bottom:5px solid cyan;
         
     
     }
+             #100{
+         font-style:bold;
+        font-family:times;
+        color:white;
+        padding:25px;
+        margin:5px;
+        border-radius:50px;
+        border:25px solid white;
+        background:linear-gradient(to left, black,silver,white);
+     
+             }
     @keyframes w {
         0%{
             border:5px solid blue;
