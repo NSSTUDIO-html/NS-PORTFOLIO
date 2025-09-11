@@ -421,7 +421,9 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:25px solid white;
-        background:linear-gradient(to top, black,silver,white);
+        background: url('100k.jpg');
+  background-size:contain;
+  background-position:center;
      cursor: url('cursor (1).png'),pointer;
         
  }
@@ -853,8 +855,9 @@ border-bottom:5px solid cyan;
         margin:5px;
         border-radius:50px;
         border:25px solid white;
-        background:linear-gradient(to bottom, black,silver,white);
-     
+        background: url('100k.jpg');
+  background-size:contain;
+  background-position:center;
              }
     @keyframes w {
         0%{
