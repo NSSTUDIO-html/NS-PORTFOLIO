@@ -128,8 +128,8 @@ border-radius:none;
     #nsb:hover{
         background:linear-gradient(120deg,cyan,blue,black);
         border:3px solid blue;
-        border-radius:0%;
-        color:white
+        border-radius:30px;
+        color:white;
         font-style:bold;
      position:sticky;
      top:0;
@@ -577,8 +577,8 @@ border-radius:none;
     #nsb:hover{
         background:linear-gradient(120deg,cyan,blue,black);
         border:3px solid blue;
-        border-radius:0%;
-        color:white
+        border-radius:30px;
+        color:white;
         font-style:bold;
      position:sticky;
      top:0;
