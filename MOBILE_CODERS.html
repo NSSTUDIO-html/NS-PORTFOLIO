@@ -1,0 +1,209 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mobile Coding Guide — HTML + Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* small, tasteful code block styling */
+    pre { background: rgba(15,23,42,0.6); color: #e6eef8; padding: 1rem; border-radius: .5rem; overflow:auto }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+  <header class="bg-gradient-to-r from-indigo-600 to-emerald-500 text-white">
+    <div class="max-w-6xl mx-auto px-6 py-10">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-extrabold tracking-tight">Mobile Coding Guide</h1>
+          <p class="mt-1 text-indigo-100/90">What you can build and the best apps & tips to code on your phone.</p>
+        </div>
+        <div class="hidden md:block">
+          <nav class="space-x-4 text-indigo-50/90 font-medium">
+            <a href="#types">Types</a>
+            <a href="#apps">Recommended Apps</a>
+            <a href="#tips">Tips</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>  <main class="max-w-6xl mx-auto px-6 py-10">
+    <section id="intro" class="mb-10">
+      <div class="bg-white shadow rounded-lg p-6">
+        <h2 class="text-2xl font-bold">Quick summary</h2>
+        <p class="mt-2 text-slate-700">On mobile you can do a surprising amount: <strong>web dev</strong>, <strong>app dev basics</strong>, <strong>Python scripting</strong>, <strong>lightweight data experiments</strong>, <strong>C/C++/Java learning</strong>, <strong>game scripting</strong>, <strong>ethical hacking practice</strong>, and use <strong>cloud IDEs</strong> for heavier work.</p>
+      </div>
+    </section><section id="types" class="mb-12">
+  <h3 class="text-xl font-semibold mb-4">Types of coding you can do on mobile</h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- Card: Web Dev -->
+    <article class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+      <div class="flex items-start gap-4">
+        <div class="flex-none w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </div>
+        <div>
+          <h4 class="font-semibold">Web Development</h4>
+          <p class="text-sm text-slate-600 mt-1">HTML, CSS, JavaScript — build and preview sites using mobile editors or the browser. Perfect for responsive experiments and quick prototypes.</p>
+          <p class="mt-2 text-xs text-slate-500">Common tools: Acode, Spck Editor, Glitch (web), Replit (web)</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card: App Dev -->
+    <article class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+      <div class="flex items-start gap-4">
+        <div class="flex-none w-12 h-12 bg-rose-100 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 20v-6M8 12h8M3 7h18"/></svg>
+        </div>
+        <div>
+          <h4 class="font-semibold">App Development</h4>
+          <p class="text-sm text-slate-600 mt-1">Write Android apps (Java/Kotlin) using AIDE or Termux; iOS learning via Swift Playgrounds. Cross-platform experimentation with React Native or Flutter is possible using cloud builds.</p>
+          <p class="mt-2 text-xs text-slate-500">Common tools: AIDE, Termux, Swift Playgrounds, Expo (web)</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card: Python -->
+    <article class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+      <div class="flex items-start gap-4">
+        <div class="flex-none w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 20c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z"/></svg>
+        </div>
+        <div>
+          <h4 class="font-semibold">Python</h4>
+          <p class="text-sm text-slate-600 mt-1">Run scripts, small data analysis, and even TensorFlow Lite demos with Pydroid, QPython, or Termux. Great for automation and learning.</p>
+          <p class="mt-2 text-xs text-slate-500">Common tools: Pydroid 3, QPython, Termux</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card: C/C++/Java -->
+    <article class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+      <div class="flex items-start gap-4">
+        <div class="flex-none w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 8h10M7 12h6M7 16h10"/></svg>
+        </div>
+        <div>
+          <h4 class="font-semibold">C / C++ / Java</h4>
+          <p class="text-sm text-slate-600 mt-1">Learn syntax and compile small programs. Great for practice on the go.</p>
+          <p class="mt-2 text-xs text-slate-500">Common tools: Cxxdroid (C/C++), Jvdroid (Java)</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card: Data Science / ML -->
+    <article class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+      <div class="flex items-start gap-4">
+        <div class="flex-none w-12 h-12 bg-violet-100 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7h18M6 20h12"/></svg>
+        </div>
+        <div>
+          <h4 class="font-semibold">Data Science / ML (light)</h4>
+          <p class="text-sm text-slate-600 mt-1">Small experiments, notebooks and TF Lite demos. Use cloud resources for heavier training.</p>
+          <p class="mt-2 text-xs text-slate-500">Common tools: Colab (web), Pydroid 3 (limited), Termux</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card: Game Dev -->
+    <article class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+      <div class="flex items-start gap-4">
+        <div class="flex-none w-12 h-12 bg-lime-100 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-lime-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </div>
+        <div>
+          <h4 class="font-semibold">Game Development (scripting)</h4>
+          <p class="text-sm text-slate-600 mt-1">Prototype games with Phaser, Three.js, or use web-based engines. Unity/Unreal editing possible but full builds need PC.</p>
+          <p class="mt-2 text-xs text-slate-500">Common tools: Phaser (web), Three.js, PlayCanvas</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card: Cybersecurity -->
+    <article class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+      <div class="flex items-start gap-4">
+        <div class="flex-none w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0-1.657 1.343-3 3-3h3v8h-6c-1.657 0-3-1.343-3-3V8z"/></svg>
+        </div>
+        <div>
+          <h4 class="font-semibold">Ethical Hacking / Cybersecurity</h4>
+          <p class="text-sm text-slate-600 mt-1">Use Termux for networking tools, practice Linux commands, and learn pen-testing theory. Always stay legal and ethical.</p>
+          <p class="mt-2 text-xs text-slate-500">Common tools: Termux, Kali NetHunter (device-specific)</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card: Cloud & Remote -->
+    <article class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition">
+      <div class="flex items-start gap-4">
+        <div class="flex-none w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-stone-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7h18M3 12h18M3 17h18"/></svg>
+        </div>
+        <div>
+          <h4 class="font-semibold">Cloud & Remote Coding</h4>
+          <p class="text-sm text-slate-600 mt-1">Use Replit, GitHub Codespaces, Google Colab, or VS Code web to offload heavy tasks to the cloud while coding from your phone.</p>
+          <p class="mt-2 text-xs text-slate-500">Common tools: Replit, GitHub Codespaces, Colab</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="apps" class="mb-12">
+  <h3 class="text-xl font-semibold mb-4">Recommended mobile apps & sites</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h4 class="font-semibold">Editors & IDEs</h4>
+      <ul class="mt-3 text-slate-600 list-disc list-inside space-y-2">
+        <li><strong>Acode</strong> — Lightweight web editor for HTML/CSS/JS.</li>
+        <li><strong>Pydroid 3</strong> — Run Python, small ML demos, install many packages.</li>
+        <li><strong>Termux</strong> — Terminal environment (power-user favorite).</li>
+        <li><strong>AIDE</strong> — Android development on-device (Java/Kotlin).</li>
+        <li><strong>Spck Editor / DroidEdit</strong> — Good for quick JS/HTML edits.</li>
+      </ul>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h4 class="font-semibold">Cloud & Remote</h4>
+      <ul class="mt-3 text-slate-600 list-disc list-inside space-y-2">
+        <li><strong>Replit</strong> — full online IDE from the browser.</li>
+        <li><strong>GitHub Codespaces</strong> — VS Code in the cloud (paid limits).</li>
+        <li><strong>Google Colab</strong> — notebooks for data & ML.</li>
+        <li><strong>PlayCanvas</strong> / <strong>Glitch</strong> — web game prototypes.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="tips" class="mb-12">
+  <h3 class="text-xl font-semibold mb-4">Practical tips & tricks</h3>
+  <div class="bg-white p-6 rounded-xl shadow space-y-4">
+    <p class="text-slate-700">Use an external keyboard for serious sessions, enable autosave, and keep projects in Git to avoid losing work. When you need heavy builds, use a cloud CI (GitHub Actions, CircleCI) or a remote desktop to a PC.</p>
+    <div>
+      <h4 class="font-medium">Sample quick commands (Termux)</h4>
+      <pre class="mt-2"><code>pkg update && pkg upgrade
+
+pkg install python git nodejs git clone <your-repo> python -m http.server 8000  # serve a folder locally</code></pre> </div> <div> <h4 class="font-medium">When to switch to a PC</h4> <ul class="mt-2 list-disc list-inside text-slate-600 space-y-1"> <li>Large ML model training</li> <li>Complex 3D game builds</li> <li>Production releases & signing mobile apps</li> </ul> </div> </div> </section>
+
+<section class="mb-8">
+  <div class="bg-gradient-to-r from-slate-800 to-sky-700 text-white p-6 rounded-xl shadow">
+    <h3 class="text-lg font-bold">Want this as a downloadable template?</h3>
+    <p class="mt-2 text-slate-100/90">I can convert this single-file HTML into a ZIP or add a dark-mode toggle and downloadable assets. Tell me what you want and I'll update it.</p>
+  </div>
+</section>
+
+  </main>  <footer class="bg-white border-t mt-10">
+    <div class="max-w-6xl mx-auto px-6 py-6 text-sm text-slate-600 flex items-center justify-between">
+      <div>Made with ❤️ — Mobile Coding Guide • Tailwind CSS</div>
+      <div class="space-x-4">
+        <a href="#" class="hover:underline">Edit</a>
+        <a href="#" class="hover:underline">Download</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
