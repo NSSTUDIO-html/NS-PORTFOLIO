@@ -3,252 +3,273 @@
 <head>
   <meta charset="UTF-8" />
   <title>My Hobbies - Naga Sasank</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    :root {
+      --primary: #2f3e9e;
+      --accent: #f7b731;
+      --bg-light: #f5f8ff;
+      --bg-card: #ffffff;
+      --text-dark: #222;
+      --text-soft: #555;
+      --border-radius: 16px;
+      --box-shadow: 0 6px 24px rgba(47,62,158,0.10);
+      --hover-shadow: 0 8px 32px rgba(47,62,158,0.16);
+      --transition: all 0.22s cubic-bezier(.42,.81,.56,1);
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f8ff;
-      color: #222;
-      padding: 20px;
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+      background: linear-gradient(110deg, var(--bg-light), #e6ecfa 60%);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
     }
 
-    h1, h2 {
+    header {
+      background: linear-gradient(90deg, var(--primary), #4b60be 60%);
+      color: #fff;
+      padding: 32px 0 20px;
       text-align: center;
-      color: #0a3d62;
-      margin: 30px 0 10px;
+      border-bottom-left-radius: 48px;
+      border-bottom-right-radius: 48px;
+      box-shadow: 0 6px 18px rgba(47,62,158,0.07);
+    }
+    header h1 {
+      font-size: 2.7rem;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 10px rgba(47,62,158,0.11);
+    }
+    header p {
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+      margin: 6px 0 10px;
+      color: #daf0ff;
     }
 
-    .section {
-      max-width: 1000px;
+    main {
+      max-width: 1200px;
       margin: auto;
-      margin-bottom: 50px;
+      padding: 24px;
+    }
+    .section {
+      margin-bottom: 52px;
+    }
+    .section h2 {
+      color: var(--primary);
+      text-align: left;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      margin-top: 0;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      border-left: 6px solid var(--accent);
+      padding-left: 15px;
+      background: linear-gradient(90deg, transparent, #fde9c6 85%);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      box-shadow: 0 2px 14px rgba(247,183,49,0.04);
+      display: inline-block;
     }
 
+    /* Card gallery styling */
     .gallery, .videos {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 16px;
     }
 
+    .cards, .cards-gallery {
+      background: var(--bg-card);
+      padding: 20px 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 20px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .cards:hover {
+      box-shadow: var(--hover-shadow);
+      transform: translateY(-3px) scale(1.03);
+      border-left: 6px solid var(--accent);
+    }
+    .cards h3 {
+      color: var(--accent);
+      font-size: 1.35rem;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .cards p {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      margin: 0;
+    }
+
+    /* Images & video thumbnails */
     img, iframe {
       width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    }
-
-    .cards {
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
       background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
+    }
+    img:hover, iframe:hover {
+      box-shadow: var(--hover-shadow);
+      transform: scale(1.035);
+    }
+    /* For local media fallback */
+    img[alt*="Edit"], img[alt*="Logo"], img[alt*="Friends"], img[alt*="srh"], img[alt*="baby"], img[alt*="sasank"], img[alt*="rashmika"] {
+      border: 2px solid #f7b73194;
     }
 
-    .cards h3 {
-      color: #e67e22;
+    /* Responsive for mobile */
+    @media (max-width: 700px) {
+      main { padding: 7px; }
+      .section h2 { font-size: 1.2rem; padding-left:8px; margin-bottom: 14px; }
+      .gallery, .videos { grid-template-columns: 1fr; gap: 13px;}
+      .cards, .cards-gallery { padding: 10px 12px;}
     }
 
     footer {
       text-align: center;
-      color: #555;
+      color: var(--text-soft);
+      background: #e7ecf5;
+      font-size: 1.05rem;
       margin-top: 50px;
+      padding: 24px;
+      border-top-left-radius: 42px;
+      border-top-right-radius: 42px;
+      box-shadow: 0 -2px 10px rgba(47,62,158,0.09);
+    }
+    footer span {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.4px;
     }
   </style>
 </head>
 <body>
-
-  <h1>My Hobbies – Naga Sasank</h1>
-
-  <!-- FAMILY IMAGE -->
-  <div class="section">
-    <h2>👨‍👩‍👧‍👦 Family</h2>
-    <div class="gallery">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFIKJur_CXpmps9nNSq34VLyTH0vOXokP28bX81LmVCXMcS1A3G6NyOhg&s=10" alt="Family Photo">
+  <header>
+    <h1>My Hobbies – Naga Sasank</h1>
+    <p>Portfolio of passions, creativity, and digital adventures</p>
+  </header>
+  <main>
+    <!-- FAMILY IMAGE -->
+    <div class="section">
+      <h2>👨‍👩‍👧‍👦 Family</h2>
+      <div class="gallery">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFIKJur_CXpmps9nNSq34VLyTH0vOXokP28bX81LmVCXMcS1A3G6NyOhg&s=10" alt="Family Photo">
+      </div>
     </div>
-  </div>
-
-  <!-- BOOKS SECTION -->
-  <div class="section">
-    <h2>📚 SSC & Coding Books</h2>
-    <div class="gallery">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvVbxafdkg11rwcYWavCY8QatGjyXCToN1dh9khGHitBuhcBO-TwP3QaCK&s=10" alt="SSC Book">
-      <img src="https://rukminim2.flixcart.com/image/750/900/klmmrgw0/regionalbooks/f/6/p/lucents-general-english-for-all-competitive-exams-with-general-original-imagypncj2by4uty.jpeg?q=90&crop=false" alt="SSC Book">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScE59KVD6_bnzzO_YIeCn5q6GnA1uHF7ENQYg70RfqJZEwwcUOlG2rGbw&s=10" alt="Programming Guide">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd8pwMHm2_njf6fXfS_pjNsQ7wgIIXi_Tl3vhIfMLf4hafZjAMJEtSzOc&s=10" alt="Programming Guide">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuRaR7XCJXKYMsInN9riqyqUZ9uGwBaFcqWDs1m6Nd4B2aqbiSEZkG4uvY&s=10" alt="Programming Guide">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSjJ8TfBZe6wgdDy_HzX9ol89Pm8aBkn_hToK027pxaonGe9kqFM8KzO8&s=10" alt="Programming Guide">
-    
+    <!-- BOOKS SECTION -->
+    <div class="section">
+      <h2>📚 SSC & Coding Books</h2>
+      <div class="gallery">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvVbxafdkg11rwcYWavCY8QatGjyXCToN1dh9khGHitBuhcBO-TwP3QaCK&s=10" alt="SSC Book">
+        <img src="https://rukminim2.flixcart.com/image/750/900/klmmrgw0/regionalbooks/f/6/p/lucents-general-english-for-all-competitive-exams-with-general-original-imagypncj2by4uty.jpeg?q=90&crop=false" alt="SSC Book">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScE59KVD6_bnzzO_YIeCn5q6GnA1uHF7ENQYg70RfqJZEwwcUOlG2rGbw&s=10" alt="Programming Guide">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd8pwMHm2_njf6fXfS_pjNsQ7wgIIXi_Tl3vhIfMLf4hafZjAMJEtSzOc&s=10" alt="Programming Guide">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuRaR7XCJXKYMsInN9riqyqUZ9uGwBaFcqWDs1m6Nd4B2aqbiSEZkG4uvY&s=10" alt="Programming Guide">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSjJ8TfBZe6wgdDy_HzX9ol89Pm8aBkn_hToK027pxaonGe9kqFM8KzO8&s=10" alt="Programming Guide">
+      </div>
     </div>
-  </div>
-
-  <!-- CODING VIDEOS -->
-  <div class="section">
-    <h2>💻 Coding Videos</h2>
-    <div class="videos">
-      <iframe width="100%" height="200" 
-  src="https://www.youtube.com/embed/zOjov-2OZ0E" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
-      <iframe width="100%" height="200" 
-  src="https://www.youtube.com/embed/kLwVKhG3wGc" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
-      <iframe width="100%" height="200" 
-  src="https://www.youtube.com/embed/4KqKUKDrXzU" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
-      <iframe width="100%" height="200" 
-  src="https://www.youtube.com/embed/aZlnam6pZzk" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
-      <iframe width="100%" height="200" 
-  src="https://www.youtube.com/embed/w84aLzoPTuY" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
-      
+    <!-- CODING VIDEOS -->
+    <div class="section">
+      <h2>💻 Coding Videos</h2>
+      <div class="videos">
+        <iframe src="https://www.youtube.com/embed/zOjov-2OZ0E" title="Coding Video 1" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/kLwVKhG3wGc" title="Coding Video 2" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/4KqKUKDrXzU" title="Coding Video 3" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/aZlnam6pZzk" title="Coding Video 4" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/w84aLzoPTuY" title="Coding Video 5" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
-  </div>
-
-  <!-- PLANNING SECTION -->
-  <div class="section">
-    <h2>🧠 My Project Plannings</h2>
-    <div class="cards">
-      <h3>Project 1: Anime AI</h3>
-      <p>A web app that turns sketches into anime-style animation using TensorFlow.js and 3D models.</p>
+    <!-- PLANNING SECTION -->
+    <div class="section">
+      <h2>🧠 My Project Plannings</h2>
+      <div class="gallery">
+        <div class="cards">
+          <h3>Project 1: Anime AI</h3>
+          <p>A web app that turns sketches into anime-style animation using TensorFlow.js and 3D models.</p>
+        </div>
+        <div class="cards">
+          <h3>Project 2: GuardAI</h3>
+          <p>A personal cybersecurity assistant built with Python and AI models to detect malicious behavior in your system.</p>
+        </div>
+        <div class="cards">
+          <h3>Project 3: Rising Shooters Game</h3>
+          <p>A 50-level game with Indian heroes fighting villains and a war story, developed using JavaScript and Three.js.</p>
+        </div>
+      </div>
     </div>
-    <div class="cards">
-      <h3>Project 2: GuardAI</h3>
-      <p>A personal cybersecurity assistant built with Python and AI models to detect malicious behavior in your system.</p>
+    <!-- PHOTO/VIDEO EDITING -->
+    <div class="section">
+      <h2>🎬 Photo & Video Edits</h2>
+      <div class="gallery">
+        <img src="srh.jpg" alt="Photo Edit">
+        <img src="rashmika.png" alt="Video Edit">
+        <img src="baby.jpg" alt="Photo Edit">
+        <img src="sasank.jpg" alt="Video Edit">
+        <iframe src="https://www.youtube.com/embed/TbbrWnqmPXE" title="Edit Showcase" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
-    <div class="cards">
-      <h3>Project 3: Rising Shooters Game</h3>
-      <p>A 50-level game with Indian heroes fighting villains and a war story, developed using JavaScript and Three.js.</p>
+    <!-- LOGO GALLERY -->
+    <div class="section">
+      <h2>🎨 Logo Gallery</h2>
+      <div class="gallery">
+        <img src="logos.jpg" alt="Logo 1">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV7mVssPFc4FcwCPBbM-RCcI4ZpKMpsCGXBXFW_N6XvXAjxeVGzu40MHUY&s=10" alt="Logo 2">
+      </div>
     </div>
-  </div>
-
-  <!-- PHOTO/VIDEO EDITING -->
-  <div class="section">
-    <h2>🎬 Photo & Video Edits</h2>
-    <div class="gallery">
-      <img src="srh.jpg" alt="Photo Edit">
-      <img src="rashmika.png" alt="Video Edit">
-      <img src="baby.jpg" alt="Photo Edit">
-      <img src="sasank.jpg" alt="Video Edit">
-      
-      <iframe width="560" height="315" 
-  src="https://www.youtube.com/embed/TbbrWnqmPXE" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
+    <!-- ANIMATION GALLERY -->
+    <div class="section">
+      <h2>🎞️ Animations Gallery</h2>
+      <div class="gallery">
+        <iframe src="https://nsstudio-html.github.io/RS-RISING-SHOOTERS/MEGAMACHINEGUN.html" height="300" style="border: none;" allowfullscreen></iframe>
+        <iframe src="https://nsstudio-html.github.io/RS-RISING-SHOOTERS/ARMEDZEEP.html" height="300" style="border: none;" allowfullscreen></iframe>
+      </div>
     </div>
-  </div>
-
-  <!-- LOGO GALLERY -->
-  <div class="section">
-    <h2>🎨 Logo Gallery</h2>
-    <div class="gallery">
-      <img src="logos.jpg" alt="Logo 1">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV7mVssPFc4FcwCPBbM-RCcI4ZpKMpsCGXBXFW_N6XvXAjxeVGzu40MHUY&s=10" alt="Logo 2">
+    <!-- PROJECT DEMOS -->
+    <div class="section">
+      <h2>🚀 Project Demos</h2>
+      <div class="videos">
+        <iframe src="https://nsstudio-html.github.io/NS-PORTFOLIO/TITANCOREAI.html" height="400" allowfullscreen></iframe>
+        <iframe src="https://nsstudio-html.github.io/NS-PORTFOLIO/JARVIS.html" height="400" allowfullscreen></iframe>
+      </div>
     </div>
-  </div>
-
-  <!-- ANIMATION GALLERY -->
-  <div class="section">
-    <h2>🎞️ Animations Gallery</h2>
-    <div class="gallery">
-      <iframe 
-  src="https://nsstudio-html.github.io/RS-RISING-SHOOTERS/MEGAMACHINEGUN.html" 
-  width="100%" 
-  height="300" 
-  style="border: none; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.2);" 
-  allowfullscreen>
-      </iframe>
-      <iframe 
-  src="https://nsstudio-html.github.io/RS-RISING-SHOOTERS/ARMEDZEEP.html" 
-  width="100%" 
-  height="300" 
-  style="border: none; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.2);" 
-  allowfullscreen>
-</iframe>
+    <!-- TV SHOWS -->
+    <div class="section">
+      <h2>📺 Favourite TV Shows</h2>
+      <div class="videos">
+        <iframe src="https://www.youtube.com/embed/mimoQBL0u5w" title="Fav TV Show 1" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/51hMKLp5ODU" title="Fav TV Show 2" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
-  </div>
-
-  <!-- PROJECT DEMOS -->
-  <div class="section">
-    <h2>🚀 Project Demos</h2>
-    <div class="videos">
-      <iframe height="400"src="https://nsstudio-html.github.io/NS-PORTFOLIO/TITANCOREAI.html" allowfullscreen></iframe>
-      <iframe height="400"src="https://nsstudio-html.github.io/NS-PORTFOLIO/JARVIS.html" allowfullscreen></iframe>
+    <!-- NATURE -->
+    <div class="section">
+      <h2>🌿 Nature Pics & Videos</h2>
+      <div class="gallery">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRubQnbQb02HIWyXGjqoHkz6rCU793Td9ejfVW0fIEFSkuVgxPYfDqHbgMS&s=10" alt="Nature 1">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqPl-Vg7_zHfR9V2td1-cN1X4BWT1FJqK9h4Oes1UuXE4dX4BgB9xC_d0&s=10" alt="Nature 2">
+      </div>
+      <div class="videos">
+        <iframe src="https://www.youtube.com/embed/xLTCivIB4kU" title="Nature Video" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
-  </div>
-
-  <!-- TV SHOWS -->
-  <div class="section">
-    <h2>📺 Favourite TV Shows</h2>
-    <div class="videos">
-      <iframe width="560" height="315" 
-  src="https://www.youtube.com/embed/mimoQBL0u5w" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-      </iframe>
-      <iframe width="560" height="315" 
-  src="https://www.youtube.com/embed/51hMKLp5ODU" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
+    <!-- FRIENDS PIC -->
+    <div class="section">
+      <h2>👬 College Friends</h2>
+      <div class="gallery">
+        <img src="friends.png" alt="Friends Pic">
+      </div>
     </div>
-  </div>
-
-  <!-- NATURE -->
-  <div class="section">
-    <h2>🌿 Nature Pics & Videos</h2>
-    <div class="gallery">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRubQnbQb02HIWyXGjqoHkz6rCU793Td9ejfVW0fIEFSkuVgxPYfDqHbgMS&s=10" alt="Nature 1">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqPl-Vg7_zHfR9V2td1-cN1X4BWT1FJqK9h4Oes1UuXE4dX4BgB9xC_d0&s=10" alt="Nature 2">
-    </div>
-    <div class="videos">
-      <iframe width="560" height="315" 
-  src="https://www.youtube.com/embed/xLTCivIB4kU" 
-  title="YouTube video player" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
-  <!-- FRIENDS PIC -->
-  <div class="section">
-    <h2>👬 College Friends</h2>
-    <div class="gallery">
-      <img src="friends.png" alt="Friends Pic">
-    </div>
-  </div>
-
+  </main>
   <footer>
-    Made with ❤️ by Naga Sasank | © 2025
+    Made with <span>❤️</span> by Naga Sasank | © 2025
   </footer>
-
 </body>
 </html>
