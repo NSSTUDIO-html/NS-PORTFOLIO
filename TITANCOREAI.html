@@ -1,121 +1,136 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Titan Core AI</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" />
-  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    h1 { font-family: 'Courier Prime', monospace; }
-    @keyframes bg {
-      0% { background-image: url('titancore.png'); }
-      25% { background-image: url('matrixcore.png'); }
-      50% { background-image: url('jarviscore.png'); }
-      75% { background-image: url('guardcore.png'); }
-      100% { background-color: black; }
-      background-position: center;
-      background-size: cover;
-    }
-    header { animation: bg 15s linear infinite; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Titan Core AI</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap">
+<style>
+  body { font-family: 'Courier Prime', monospace; }
+  header {
+    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+    background-size: 600% 600%;
+    animation: gradientBG 15s ease infinite;
+  }
+  @keyframes gradientBG {
+    0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
+  }
+  .chat-box { background: rgba(0,0,0,0.7); border-radius: 1rem; padding: 1rem; }
+  .message { padding: 0.5rem 1rem; border-radius: 1rem; margin-bottom: 0.5rem; max-width: 80%; }
+  .user-msg { background: #10b981; color: white; margin-left: auto; text-align: right; }
+  .ai-msg { background: #1f2937; color: white; margin-right: auto; text-align: left; }
+  .typing { font-style: italic; color: #fbbf24; }
+  .tab { transition: opacity 0.5s ease; }
+  .tool-button:hover { transform: scale(1.05); transition: 0.3s; }
+</style>
 </head>
-<body class="bg-gray-100 text-gray-800 pb-16">
-  <!-- Header -->
-  <header class="text-center text-white p-6 bg-black">
-    <h1 class="text-4xl font-bold">Titan Core AI</h1>
-    <p class="text-lg">Your All-in-One AI Assistant</p>
-  </header>  <!-- Navigation -->  <nav class="flex flex-wrap justify-center gap-3 bg-gray-700 p-3">
-    <button onclick="showTab('chat')" class="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-500">Chatbot</button>
-    <button onclick="showTab('tools')" class="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-500">AI Tools</button>
-    <button onclick="showTab('voice')" class="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-500">Voice Assistant</button>
-  </nav>  <!-- Main Content -->  <main class="p-6">
-    <!-- Chatbot -->
-    <section id="chat" class="tab block">
-      <h2 class="text-2xl font-bold mb-4">Chatbot (Powered by TensorFlow.js)</h2>
-      <div class="chat-box max-w-xl mx-auto flex flex-col gap-3 bg-black/70 p-4 rounded-xl">
-        <div id="chat-log" class="text-white p-3 h-64 overflow-y-auto rounded-lg border border-gray-300 bg-black/60 bg-[url('titancore.png')] bg-center bg-contain bg-no-repeat"></div>
-        <input type="text" id="user-input" placeholder="Ask me anything..." class="p-2 rounded-md border border-gray-400 text-black" />
-        <button id="send-btn" onclick="sendMessage()" class="px-4 py-2 bg-emerald-500 text-white font-bold rounded-md hover:bg-emerald-600">Send</button>
-      </div>
-    </section><!-- AI Tools -->
-<section id="tools" class="tab hidden">
-  <h2 class="text-2xl font-bold mb-6">AI Tools</h2>
-  <div class="grid gap-6">
-    <div class="tool-button bg-gradient-to-r from-lime-500 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-silver">Matrix AI</div>
-    <img class="tool-image w-full max-h-96 object-contain mb-6" src="matrixcore.png" />
+<body class="bg-gray-900 text-gray-100">
 
-    <div class="tool-button bg-gradient-to-r from-blue-500 via-cyan-300 to-white text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-black">J.A.R.V.I.S AI</div>
-    <img class="tool-image w-full max-h-96 object-contain mb-6" src="jarviscore.png" />
+<!-- Header -->
+<header class="text-center p-8 text-white shadow-lg">
+  <h1 class="text-5xl font-bold">Titan Core AI</h1>
+  <p class="text-xl mt-2">Your All-in-One AI Assistant</p>
+</header>
 
-    <div class="tool-button bg-gradient-to-r from-gray-400 via-black to-gray-400 text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-gray-400">GUARD AI</div>
-    <img class="tool-image w-full max-h-96 object-contain mb-6" src="guardcore.png" />
+<!-- Navigation -->
+<nav class="flex justify-center gap-4 p-4 bg-gray-800 sticky top-0 z-10">
+  <button onclick="showTab('chat')" class="tab-btn px-4 py-2 rounded-lg font-semibold bg-gray-600 hover:bg-gray-700">Chatbot</button>
+  <button onclick="showTab('tools')" class="tab-btn px-4 py-2 rounded-lg font-semibold bg-gray-600 hover:bg-gray-700">AI Tools</button>
+  <button onclick="showTab('voice')" class="tab-btn px-4 py-2 rounded-lg font-semibold bg-gray-600 hover:bg-gray-700">Voice Assistant</button>
+</nav>
 
-    <div class="tool-button bg-gradient-to-r from-blue-700 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-blue-700">ONESHOT 3D</div>
+<main class="p-6 max-w-5xl mx-auto">
 
-    <div class="tool-button bg-gradient-to-r from-purple-700 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-purple-700">VIDMORPH AI</div>
+  <!-- Chatbot -->
+  <section id="chat" class="tab block">
+    <h2 class="text-3xl font-bold mb-4">Chatbot</h2>
+    <div class="chat-box flex flex-col h-96 overflow-y-auto" id="chat-log"></div>
+    <div class="mt-4 flex gap-2">
+      <input type="text" id="user-input" placeholder="Ask me anything..." class="flex-1 p-2 rounded-md text-black">
+      <button onclick="sendMessage()" class="px-4 py-2 bg-emerald-500 rounded-md hover:bg-emerald-600 font-bold">Send</button>
+    </div>
+  </section>
 
-    <div class="tool-button bg-gradient-to-r from-violet-500 to-purple-700 text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-violet-500">ANIME AI</div>
+  <!-- AI Tools -->
+  <section id="tools" class="tab hidden">
+    <h2 class="text-3xl font-bold mb-6">AI Tools</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-lime-500 to-black shadow-lg text-center font-bold border-4 border-silver">Matrix AI</div>
+      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-blue-500 via-cyan-300 to-white shadow-lg text-center font-bold border-4 border-black">J.A.R.V.I.S AI</div>
+      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-gray-400 via-black to-gray-400 shadow-lg text-center font-bold border-4 border-gray-400">GUARD AI</div>
+      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-blue-700 to-black shadow-lg text-center font-bold border-4 border-blue-700">ONESHOT 3D</div>
+      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-purple-700 to-black shadow-lg text-center font-bold border-4 border-purple-700">VIDMORPH AI</div>
+      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-violet-500 to-purple-700 shadow-lg text-center font-bold border-4 border-violet-500">ANIME AI</div>
+    </div>
+  </section>
 
-    <div class="tool-button bg-gradient-to-r from-yellow-400 via-black to-gray-300 text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-gray-300">AR SKETCHER</div>
+  <!-- Voice Assistant -->
+  <section id="voice" class="tab hidden">
+    <h2 class="text-3xl font-bold mb-4">Voice Assistant</h2>
+    <button onclick="startListening()" class="px-6 py-3 bg-indigo-600 rounded-lg font-bold hover:bg-indigo-700">Start Listening</button>
+    <p id="voice-output" class="mt-4 text-gray-300">Voice responses will appear here...</p>
+  </section>
 
-    <div class="tool-button bg-gradient-to-r from-red-600 via-orange-500 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-red-600">STOCKS AI</div>
+</main>
 
-    <div class="tool-button bg-gradient-to-r from-green-600 via-lime-400 to-black text-white rounded-2xl shadow-lg text-center p-6 font-bold border-4 border-green-600">AR-AI</div>
-  </div>
-</section>
+<!-- Footer -->
+<footer class="text-center py-4 bg-gray-800 text-white mt-6">
+  © 2025 Titan Core AI | Built by Naga Sasank
+</footer>
 
-<!-- Voice Assistant -->
-<section id="voice" class="tab hidden">
-  <h2 class="text-2xl font-bold mb-4">Voice Assistant</h2>
-  <button onclick="startListening()" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700">Start Listening</button>
-  <p id="voice-output" class="mt-4 text-gray-700">Voice responses will appear here...</p>
-</section>
+<!-- Scripts -->
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('bg-emerald-500'));
+    document.querySelector(`[onclick="showTab('${id}')"]`).classList.add('bg-emerald-500');
+  }
 
-  </main>  <!-- Footer -->  <footer class="text-center py-4 bg-black text-white fixed bottom-0 w-full">
-    <p>© 2025 Titan Core AI | Built by Naga Sasank</p>
-  </footer>  <!-- Script -->  <script>
-    function showTab(id) {
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.add('hidden'));
-      document.getElementById(id).classList.remove('hidden');
-    }
+  async function sendMessage() {
+    const input = document.getElementById('user-input');
+    const log = document.getElementById('chat-log');
+    const message = input.value.trim();
+    if(!message) return;
 
-    async function sendMessage() {
-      const input = document.getElementById('user-input');
-      const log = document.getElementById('chat-log');
-      const message = input.value.trim();
-      if (!message) return;
+    log.innerHTML += `<div class="message user-msg">${message}</div>`;
+    input.value = '';
+    log.scrollTop = log.scrollHeight;
 
-      log.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
-      input.value = '';
-      const response = await generateBotResponse(message);
-      log.innerHTML += `<div><strong>Titan:</strong> ${response}</div>`;
-      log.scrollTop = log.scrollHeight;
-    }
+    log.innerHTML += `<div class="message ai-msg typing">Titan is typing...</div>`;
+    log.scrollTop = log.scrollHeight;
 
-    async function generateBotResponse(text) {
-      await tf.ready();
-      const encoded = tf.tensor1d([...text].map(c => c.charCodeAt(0))).mean().arraySync();
-      const replies = [
-        "That's interesting!",
-        "Can you explain more?",
-        "I'm here to help you.",
-        "Let's explore that further.",
-        "Thanks for sharing."
-      ];
-      return replies[Math.floor(encoded) % replies.length];
-    }
+    const response = await generateBotResponse(message);
 
-    function startListening() {
-      const output = document.getElementById('voice-output');
-      output.innerText = 'Listening... (mock)';
-      setTimeout(() => {
-        output.innerText = 'Hello! I heard you say something.';
-      }, 2000);
-    }
+    log.querySelector('.typing').remove();
+    log.innerHTML += `<div class="message ai-msg">${response}</div>`;
+    log.scrollTop = log.scrollHeight;
+  }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      showTab('chat');
-    });
-  </script></body>
+  async function generateBotResponse(text) {
+    await tf.ready();
+    const encoded = tf.tensor1d([...text].map(c => c.charCodeAt(0))).mean().arraySync();
+    const replies = [
+      "That's interesting!",
+      "Can you explain more?",
+      "I'm here to help you.",
+      "Let's explore that further.",
+      "Thanks for sharing."
+    ];
+    return replies[Math.floor(encoded) % replies.length];
+  }
+
+  function startListening() {
+    const output = document.getElementById('voice-output');
+    output.innerText = '🎤 Listening...';
+    setTimeout(() => {
+      output.innerText = 'Hello! I heard you say something.';
+    }, 2000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => showTab('chat'));
+</script>
+</body>
 </html>
