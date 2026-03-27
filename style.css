@@ -14,7 +14,7 @@
     cursor: url('cursor (1).png') 0 0, auto;
 }
 
- h2 {
+ h4 {
       text-align: center;
       margin-bottom: 10px;
     }
@@ -498,7 +498,7 @@ background-size:contain;
          text-shadow:0 0 10px black;
          cursor:url('cursor (1).png') 0 0,auto;
         }
-     h2 {
+     h4 {
       text-align: center;
       margin-bottom: 10px;
     }
