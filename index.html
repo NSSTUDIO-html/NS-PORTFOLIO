@@ -206,51 +206,96 @@ I aim to build powerful, real-world tech products that blend AI, 3D, and cyberse
 </section>
     <section id="skills">
         <h2>My Skills</h2>
-        <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center; padding:20px; text-align:center;">
+        <style>
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .skills-box {
+    min-width: 250px;
+  }
+
+  .skills-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .skills-icons i,
+  .skills-icons img {
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+    object-fit: contain;
+    transition: 0.3s;
+  }
+
+  .skills-icons i:hover,
+  .skills-icons img:hover {
+    transform: scale(1.2);
+  }
+</style>
+
+<div class="skills-container">
 
   <!-- Frontend -->
-  <div>
+  <div class="skills-box">
     <h4>Frontend</h4>
-    <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
-      <img src="https://cdn.simpleicons.org/html5" />
-      <img src="https://cdn.simpleicons.org/css3" />
-      <img src="https://cdn.simpleicons.org/javascript" />
-      <img src="https://cdn.simpleicons.org/react" />
-      <img src="https://cdn.simpleicons.org/tailwindcss" />
-      <img src="https://cdn.simpleicons.org/threedotjs" />
-      <img src="https://cdn.simpleicons.org/blender" />
+    <div class="skills-icons">
+      <i class="devicon-html5-plain colored"></i>
+      <i class="devicon-css3-plain colored"></i>
+      <i class="devicon-javascript-plain colored"></i>
+      <i class="devicon-react-original colored"></i>
+      <i class="devicon-tailwindcss-plain colored"></i>
+
+      <!-- Better ThreeJS -->
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" title="ThreeJS"/>
+
+      <i class="devicon-blender-original colored"></i>
     </div>
   </div>
 
   <!-- Backend -->
-  <div>
+  <div class="skills-box">
     <h4>Backend</h4>
-    <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
-      <img src="https://cdn.simpleicons.org/nodedotjs" />
-      <img src="https://cdn.simpleicons.org/express" />
-      <img src="https://cdn.simpleicons.org/python" />
-      <img src="https://cdn.simpleicons.org/django" />
-      <img src="https://cdn.simpleicons.org/java" />
-      <img src="https://cdn.simpleicons.org/mysql" />
+    <div class="skills-icons">
+      <i class="devicon-nodejs-plain colored"></i>
+      <i class="devicon-express-original"></i>
+      <i class="devicon-python-plain colored"></i>
+      <i class="devicon-django-plain"></i>
+      <i class="devicon-java-plain colored"></i>
+      <i class="devicon-mysql-plain colored"></i>
     </div>
   </div>
 
   <!-- Tools -->
-  <div>
+  <div class="skills-box">
     <h4>Tools</h4>
-    <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
-      <img src="https://cdn.simpleicons.org/visualstudiocode" />
-      <img src="https://cdn.simpleicons.org/pycharm" />
-      <img src="https://cdn.simpleicons.org/microsoftoffice" />
-      <img src="https://cdn.simpleicons.org/tally" />
-      <img src="https://cdn.simpleicons.org/git" />
-      <img src="https://cdn.simpleicons.org/github" />
-      <img src="https://cdn.simpleicons.org/vercel" />
-      <img src="https://cdn.simpleicons.org/linux" />
+    <div class="skills-icons">
+      <i class="devicon-vscode-plain colored"></i>
+      <i class="devicon-pycharm-plain colored"></i>
+
+      <!-- MS Office (clean icon) -->
+      <img src="https://img.icons8.com/color/48/microsoft-office-2019.png" title="MS Office"/>
+
+      <!-- Tally (official logo) -->
+      <img src="https://upload.wikimedia.org/wikipedia/en/5/5f/Tally_Solutions_Logo.svg" title="Tally Prime"/>
+
+      <i class="devicon-git-plain colored"></i>
+      <i class="devicon-github-original"></i>
+      <i class="devicon-vercel-original"></i>
+      <i class="devicon-linux-plain colored"></i>
     </div>
   </div>
 
-        </div>
+</div>
 
     </section>
 <style>
