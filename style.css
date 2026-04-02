@@ -422,6 +422,45 @@ border-bottom:5px solid cyan;
   text-shadow:0 0 5px black;
     cursor: url('cursor (1).png'),pointer;
  }
+ #jdp{
+  font-style:bold;
+        font-family:arial;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:50%;
+        border:10px outset orange;
+        background: url('https://img.freepik.com/free-photo/abstract-textured-backgound_1258-30450.jpg?semt=ais_hybrid&w=740&q=80');
+  background-size:cover;
+  text-shadow:0 0 5px black;
+    cursor: url('cursor (1).png'),pointer;
+ }
+ #MERN{
+  font-style:bold;
+        font-family:arial;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:40%;
+        border:10px outset green;
+        background: url('https://img.freepik.com/free-vector/green-background-colorful-banner_677411-4085.jpg?semt=ais_incoming&w=740&q=80');
+  background-size:cover;
+  text-shadow:0 0 5px black;
+    cursor: url('cursor (1).png'),pointer;
+ }
+ #RF{
+  font-style:bold;
+        font-family:arial;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:0%;
+        border:10px ridge cyan;
+        background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmRU3LDRuIkWXr0BbODBaXU_xGXVL2CytD19EJsml2eedRh42yBGDbFqpx&s=10');
+  background-size:cover;
+  text-shadow:0 0 5px black;
+    cursor: url('cursor (1).png'),pointer;
+ }
     #w{
         font-style:bold;
         font-family:times;
@@ -893,6 +932,45 @@ border-bottom:5px solid cyan;
     background-size:cover;
       text-shadow:0 0 5px black;
      }
+     #jdp{
+       font-style:bold;
+        font-family:arial;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:50%;
+        border:10px outset orange;
+        background: url('https://img.freepik.com/free-photo/abstract-textured-backgound_1258-30450.jpg?semt=ais_hybrid&w=740&q=80');
+  background-size:cover;
+  text-shadow:0 0 5px black;
+    cursor: url('cursor (1).png'),pointer;
+ }
+ #MERN{
+  font-style:bold;
+        font-family:arial;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:40%;
+        border:10px outset green;
+        background: url('https://img.freepik.com/free-vector/green-background-colorful-banner_677411-4085.jpg?semt=ais_incoming&w=740&q=80');
+  background-size:cover;
+  text-shadow:0 0 5px black;
+    cursor: url('cursor (1).png'),pointer;
+ }
+ #RF{
+  font-style:bold;
+        font-family:arial;
+        color:white;
+        padding:20px;
+        margin:5px;
+        border-radius:0%;
+        border:10px ridge cyan;
+        background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmRU3LDRuIkWXr0BbODBaXU_xGXVL2CytD19EJsml2eedRh42yBGDbFqpx&s=10');
+  background-size:cover;
+  text-shadow:0 0 5px black;
+    cursor: url('cursor (1).png'),pointer;
+ }
     #w{
         font-style:bold;
         font-family:times;
