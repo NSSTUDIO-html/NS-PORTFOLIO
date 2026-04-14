@@ -1,193 +1,237 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>PIXELCRAFT PRO Editor</title>
+<title>PIXELCRAFT ULTRA</title>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <style>
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Segoe UI";
+  display: flex;
   background: #1e1e2f;
   color: white;
-  display: flex;
 }
 
 /* SIDEBAR */
 .sidebar {
-  width: 250px;
+  width: 260px;
   background: #2b2b3d;
-  padding: 15px;
+  padding: 10px;
   overflow-y: auto;
 }
 
-.sidebar h3 {
-  border-bottom: 1px solid #555;
-  padding-bottom: 5px;
-}
+h3 { border-bottom: 1px solid #555; }
 
-.control {
-  margin: 10px 0;
-}
-
-input, select {
+input, select, button {
   width: 100%;
-  padding: 5px;
+  margin: 5px 0;
 }
 
-/* MAIN AREA */
+/* CANVAS AREA */
 .main {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .canvas-box {
   position: relative;
   border: 2px dashed #666;
-  padding: 10px;
 }
 
 img {
-  max-width: 600px;
+  max-width: 700px;
+  display: block;
 }
 
 /* TEXT */
-.text-overlay {
+.text {
   position: absolute;
-  top: 50px;
-  left: 50px;
-  font-size: 30px;
   cursor: move;
   user-select: none;
+  font-size: 30px;
 }
 
-button {
-  padding: 8px;
-  margin-top: 5px;
-  width: 100%;
-  background: #4cafef;
-  border: none;
-  color: white;
-  cursor: pointer;
+/* CROP BOX */
+.crop-box {
+  position: absolute;
+  border: 2px dashed red;
+  pointer-events: none;
 }
 
-button:hover {
-  background: #2c8ed6;
+/* DRAW CANVAS */
+.draw {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
-  <h2>PIXELCRAFT</h2>
 
-  <div class="control">
-    <input type="file" onchange="loadImage(event)">
-  </div>
+<input type="file" onchange="loadImage(event)">
 
-  <h3>Filters</h3>
-  <div class="control">Brightness <input type="range" id="brightness" min="0" max="2" step="0.1" value="1"></div>
-  <div class="control">Contrast <input type="range" id="contrast" min="0" max="2" step="0.1" value="1"></div>
-  <div class="control">Blur <input type="range" id="blur" min="0" max="10"></div>
+<h3>Filters</h3>
+Brightness <input type="range" id="b" min="0" max="2" step="0.1" value="1">
+Contrast <input type="range" id="c" min="0" max="2" step="0.1" value="1">
+Grayscale <input type="range" id="g" min="0" max="1" step="0.1">
+Sepia <input type="range" id="s" min="0" max="1" step="0.1">
+Hue <input type="range" id="h" min="0" max="360">
+Invert <input type="range" id="i" min="0" max="1" step="0.1">
 
-  <h3>Text</h3>
-  <div class="control">
-    <input type="text" id="textInput" placeholder="Enter text">
-  </div>
+<h3>Transform</h3>
+<button onclick="rotate()">Rotate</button>
+<button onclick="flipX()">Flip X</button>
+<button onclick="flipY()">Flip Y</button>
 
-  <div class="control">
-    Font Size <input type="range" id="fontSize" min="10" max="100" value="30">
-  </div>
+<h3>Text</h3>
+<input id="textVal" placeholder="Text">
+<button onclick="addText()">Add Text</button>
 
-  <div class="control">
-    Color <input type="color" id="color">
-  </div>
+<h3>Draw</h3>
+<button onclick="enableDraw()">Draw Mode</button>
+<button onclick="disableDraw()">Stop Draw</button>
 
-  <button onclick="addText()">Add Text</button>
+<h3>Crop</h3>
+<button onclick="startCrop()">Start Crop</button>
+<button onclick="applyCrop()">Apply Crop</button>
 
-  <h3>Actions</h3>
-  <button onclick="downloadImage()">Download Image</button>
+<h3>Zoom</h3>
+<input type="range" id="zoom" min="0.5" max="2" step="0.1" value="1">
+
+<h3>Export</h3>
+<button onclick="download()">Download</button>
+
 </div>
 
-<!-- MAIN -->
 <div class="main">
-  <div class="canvas-box" id="canvasBox">
-    <img id="image">
+  <div class="canvas-box" id="box">
+    <img id="img">
+    <canvas id="drawCanvas" class="draw"></canvas>
+    <div id="cropBox" class="crop-box"></div>
   </div>
 </div>
 
 <script>
-let img = document.getElementById("image");
-let canvasBox = document.getElementById("canvasBox");
+let img = document.getElementById("img");
+let box = document.getElementById("box");
+let drawCanvas = document.getElementById("drawCanvas");
+let ctx = drawCanvas.getContext("2d");
+
+let rotation = 0, scaleX = 1, scaleY = 1;
 
 /* LOAD IMAGE */
-function loadImage(e) {
-  const file = e.target.files[0];
-  img.src = URL.createObjectURL(file);
+function loadImage(e){
+  img.src = URL.createObjectURL(e.target.files[0]);
+  setTimeout(()=>{
+    drawCanvas.width = img.width;
+    drawCanvas.height = img.height;
+  },500);
 }
 
 /* FILTERS */
-document.querySelectorAll("input[type=range]").forEach(slider => {
-  slider.addEventListener("input", applyFilters);
+document.querySelectorAll("input[type=range]").forEach(x=>{
+  x.oninput = apply;
 });
 
-function applyFilters() {
+function apply(){
   img.style.filter = `
-    brightness(${brightness.value})
-    contrast(${contrast.value})
-    blur(${blur.value}px)
+    brightness(${b.value})
+    contrast(${c.value})
+    grayscale(${g.value})
+    sepia(${s.value})
+    hue-rotate(${h.value}deg)
+    invert(${i.value})
+  `;
+  img.style.transform = `
+    rotate(${rotation}deg)
+    scale(${zoom.value * scaleX},${zoom.value * scaleY})
   `;
 }
 
-/* ADD TEXT */
-function addText() {
-  const text = document.createElement("div");
-  text.className = "text-overlay";
-  text.innerText = textInput.value || "Sample";
+/* TRANSFORM */
+function rotate(){ rotation+=90; apply(); }
+function flipX(){ scaleX*=-1; apply(); }
+function flipY(){ scaleY*=-1; apply(); }
 
-  text.style.fontSize = fontSize.value + "px";
-  text.style.color = color.value;
-
-  makeDraggable(text);
-  canvasBox.appendChild(text);
+/* TEXT */
+function addText(){
+  let t = document.createElement("div");
+  t.className="text";
+  t.innerText = textVal.value || "Text";
+  t.style.top="50px"; t.style.left="50px";
+  box.appendChild(t);
+  drag(t);
 }
 
-/* DRAG */
-function makeDraggable(el) {
-  let offsetX, offsetY;
+function drag(el){
+  el.onmousedown = e=>{
+    let x=e.offsetX,y=e.offsetY;
+    document.onmousemove = e=>{
+      el.style.left = (e.pageX-box.offsetLeft-x)+"px";
+      el.style.top = (e.pageY-box.offsetTop-y)+"px";
+    }
+    document.onmouseup=()=>document.onmousemove=null;
+  }
+}
 
-  el.onmousedown = function(e) {
-    offsetX = e.offsetX;
-    offsetY = e.offsetY;
+/* DRAW */
+let drawing=false;
 
-    document.onmousemove = function(e) {
-      el.style.left = (e.pageX - canvasBox.offsetLeft - offsetX) + "px";
-      el.style.top = (e.pageY - canvasBox.offsetTop - offsetY) + "px";
-    };
+function enableDraw(){
+  drawCanvas.onmousedown = ()=>drawing=true;
+  drawCanvas.onmouseup = ()=>drawing=false;
+  drawCanvas.onmousemove = e=>{
+    if(drawing){
+      ctx.fillRect(e.offsetX,e.offsetY,3,3);
+    }
+  }
+}
 
-    document.onmouseup = function() {
-      document.onmousemove = null;
-    };
-  };
+function disableDraw(){
+  drawCanvas.onmousedown=null;
+  drawCanvas.onmousemove=null;
+}
+
+/* CROP */
+let cropStart=null;
+
+function startCrop(){
+  box.onmousedown = e=>{
+    cropStart={x:e.offsetX,y:e.offsetY};
+  }
+  box.onmousemove = e=>{
+    if(cropStart){
+      cropBox.style.display="block";
+      cropBox.style.left=cropStart.x+"px";
+      cropBox.style.top=cropStart.y+"px";
+      cropBox.style.width=(e.offsetX-cropStart.x)+"px";
+      cropBox.style.height=(e.offsetY-cropStart.y)+"px";
+    }
+  }
+  box.onmouseup=()=>cropStart=null;
+}
+
+function applyCrop(){
+  alert("Crop visual only (advanced canvas crop next level)");
 }
 
 /* DOWNLOAD */
-function downloadImage() {
-  html2canvas(canvasBox).then(canvas => {
-    const link = document.createElement("a");
-    link.download = "pixelcraft.png";
-    link.href = canvas.toDataURL();
-    link.click();
+function download(){
+  html2canvas(box).then(c=>{
+    let a=document.createElement("a");
+    a.download="pixelcraft.png";
+    a.href=c.toDataURL();
+    a.click();
   });
 }
 </script>
-
-<!-- LIBRARY -->
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 </body>
 </html>
