@@ -24,38 +24,41 @@
     border-radius: 16px;
   }
 
-  .neon {
-    box-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff;
+  .tab { display: none; }
+  .active { display: block; }
+
+  .msg-user {
+    background: #10b981;
+    margin-left: auto;
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .msg-ai {
+    background: #1f2937;
+    margin-right: auto;
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .ai-card {
+    padding: 14px;
+    border-radius: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .ai-card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 18px rgba(0,255,255,0.4);
   }
 
   .sidebar {
     background: rgba(10,10,20,0.7);
     backdrop-filter: blur(10px);
     border-right: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .tab {
-    display: none;
-  }
-
-  .active {
-    display: block;
-  }
-
-  .tool:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
-    box-shadow: 0 0 15px #00f5ff;
-  }
-
-  .msg-user {
-    background: #10b981;
-    margin-left: auto;
-  }
-
-  .msg-ai {
-    background: #1f2937;
-    margin-right: auto;
   }
 </style>
 </head>
@@ -71,7 +74,7 @@
   <button onclick="showTab('voice')" class="w-full text-left p-3 rounded hover:bg-gray-700 mt-2">🎙 Voice AI</button>
 
   <div class="mt-10 text-xs text-gray-400">
-    SYSTEM STATUS: ONLINE ⚡
+    SYSTEM: ONLINE ⚡
   </div>
 </aside>
 
@@ -79,51 +82,79 @@
 <main class="flex-1 p-6 overflow-y-auto">
 
 <!-- HEADER -->
-<div class="glass p-4 mb-6 text-center neon">
+<div class="glass p-4 mb-6 text-center">
   <h2 class="text-3xl font-bold">Titan Core AI</h2>
-  <p class="text-gray-400">Next Gen AI Operating System</p>
+  <p class="text-gray-400">AI Operating System Dashboard</p>
 </div>
 
 <!-- CHAT -->
 <section id="chat" class="tab active">
-  <div class="glass p-4 h-[500px] overflow-y-auto flex flex-col" id="chat-log"></div>
 
-  <div class="flex mt-4 gap-2">
-    <input id="user-input" class="flex-1 p-3 rounded bg-black text-white border border-gray-700" placeholder="Ask Titan AI..." />
-    <button onclick="sendMessage()" class="px-6 bg-cyan-500 hover:bg-cyan-600 rounded font-bold">Send</button>
-  </div>
+<div class="glass h-[450px] overflow-y-auto p-4 flex flex-col" id="chat-log"></div>
+
+<div class="flex mt-4 gap-2">
+  <input id="user-input" class="flex-1 p-3 rounded bg-black border border-gray-700" placeholder="Ask Titan AI..." />
+  <button onclick="sendMessage()" class="px-6 bg-cyan-500 rounded">Send</button>
+</div>
+
 </section>
 
 <!-- TOOLS -->
 <section id="tools" class="tab">
-  <h2 class="text-2xl mb-4">AI Modules</h2>
 
-  <div class="grid md:grid-cols-3 gap-4">
+<h2 class="text-2xl mb-4">⚡ 21 AI Modules</h2>
 
-    <div class="glass tool p-4">🧠 Matrix AI</div>
-    <div class="glass tool p-4">🤖 J.A.R.V.I.S AI</div>
-    <div class="glass tool p-4">🛡 Guard AI</div>
-    <div class="glass tool p-4">🎨 Anime AI</div>
-    <div class="glass tool p-4">🎬 VidMorph AI</div>
-    <div class="glass tool p-4">🧊 OneShot 3D</div>
+<div class="grid md:grid-cols-3 gap-4">
 
-  </div>
+<div class="ai-card bg-gradient-to-r from-green-500 to-black">🧠 Matrix AI</div>
+<div class="ai-card bg-gradient-to-r from-blue-500 to-cyan-400">🤖 J.A.R.V.I.S AI</div>
+<div class="ai-card bg-gradient-to-r from-gray-700 to-black">🛡 Guard AI</div>
+
+<div class="ai-card bg-gradient-to-r from-pink-500 to-purple-700">🎨 Anime AI</div>
+<div class="ai-card bg-gradient-to-r from-indigo-600 to-black">🎬 VidMorph AI</div>
+<div class="ai-card bg-gradient-to-r from-purple-500 to-black">🧊 OneShot 3D</div>
+
+<div class="ai-card bg-gradient-to-r from-yellow-400 to-orange-500">💻 Titan Code AI</div>
+<div class="ai-card bg-gradient-to-r from-emerald-400 to-teal-700">📚 Scholar AI</div>
+<div class="ai-card bg-gradient-to-r from-red-500 to-black">🎯 Career AI</div>
+
+<div class="ai-card bg-gradient-to-r from-sky-400 to-blue-900">🎨 Design AI</div>
+<div class="ai-card bg-gradient-to-r from-gray-400 to-gray-900">📰 NewsMind AI</div>
+<div class="ai-card bg-gradient-to-r from-lime-400 to-green-700">📈 DataMind AI</div>
+
+<div class="ai-card bg-gradient-to-r from-cyan-500 to-black">🌍 Translate AI</div>
+<div class="ai-card bg-gradient-to-r from-orange-400 to-red-600">🎵 SoundForge AI</div>
+<div class="ai-card bg-gradient-to-r from-fuchsia-500 to-black">✍ Writer AI</div>
+
+<div class="ai-card bg-gradient-to-r from-blue-300 to-indigo-700">🧩 Logic AI</div>
+<div class="ai-card bg-gradient-to-r from-green-300 to-black">🚀 Startup AI</div>
+<div class="ai-card bg-gradient-to-r from-pink-300 to-purple-900">🎮 GameForge AI</div>
+
+<div class="ai-card bg-gradient-to-r from-slate-400 to-black">🏗 Build AI</div>
+<div class="ai-card bg-gradient-to-r from-emerald-600 to-black">🤖 Agent AI</div>
+<div class="ai-card bg-gradient-to-r from-yellow-300 to-black">🔍 Titan Search AI</div>
+
+</div>
+
 </section>
 
 <!-- VOICE -->
 <section id="voice" class="tab">
-  <h2 class="text-2xl mb-4">Voice AI</h2>
 
-  <button onclick="startListening()" class="px-6 py-3 bg-purple-600 rounded hover:bg-purple-700">
-    🎙 Start Listening
-  </button>
+<h2 class="text-2xl mb-4">🎙 Voice AI</h2>
 
-  <div id="voice-output" class="mt-4 text-gray-300"></div>
+<button onclick="startListening()" class="px-6 py-3 bg-purple-600 rounded">
+Start Listening
+</button>
+
+<div id="voice-output" class="mt-4 text-gray-300"></div>
+
 </section>
 
 </main>
 
 <script>
+
 function showTab(id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -135,28 +166,28 @@ async function sendMessage(){
 
   if(!input.value) return;
 
-  log.innerHTML += `<div class='p-2 rounded msg-user w-fit'>${input.value}</div>`;
+  log.innerHTML += `<div class='msg-user'>${input.value}</div>`;
 
   const msg = input.value;
   input.value = "";
 
-  log.innerHTML += `<div class='p-2 rounded msg-ai w-fit opacity-60'>Thinking...</div>`;
-  log.scrollTop = log.scrollHeight;
+  log.innerHTML += `<div class='msg-ai'>Thinking...</div>`;
 
   setTimeout(()=>{
-    document.querySelector('.opacity-60').remove();
-    log.innerHTML += `<div class='p-2 rounded msg-ai w-fit'>Titan AI Response: ${msg}</div>`;
+    document.querySelector('.msg-ai').remove();
+    log.innerHTML += `<div class='msg-ai'>Titan AI: ${msg}</div>`;
   }, 800);
 }
 
 function startListening(){
-  document.getElementById("voice-output").innerText = "🎧 Listening to voice...";
+  const out = document.getElementById("voice-output");
+  out.innerText = "🎧 Listening...";
+
   setTimeout(()=>{
-    document.getElementById("voice-output").innerText = "✔ Command received successfully.";
+    out.innerText = "✔ Command received";
   }, 2000);
 }
 
-showTab('chat');
 </script>
 
 </body>
