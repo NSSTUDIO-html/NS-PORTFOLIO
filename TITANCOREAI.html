@@ -1,136 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Titan Core AI</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
 <style>
-  body { font-family: 'Courier Prime', monospace; }
-  header {
-    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-    background-size: 600% 600%;
-    animation: gradientBG 15s ease infinite;
+  body {
+    font-family: 'Orbitron', sans-serif;
+    background: radial-gradient(circle at top, #0f172a, #000);
+    color: white;
   }
-  @keyframes gradientBG {
-    0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
+
+  .glass {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
   }
-  .chat-box { background: rgba(0,0,0,0.7); border-radius: 1rem; padding: 1rem; }
-  .message { padding: 0.5rem 1rem; border-radius: 1rem; margin-bottom: 0.5rem; max-width: 80%; }
-  .user-msg { background: #10b981; color: white; margin-left: auto; text-align: right; }
-  .ai-msg { background: #1f2937; color: white; margin-right: auto; text-align: left; }
-  .typing { font-style: italic; color: #fbbf24; }
-  .tab { transition: opacity 0.5s ease; }
-  .tool-button:hover { transform: scale(1.05); transition: 0.3s; }
+
+  .neon {
+    box-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff;
+  }
+
+  .sidebar {
+    background: rgba(10,10,20,0.7);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .tab {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+
+  .tool:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+    box-shadow: 0 0 15px #00f5ff;
+  }
+
+  .msg-user {
+    background: #10b981;
+    margin-left: auto;
+  }
+
+  .msg-ai {
+    background: #1f2937;
+    margin-right: auto;
+  }
 </style>
 </head>
-<body class="bg-gray-900 text-gray-100">
 
-<!-- Header -->
-<header class="text-center p-8 text-white shadow-lg">
-  <h1 class="text-5xl font-bold">Titan Core AI</h1>
-  <p class="text-xl mt-2">Your All-in-One AI Assistant</p>
-</header>
+<body class="flex h-screen overflow-hidden">
 
-<!-- Navigation -->
-<nav class="flex justify-center gap-4 p-4 bg-gray-800 sticky top-0 z-10">
-  <button onclick="showTab('chat')" class="tab-btn px-4 py-2 rounded-lg font-semibold bg-gray-600 hover:bg-gray-700">Chatbot</button>
-  <button onclick="showTab('tools')" class="tab-btn px-4 py-2 rounded-lg font-semibold bg-gray-600 hover:bg-gray-700">AI Tools</button>
-  <button onclick="showTab('voice')" class="tab-btn px-4 py-2 rounded-lg font-semibold bg-gray-600 hover:bg-gray-700">Voice Assistant</button>
-</nav>
+<!-- SIDEBAR -->
+<aside class="sidebar w-64 p-6 hidden md:block">
+  <h1 class="text-2xl font-bold text-cyan-400 mb-8">⚡ TITAN CORE AI</h1>
 
-<main class="p-6 max-w-5xl mx-auto">
+  <button onclick="showTab('chat')" class="w-full text-left p-3 rounded hover:bg-gray-700">💬 Chat AI</button>
+  <button onclick="showTab('tools')" class="w-full text-left p-3 rounded hover:bg-gray-700 mt-2">🧠 AI Tools</button>
+  <button onclick="showTab('voice')" class="w-full text-left p-3 rounded hover:bg-gray-700 mt-2">🎙 Voice AI</button>
 
-  <!-- Chatbot -->
-  <section id="chat" class="tab block">
-    <h2 class="text-3xl font-bold mb-4">Chatbot</h2>
-    <div class="chat-box flex flex-col h-96 overflow-y-auto" id="chat-log"></div>
-    <div class="mt-4 flex gap-2">
-      <input type="text" id="user-input" placeholder="Ask me anything..." class="flex-1 p-2 rounded-md text-black">
-      <button onclick="sendMessage()" class="px-4 py-2 bg-emerald-500 rounded-md hover:bg-emerald-600 font-bold">Send</button>
-    </div>
-  </section>
+  <div class="mt-10 text-xs text-gray-400">
+    SYSTEM STATUS: ONLINE ⚡
+  </div>
+</aside>
 
-  <!-- AI Tools -->
-  <section id="tools" class="tab hidden">
-    <h2 class="text-3xl font-bold mb-6">AI Tools</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-lime-500 to-black shadow-lg text-center font-bold border-4 border-silver">Matrix AI</div>
-      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-blue-500 via-cyan-300 to-white shadow-lg text-center font-bold border-4 border-black">J.A.R.V.I.S AI</div>
-      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-gray-400 via-black to-gray-400 shadow-lg text-center font-bold border-4 border-gray-400">GUARD AI</div>
-      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-blue-700 to-black shadow-lg text-center font-bold border-4 border-blue-700">ONESHOT 3D</div>
-      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-purple-700 to-black shadow-lg text-center font-bold border-4 border-purple-700">VIDMORPH AI</div>
-      <div class="tool-button p-6 rounded-xl bg-gradient-to-r from-violet-500 to-purple-700 shadow-lg text-center font-bold border-4 border-violet-500">ANIME AI</div>
-    </div>
-  </section>
+<!-- MAIN -->
+<main class="flex-1 p-6 overflow-y-auto">
 
-  <!-- Voice Assistant -->
-  <section id="voice" class="tab hidden">
-    <h2 class="text-3xl font-bold mb-4">Voice Assistant</h2>
-    <button onclick="startListening()" class="px-6 py-3 bg-indigo-600 rounded-lg font-bold hover:bg-indigo-700">Start Listening</button>
-    <p id="voice-output" class="mt-4 text-gray-300">Voice responses will appear here...</p>
-  </section>
+<!-- HEADER -->
+<div class="glass p-4 mb-6 text-center neon">
+  <h2 class="text-3xl font-bold">Titan Core AI</h2>
+  <p class="text-gray-400">Next Gen AI Operating System</p>
+</div>
+
+<!-- CHAT -->
+<section id="chat" class="tab active">
+  <div class="glass p-4 h-[500px] overflow-y-auto flex flex-col" id="chat-log"></div>
+
+  <div class="flex mt-4 gap-2">
+    <input id="user-input" class="flex-1 p-3 rounded bg-black text-white border border-gray-700" placeholder="Ask Titan AI..." />
+    <button onclick="sendMessage()" class="px-6 bg-cyan-500 hover:bg-cyan-600 rounded font-bold">Send</button>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools" class="tab">
+  <h2 class="text-2xl mb-4">AI Modules</h2>
+
+  <div class="grid md:grid-cols-3 gap-4">
+
+    <div class="glass tool p-4">🧠 Matrix AI</div>
+    <div class="glass tool p-4">🤖 J.A.R.V.I.S AI</div>
+    <div class="glass tool p-4">🛡 Guard AI</div>
+    <div class="glass tool p-4">🎨 Anime AI</div>
+    <div class="glass tool p-4">🎬 VidMorph AI</div>
+    <div class="glass tool p-4">🧊 OneShot 3D</div>
+
+  </div>
+</section>
+
+<!-- VOICE -->
+<section id="voice" class="tab">
+  <h2 class="text-2xl mb-4">Voice AI</h2>
+
+  <button onclick="startListening()" class="px-6 py-3 bg-purple-600 rounded hover:bg-purple-700">
+    🎙 Start Listening
+  </button>
+
+  <div id="voice-output" class="mt-4 text-gray-300"></div>
+</section>
 
 </main>
 
-<!-- Footer -->
-<footer class="text-center py-4 bg-gray-800 text-white mt-6">
-  © 2025 Titan Core AI | Built by Naga Sasank
-</footer>
-
-<!-- Scripts -->
 <script>
-  function showTab(id) {
-    document.querySelectorAll('.tab').forEach(tab => tab.classList.add('hidden'));
-    document.getElementById(id).classList.remove('hidden');
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('bg-emerald-500'));
-    document.querySelector(`[onclick="showTab('${id}')"]`).classList.add('bg-emerald-500');
-  }
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
-  async function sendMessage() {
-    const input = document.getElementById('user-input');
-    const log = document.getElementById('chat-log');
-    const message = input.value.trim();
-    if(!message) return;
+async function sendMessage(){
+  const input = document.getElementById("user-input");
+  const log = document.getElementById("chat-log");
 
-    log.innerHTML += `<div class="message user-msg">${message}</div>`;
-    input.value = '';
-    log.scrollTop = log.scrollHeight;
+  if(!input.value) return;
 
-    log.innerHTML += `<div class="message ai-msg typing">Titan is typing...</div>`;
-    log.scrollTop = log.scrollHeight;
+  log.innerHTML += `<div class='p-2 rounded msg-user w-fit'>${input.value}</div>`;
 
-    const response = await generateBotResponse(message);
+  const msg = input.value;
+  input.value = "";
 
-    log.querySelector('.typing').remove();
-    log.innerHTML += `<div class="message ai-msg">${response}</div>`;
-    log.scrollTop = log.scrollHeight;
-  }
+  log.innerHTML += `<div class='p-2 rounded msg-ai w-fit opacity-60'>Thinking...</div>`;
+  log.scrollTop = log.scrollHeight;
 
-  async function generateBotResponse(text) {
-    await tf.ready();
-    const encoded = tf.tensor1d([...text].map(c => c.charCodeAt(0))).mean().arraySync();
-    const replies = [
-      "That's interesting!",
-      "Can you explain more?",
-      "I'm here to help you.",
-      "Let's explore that further.",
-      "Thanks for sharing."
-    ];
-    return replies[Math.floor(encoded) % replies.length];
-  }
+  setTimeout(()=>{
+    document.querySelector('.opacity-60').remove();
+    log.innerHTML += `<div class='p-2 rounded msg-ai w-fit'>Titan AI Response: ${msg}</div>`;
+  }, 800);
+}
 
-  function startListening() {
-    const output = document.getElementById('voice-output');
-    output.innerText = '🎤 Listening...';
-    setTimeout(() => {
-      output.innerText = 'Hello! I heard you say something.';
-    }, 2000);
-  }
+function startListening(){
+  document.getElementById("voice-output").innerText = "🎧 Listening to voice...";
+  setTimeout(()=>{
+    document.getElementById("voice-output").innerText = "✔ Command received successfully.";
+  }, 2000);
+}
 
-  document.addEventListener('DOMContentLoaded', () => showTab('chat'));
+showTab('chat');
 </script>
+
 </body>
 </html>
