@@ -278,28 +278,62 @@ I believe in continuous learning, practical experience, and turning ideas into r
     </div>
   </div>
 
-  <!-- 7. DEVELOPMENT ENVIRONMENTS - 2 SKILLS -->
-  <div class="skills-box">
-    <h4>7. Development Environments</h4>
-    <div class="skills-icons">
-      <i class="devicon-vscode-plain colored" title="Visual Studio Code"></i>
-      <i class="devicon-pycharm-plain colored" title="PyCharm"></i>
-    </div>
-  </div>
+<!-- 7. DEVELOPMENT ENVIRONMENTS -->
+<div class="skills-box">
+  <h4>7. Development Environments</h4>
+  <div class="skills-icons">
 
-  <!-- 8. OPERATING SYSTEM - 1 SKILL -->
-  <div class="skills-box">
-    <h4>8. Operating System</h4>
-    <div class="skills-icons">
-      <i class="devicon-linux-plain colored" title="Linux"></i>
-    </div>
+    <i class="devicon-vscode-plain colored"
+       title="Visual Studio Code"></i>
+
+    <img src="https://cdn.simpleicons.org/pycharm/21D789"
+         alt="PyCharm"
+         title="PyCharm"
+         class="skill-img">
+
   </div>
+</div>
+
+  <!-- 8. OPERATING SYSTEM -->
+<div class="skills-box">
+  <h4>8. Operating System</h4>
+  <div class="skills-icons">
+
+    <img src="https://cdn.simpleicons.org/linux/FCC624"
+         alt="Linux"
+         title="Linux"
+         class="skill-img">
+
+  </div>
+</div>
 
 </div>
 
 
     </section>
 <style>
+    .skills-icons .skill-img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    display: inline-block;
+    opacity: 1;
+    visibility: visible;
+    filter: none;
+}
+
+/* Mobile visibility correction */
+.skills-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.skills-icons img {
+    max-width: 100%;
+}
   i, img {
     filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.4));
     transition: transform 0.3s ease, filter 0.3s ease;
